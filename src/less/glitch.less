@@ -1,0 +1,49 @@
+//@import "lesshat";
+
+@keyframes glitch{
+  @iterations: 20;
+  .loop (@i) when (@i > 0) {
+    @percent: (@i/@iterations)*100%;
+    @rand: `Math.floor((Math.random() * 100) + 1)`;
+    @{percent} {
+  	  clip:rect(unit(@rand,px),9999px, unit(@rand,px),0);
+    }
+    .loop(@i - 1);
+  }
+  .loop(@iterations);
+}
+
+@keyframes glitch2{
+  @iterations: 20;
+  .loop (@i) when (@i > 0) {
+    @percent: (@i/@iterations)*100%;
+    @rand: `Math.floor((Math.random() * 100) + 1)`;
+    @{percent} {
+	  clip:rect(unit(@rand,px),9999px, unit(@rand,px),0);
+    }
+    .loop(@i - 1);
+  }
+  .loop(@iterations);
+}
+
+
+.glitchHover{
+	position: relative;
+  	color:#fff;
+  	clip:rect(0,900px,0,0); 
+	&:after{
+		left: 12px;
+		top: 20px;
+		overflow:hidden;
+		clip:rect(0,900px,0,0); 
+		-webkit-animation:glitch 2s infinite linear alternate-reverse;
+	}
+
+	&:before{
+		left: 12px;
+		top: 20px;
+		overflow:hidden;
+		clip:rect(0,900px,0,0); 
+		-webkit-animation:glitch2 3s infinite linear alternate-reverse;
+	}		
+}

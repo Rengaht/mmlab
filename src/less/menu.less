@@ -1,0 +1,45 @@
+
+@gap:5%;
+
+.mainMenu{
+	position: fixed;
+	bottom: 0;
+	width:100%;	
+	height: @bottomheight;
+	min-height: 93px;
+	font-size: 32px;
+	text-align: center;
+	transition: .2s;
+	z-index: 2;
+
+	&.show{
+		height:100%;
+		transition: .2s;
+		background: rgba(0,0,0,0.6);		
+	}
+	
+	div img{
+		margin-top: 2.5%;
+	}
+	img{
+		margin-top: 5px;
+	}
+
+}
+.mainMenuItem{
+	display: block;
+	width:100%;
+	margin-top: @gap;
+	text-align: center;
+
+	font-family: 'Assistant';
+	&:hover{
+		color:red;
+	}
+}
+
+
+.copyright{
+	margin-top: @gap;
+	font-size: 12px;	
+}
