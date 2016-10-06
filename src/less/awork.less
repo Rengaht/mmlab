@@ -3,6 +3,7 @@
 	width:80%;
 	height:100%;
 	overflow: hidden;
+	//pointer-events: none;
 }
 .AWorkLeft{
 	position: absolute;
@@ -28,6 +29,7 @@
 		}
 		.Chinese{
 			font-size: 24px;
+			margin-top: 10px;
 		}
 	}
 	.AWorkLeftBottom{
@@ -55,6 +57,7 @@
 	overflow: scroll;
 	overflow-x: hidden;
 	padding: 20px;
+	//pointer-events: auto;
 }
 
 
@@ -180,7 +183,10 @@
 		width:32%;
 		display: inline-block;
 		margin-right: 2%;
-	
+		
+		>a img{
+			width:100%;
+		}
 
 		&:last-child{
 			margin-right: 0;
@@ -195,10 +201,13 @@
 			opacity: 0;
 			transition:.3s;
 
-			
-			
-			div{
-				text-transform: capitalize;
+			div:first-child{
+				text-transform: uppercase;
+				font-family: 'Assistant';
+				margin: 2px;
+			}
+			div:last-child{
+				text-transform: uppercase;
 				font-family: 'mmlabWebTitle';
 				margin: 2px;
 			}

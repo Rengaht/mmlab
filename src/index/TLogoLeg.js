@@ -18,7 +18,7 @@ function LLeg(p_,v_,g_){
 	}
 
 	this._shader_uniform.texture.value.wrapS=this._shader_uniform.texture.value.wrapT=THREE.RepeatWrapping;
-	this._id;
+	this.id;
 
 }
 
@@ -48,12 +48,12 @@ LLeg.prototype.update=function(){
 	// else if(t>gend) t=gend;
 	//t=(t-gstart)/(gend-gstart);
 	//console.log(t);
-
-	this._shader_uniform.amount.value=t;
-	this._shader_uniform.angle.value=t*(Math.random()-0.5)*2.0*Math.PI*.4;
-	this._shader_uniform.seed_x.value=t*(Math.random()-0.5)*2.0*0.02;
-	this._shader_uniform.seed_y.value=t*(Math.random()-0.5)*2.0*0.03;
-
+	if(!this._gold){
+		this._shader_uniform.amount.value=t;
+		this._shader_uniform.angle.value=t*(Math.random()-0.5)*2.0*Math.PI*.4;
+		this._shader_uniform.seed_x.value=t*(Math.random()-0.5)*2.0*0.02;
+		this._shader_uniform.seed_y.value=t*(Math.random()-0.5)*2.0*0.03;
+	}
 	//console.log(this._pos[2]+" - "+t+" - "+this._shader_uniform.amount.value);
 
 }

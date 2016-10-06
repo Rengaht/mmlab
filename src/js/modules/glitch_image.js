@@ -17,8 +17,8 @@ export default class GlitchImage extends React.Component{
 	            blue:0.58
 	        },
 	        lineOffset:{
-	            value:12,
-	            lineHeight: 15
+	            value:8.0,
+	            lineHeight: 8
 	        },
 	        frame_rate: 30.0
     	};
@@ -39,6 +39,9 @@ export default class GlitchImage extends React.Component{
 		this.intervalId=setInterval(this.draw,this._options.frame_rate);
 	}
 	draw(){
+
+		if(!this.refs._canvas) return;
+		
 		const ctx=this.refs._canvas.getContext('2d');
 
 		let w_=this.refs._canvas.width;
@@ -71,13 +74,26 @@ export default class GlitchImage extends React.Component{
     	//console.log(offset+'  '+this.density);
 
     	var p_=(1.0-this.density);
-    	offset=this._options.lineOffset.value*Math.sin(p_*Math.PI*.5);
+    	//offset=this._options.lineOffset.value*Math.sin(p_*Math.PI*.5);
+    	offset=(Math.sin(Math.PI*p_)+(Math.random()*2-1)*.3)*this._options.lineOffset.value+(Math.random()*2-1);
     	//console.log(this.density+'  '+offset);
     	var turb=0;
+    	var turby=0;
+
+    	var turby_start=0;
+    	var turby_end=0;
+
     	for(y=0;y<h_;++y){
-    		if(y%this._options.lineOffset.lineHeight==0) 
-    			if(this.randomRange(1,20)<2) turb=this._options.lineOffset.value*Math.random()*.5;
+    		if(y%this._options.lineOffset.lineHeight==0){
+    			if(this.randomRange(1,20)<2*this.density) turb=this._options.lineOffset.value*5.0*(Math.random()*2-1)*p_;
     			else turb=0;
+
+    			if(this.randomRange(1,50)<2){
+    				turby=this._options.lineOffset.value*(Math.random()*2-1);    				
+    				turby_start=w_*.5*Math.random();
+    				turby_end=w_*(.5+.5*Math.random());
+    			}else turby=0;
+    		}
     		
     		// turb=offset*.1*Math.round(y/this._options.lineOffset.lineHeight);
     		// turb+=2;
@@ -85,13 +101,20 @@ export default class GlitchImage extends React.Component{
 
     			//if(turb!=0) if(this.randomRange(1,50)<2) turb=0;
     			
-    			var off=offset+turb;
-    			if(this.randomRange(0,100)<1) off+=this._options.lineOffset.value*Math.random()*.2;
+    			var off=Math.round(offset+turb);
+    			if(this.randomRange(0,100)<1) off+=this._options.lineOffset.value*Math.random()*.3;
 
+    			var offy=0;
+    			if(x>turby_start && x<turby_end){
+    				offy=turby;    				
+    			}
 
 				let val=pixels[(x+y*w_)*4];
-				var cr=(x+off>=w_)?0:pixels[Math.round((x+off+y*w_)*4)]*.33*p_;
-				var cg=(x-off<0)?0:pixels[Math.round((x-off+y*w_)*4)]*.33*p_;
+				var cr=(x+off>=w_)?val*.33:pixels[Math.round((x+off+(y+offy)*w_)*4)]*.33;
+				var cg=(x-off<0)?val*.33:pixels[Math.round((x-off+(y+offy)*w_)*4)]*.33;
+
+				// var cr=pixels[Math.round(((x+off)%w_+(y+offy)*w_)*4)]*.33;
+				// var cg=pixels[Math.round(((x-off+w_)%w_+(y+offy)*w_)*4)]*.33;
 
 				pixels[(x+y*w_)*4]=pixels[(x+y*w_)*4]+cr;
 				pixels[(x+y*w_)*4+1]=pixels[(x+y*w_)*4+1]+cg;
@@ -102,6 +125,7 @@ export default class GlitchImage extends React.Component{
     	}
 
 		this.density-=1.0/(this.props.last/this._options.frame_rate);
+		//if(this.density<w_) this.density++;
 		//console.log(offset+' '+this.density);
 		
 		ctx.putImageData(imageData,0,0);

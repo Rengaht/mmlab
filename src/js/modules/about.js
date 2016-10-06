@@ -5,6 +5,7 @@ export default React.createClass({
   render() {
     return(
     	<div className="mainContainer">
+            <iframe src="background_stack.html" className="indexFrame"></iframe>                
          	<Title text="ABOUT">
          		<span className="aboutTopSub">梅林鬍子實驗室</span>
          		<span className="aboutTopSub">Merlin's Mustache Lab</span>

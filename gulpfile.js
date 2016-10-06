@@ -17,19 +17,23 @@ var less=require('gulp-less');
 var cssmin=require('gulp-minify-css');
 var concat=require('gulp-concat');
 
+var refresh=require("gulp-refresh");
+
 gulp.task('build_js', function () {
     return browserify({entries: 'src/js/app.js', extensions: ['.js'], debug: true})
         .transform('babelify', {presets: ['es2015', 'react']})
         .bundle()
         .pipe(source('main.js'))
-        .pipe(gulp.dest('dist'));
+        .pipe(gulp.dest('dist'))
+        .pipe(refresh());
 });
 gulp.task('build_css',function(){
 	return gulp.src(['src/less/app.less'])
 				.pipe(less())
 				//.pipe(concat('app.css'))
 				//.pipe(cssmin())
-				.pipe(gulp.dest('dist/css'));
+				.pipe(gulp.dest('dist/css'))
+				.pipe(refresh());
 });
 
 gulp.task('watch_js',function(){

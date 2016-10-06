@@ -1,14 +1,18 @@
 import React from 'react'
 import {Link} from 'react-router'
+import GlitchText from './glitch_text'
 
 export default class AWork extends React.Component{
 
 	constructor(props){
 		super(props);
 		
-		this.state={};
+		this.state={
+			'key':-1
+		};
 		//this.loadData=this.loadData.bind(this);
 		this.loadData(this.props.params.title);
+		//console.log(this.props.location.query);
 	}
 	loadData(title_){
 
@@ -19,6 +23,7 @@ export default class AWork extends React.Component{
 			cache:false,
 			success: function(data){
 				this.setState({work:data.work});
+				this.setState({key:data.work.id});
 			}.bind(this),
 			error: function(xhr, status, err){
 				console.error(this.url, status, err.toString());
@@ -35,35 +40,42 @@ export default class AWork extends React.Component{
 		for(var t  in this.state.work.type) tag_list_+='  #'+this.state.work.type[t];
 
 		return (
-			<div key={this.state.work.title_en} className="AWorkContent center">
-				<div className="AWorkLeft">
-					<div className="AWorkLeftTop">
-						<div className="English">{this.state.work.title_en}</div>
-						<div className="Chinese">{this.state.work.title_ch}</div>
-					</div>
-					<div className="AWorkLeftBottom">
-						<div className="floatBottom">
-							<div>{this.state.work.client}</div>
-							<div>{this.state.work.descript}</div>
-							<div className="AWorkTag">{this.state.work.year}{tag_list_}</div>
+			<div>
+				<iframe src="background_rotate.html" className="indexFrame"></iframe>		     					
+				<div key={this.state.key} className="AWorkContent center">
+					<div className="AWorkLeft">
+						<div className="AWorkLeftTop">
+							<div className="English">
+								<GlitchText hover={false}
+									font_size={36}
+									text={this.state.work.title_en}/>										
+							</div>
+							<div className="Chinese">{this.state.work.title_ch}</div>
+						</div>
+						<div className="AWorkLeftBottom">
+							<div className="floatBottom">
+								<div>{this.state.work.client}</div>
+								<div>{this.state.work.descript}</div>
+								<div className="AWorkTag">{this.state.work.year}{tag_list_}</div>
+							</div>
 						</div>
 					</div>
+					<div className="AWorkRight">
+						
+						<WorkVideo src={this.state.work.video}/>
+						<div className="AWorkText Chinese">{this.state.work.text_ch}</div>
+						<div className="AWorkGap"></div>
+						<div className="AWorkText English">{this.state.work.text_en}</div>
+
+						<ImageSlide image={this.state.work.image}/>
+
+						<RelateWork work={this.state.work.related}/>
+					</div>
+					<Link to={"/work"} className="AWorkClose">
+						<img src="image/x.png"/>
+					</Link>
+
 				</div>
-				<div className="AWorkRight">
-					
-					<WorkVideo src={this.state.work.video}/>
-					<div className="AWorkText Chinese">{this.state.work.text_ch}</div>
-					<div className="AWorkGap"></div>
-					<div className="AWorkText English">{this.state.work.text_en}</div>
-
-					<ImageSlide image={this.state.work.image}/>
-
-					<RelateWork work={this.state.work.related}/>
-				</div>
-				<Link to={"/work"} className="AWorkClose">
-					<img src="image/x.png"/>
-				</Link>
-
 			</div>
 
 		);
@@ -127,11 +139,12 @@ class ImageSlide extends React.Component{
 	}
 	goLeft(){
 		var m_=this.props.image.length;
-		this.setState({show_index:(this.state.show_index+1)%m_});
+		this.setState({show_index:(this.state.show_index-1+m_)%m_});
 	}
 	goRight(){
 		var m_=this.props.image.length;
-		this.setState({show_index:(this.state.show_index-1+m_)%m_});
+		this.setState({show_index:(this.state.show_index+1)%m_});
+		
 	}
 	goNum(e){
 		if(this.state.show_index==e.target.id) return;
@@ -147,7 +160,7 @@ class RelateWork extends React.Component{
 		relateNodes=this.props.work.map(function(work_,index){
 			return(				
 				<div key={index} className="relatedContainer">
-					<Link to={"/work/"+work_.title_en}>
+					<Link to={"/work/"+work_.id}>
 						<img className="workThumbImage" src={"data/thumb/p"+(work_.id+1)+".jpg"} /> 
 						<div className="relatedTag">
 							<div>{work_.title_en}</div>

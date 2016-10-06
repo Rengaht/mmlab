@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {Router,Route,hashHistory,IndexRoute} from 'react-router'
+import {Router,Route,hashHistory,IndexRoute,useRouterHistory} from 'react-router'
 
 import Main from './modules/main'
 import Home from './modules/home'
@@ -10,8 +10,10 @@ import Blog from './modules/blog'
 import Work from './modules/work'
 import AWork from './modules/awork'
 
+//import createBrowserHistory from 'history/lib/createBrowserHistory';
+import { createHashHistory } from 'history'
 
-//const appHistory=useRouterHistory(createHashHistory)({queryKey:false})
+const appHistory = useRouterHistory(createHashHistory)({ queryKey: false })
 
 ReactDOM.render((
 	<Router history={hashHistory}>

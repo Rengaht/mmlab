@@ -38,6 +38,46 @@
   src: local('Hind Vadodara'), local('HindVadodara-Regular'), url(https://fonts.gstatic.com/s/hindvadodara/v2/9c6KKeibr6NtFqknnNxZB8I79x-VWsl9ZLFyGx7L0Fo.woff2) format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
 }
+/* hebrew */
+@font-face {
+  font-family: 'Assistant';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Assistant ExtraBold'), local('Assistant-ExtraBold'), url(https://fonts.gstatic.com/s/assistant/v1/-mTR0sX8a0RsadH4AMDT8EByb1TKJa77egybnpn19yM.woff2) format('woff2');
+  unicode-range: U+0590-05FF, U+20AA, U+25CC, U+FB1D-FB4F;
+}
+/* latin */
+@font-face {
+  font-family: 'Assistant';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Assistant ExtraBold'), local('Assistant-ExtraBold'), url(https://fonts.gstatic.com/s/assistant/v1/-mTR0sX8a0RsadH4AMDT8Ogdm0LZdjqr5-oayXSOefg.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+/* gujarati */
+@font-face {
+  font-family: 'Hind Vadodara';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Hind Vadodara'), local('HindVadodara-Regular'), url(https://fonts.gstatic.com/s/hindvadodara/v2/9c6KKeibr6NtFqknnNxZByUZf6SPjCvTHKwPaGj40_g.woff2) format('woff2');
+  unicode-range: U+0964-0965, U+0A80-0AFF, U+200B-200D, U+20B9, U+25CC, U+A830-A839;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Hind Vadodara';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Hind Vadodara'), local('HindVadodara-Regular'), url(https://fonts.gstatic.com/s/hindvadodara/v2/9c6KKeibr6NtFqknnNxZBxLE1M_n0V67aubpfN9Cf9U.woff2) format('woff2');
+  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Hind Vadodara';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Hind Vadodara'), local('HindVadodara-Regular'), url(https://fonts.gstatic.com/s/hindvadodara/v2/9c6KKeibr6NtFqknnNxZB8I79x-VWsl9ZLFyGx7L0Fo.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
 body {
   background-color: black;
   color: white;
@@ -82,6 +122,15 @@ a {
   position: fixed;
   width: 100%;
   height: 100%;
+  border: none;
+}
+#_main {
+  transition: .2s;
+}
+#_main.blur {
+  transition: 0.1s ease-in-out 0.1s;
+  -webkit-filter: blur(3px);
+  filter: blur(3px);
 }
 .mainMenu {
   position: fixed;
@@ -91,12 +140,14 @@ a {
   min-height: 93px;
   font-size: 32px;
   text-align: center;
-  transition: .2s;
+  transition: all .1s;
   z-index: 2;
+  background-image: none;
+  background-size: cover;
 }
 .mainMenu.show {
   height: 100%;
-  transition: .2s;
+  transition: all .2s;
   background: rgba(0, 0, 0, 0.6);
 }
 .mainMenu div img {
@@ -123,7 +174,6 @@ a {
   position: fixed;
   width: 100%;
   height: 8%;
-  background: black;
 }
 .titleContent {
   position: relative;
@@ -132,7 +182,7 @@ a {
 }
 .titleText {
   position: absolute;
-  bottom: -8px;
+  bottom: 0px;
   font-size: 40px;
   background: black;
   font-family: 'Assistant';
@@ -182,6 +232,7 @@ a {
 }
 .AWorkLeft .AWorkLeftTop .Chinese {
   font-size: 24px;
+  margin-top: 10px;
 }
 .AWorkLeft .AWorkLeftBottom {
   flex: 1;
@@ -316,6 +367,9 @@ a {
   display: inline-block;
   margin-right: 2%;
 }
+.AWorkRelated .relatedContainer > a img {
+  width: 100%;
+}
 .AWorkRelated .relatedContainer:last-child {
   margin-right: 0;
 }
@@ -328,8 +382,13 @@ a {
   opacity: 0;
   transition: .3s;
 }
-.AWorkRelated .relatedContainer .relatedTag div {
-  text-transform: capitalize;
+.AWorkRelated .relatedContainer .relatedTag div:first-child {
+  text-transform: uppercase;
+  font-family: 'Assistant';
+  margin: 2px;
+}
+.AWorkRelated .relatedContainer .relatedTag div:last-child {
+  text-transform: uppercase;
   font-family: 'mmlabWebTitle';
   margin: 2px;
 }
@@ -357,7 +416,7 @@ a {
   /* 3:2 */
   height: 0;
 }
-.workThumbContainer canvas {
+.workThumbContainer > canvas {
   position: absolute;
   top: 0;
   left: 0;
@@ -378,9 +437,8 @@ a {
   transition: .3s;
 }
 .workThumbDescript .english {
-  font-family: 'Assistant';
-  font-size: 34px;
-  text-transform: uppercase;
+  width: 100%;
+  height: 40px;
   margin-left: 4%;
   margin-top: 4%;
 }
@@ -388,6 +446,7 @@ a {
   font-family: mmlabWebTitle;
   font-size: 22px;
   margin-left: 4%;
+  margin-top: 5px;
 }
 .workThumbDescript .tag {
   width: 100%;
@@ -404,7 +463,7 @@ a {
 }
 .workThumbDescript:hover {
   opacity: 1;
-  transition: 0.1s ease-in-out 0.3s;
+  transition: 0.2s ease-in-out 0.4s;
 }
 /* filter */
 .workFilter {
@@ -444,4 +503,9 @@ a {
 .contactMap {
   height: 80%;
   background-color: white;
+}
+.mapMarker {
+  position: relative;
+  left: -40px;
+  top: -20px;
 }

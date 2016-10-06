@@ -1,0 +1,94 @@
+<html>
+<head>
+
+<script src="include/three/three.js"></script>
+<script src="include/three/shaders/CopyShader.js"></script>
+<script src="include/three/shaders/ConvolutionShader.js"></script>
+<script src="include/three/shaders/RGBShiftShader.js"></script>
+
+
+<script src="include/three/postprocessing/EffectComposer.js"></script>
+<script src="include/three/postprocessing/RenderPass.js"></script>
+<script src="include/three/postprocessing/MaskPass.js"></script>
+<script src="include/three/postprocessing/ShaderPass.js"></script>
+
+<script src="include/three/postprocessing/BloomPass.js"></script>>
+<script src="include/three/postprocessing/DotScreenPass.js"></script>
+
+<script src="include/three/stats.min.js"></script>
+
+<script src="src/background/StackSlice.js"></script>
+
+
+
+<script id="glitchFragmentShader" type="x-shader/x-fragment">	
+	uniform float amount;
+	uniform float angle;
+	uniform float seed_x;
+	uniform float seed_y;
+	uniform sampler2D texture;
+
+	uniform float dvel;
+	uniform float damp;
+
+
+	varying vec2 vUv;
+	float rand(vec2 co){
+		return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
+	}
+	void main(void){
+
+
+		float seed=0.05;
+		float distortion_x=0.5;
+		float distortion_y=0.2;
+		float col_s=0.02;
+
+
+		vec2 p=vUv;
+
+		float xs=floor(gl_FragCoord.x/0.5);
+		float ys=floor(gl_FragCoord.y/0.5);
+		
+		//distort
+		float distortion=sin(vUv.y*dvel)*damp;		
+		p.x+=distortion;
+
+		//glitch
+		vec2 offset = amount*0.01 * vec2( cos(angle), sin(angle));
+		vec4 cr = texture2D(texture, p + offset);
+		vec4 cga = texture2D(texture, p);
+		vec4 cb = texture2D(texture, p - offset);
+
+		gl_FragColor = vec4(cga.r+cr.r, cga.g+cb.b, cga.b+cr.r+cb.b,(cga.a+cr.a+cb.a)*.25);
+		
+	}
+</script>
+<script id="vertexShader" type="x-shader/x-vertex">	
+	varying vec2 vUv;
+	void main(){
+		vUv=uv;
+		vec4 mvPosition=modelViewMatrix*vec4( position, 1.0 );
+		gl_Position=projectionMatrix*mvPosition;
+	}
+</script>
+
+
+<style type="text/css">		
+	canvas{
+		position:absolute;
+		margin:0;
+		left:0;
+		top:0;
+	}
+</style>
+
+</head>
+
+<body>
+	<script src="src/background/background_stack.js"></script>
+
+</body>
+
+</html>
+

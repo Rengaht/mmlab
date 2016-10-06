@@ -141,12 +141,12 @@ function update(){
 			_scene.remove(_scene.children[i]);
 		}else{
 			_leg[i].update();
-			updatePos(_scene.children[i],_leg[i]);
+			updatePos(_scene.getObjectById(_leg[i].id,true),_leg[i]);
 		}
 	}	
 
 	frameCount++;
-	if(frameCount%Const.AddInterval==1) addLeg();
+	if(frameCount%Const.AddInterval==Const.AddInterval-1) addLeg();
 
 	stats.update();
 
@@ -157,23 +157,23 @@ function update(){
 	_raycaster.setFromCamera(_mouse,_camera);
 	var inter=_raycaster.intersectObjects(_scene.children);
 
-	if(inter.length>0){
+	// if(inter.length>0){
 		
-		if(_intersected!=inter[0].object){
+	// 	if(_intersected!=inter[0].object){
 
-			if(_intersected) _intersected.material=_intersected._current_material;
+	// 		if(_intersected) _intersected.material=_intersected._current_material;
 
-			var uni=inter[0].object.material.uniforms;
-			if(uni && uni.gold && uni.gold.value==true){
-				_intersected=inter[0].object;
-				_intersected._current_material=_intersected.material;
-				_intersected.material=_selected_material;
-			}
-		}		
-	}else{
-		if(_intersected) _intersected.material=_intersected._current_material;
-		_intersected=null;
-	}
+	// 		var uni=inter[0].object.material.uniforms;
+	// 		if(uni && uni.gold && uni.gold.value==true){
+	// 			_intersected=inter[0].object;
+	// 			_intersected._current_material=_intersected.material;
+	// 			_intersected.material=_selected_material;
+	// 		}
+	// 	}		
+	// }else{
+	// 	if(_intersected) _intersected.material=_intersected._current_material;
+	// 	_intersected=null;
+	// }
 	
 }
 
@@ -200,7 +200,10 @@ function addLeg(){
 
 		var mat_=createMaterial(leg_._shader_uniform);
 
-		var mesh_=new THREE.Mesh(_leg_geometry,mat_);			
+		var mesh_=new THREE.Mesh(_leg_geometry,mat_);	
+
+		leg_.id=mesh_.id;
+				
 		updatePos(mesh_,leg_);
 		//console.log(leg_._shader_uniform.amount.value);
 
@@ -256,6 +259,9 @@ function initLeg(){
 			var mat_=createMaterial(leg_._shader_uniform);
 
 			var mesh_=new THREE.Mesh(_leg_geometry,mat_);			
+
+			leg_.id=mesh_.id;
+
 			updatePos(mesh_,leg_);
 
 			_leg.push(leg_);
@@ -280,6 +286,11 @@ function createMaterial(uniforms_){
 	
 }
 function updatePos(mesh_,leg_){
+
+	if(!mesh_){
+		return;	
+	} 
+
 	var pos=leg_.getPos();
 
 	mesh_.position.x=pos[0];

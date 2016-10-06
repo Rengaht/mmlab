@@ -33,7 +33,9 @@ export class MainMenu extends React.Component{
 		}
 	}
 	toggleShow(){
+		this.props.backBlur(!this.state.show);
 		this.setState({show:!this.state.show});
+
 	}
 
 }

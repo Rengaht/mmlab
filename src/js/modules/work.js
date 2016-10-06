@@ -64,6 +64,7 @@ export default class Work extends React.Component{
 		// );
 		return(
 			<div className="mainContainer">
+				<iframe src="background_float.html" className="indexFrame"></iframe>
 		     	<Title text="WORK">
 		     		<WorkFilter ref="_year" name="YEAR" val={this.state.filter.year} filterHandler={this.applyFilter} showFilter={this.toggleFilter}/>
 		     		<span className="filterGap">|</span>
@@ -142,15 +143,21 @@ class WorkThumb extends React.Component{
 		//console.log(this.props.index);
 		return(
 			<div className={this.props.index%3==2?"workItem last-in-row":"workItem"}>
-			<Link to={"/work/"+this.props.work.title_en} id={this.props.work.id}>
+			<Link to={"/work/"+this.props.work.id}>
 				<div className="workThumbContainer" 
 					 onMouseEnter={this.onMouseEnter}
 					 onMouseLeave={this.onMouseLeave}>
 					<GlitchImage ref="_img" 
-							last={400.0}
+							last={500.0}
 							src={"data/thumb/p"+(this.props.work.id+1)+".jpg"}/>
 					<div ref="_descript" className="workThumbDescript">
-						<div className="english">{this.props.work.title_en}</div>
+						<div className="english">
+							<GlitchText hover={false}
+										font_size={32}
+										amp={1.0}
+										line_height={3.0}
+										text={this.props.work.title_en}/>
+						</div>
 						<div className="chinese">{this.props.work.title_ch}</div>
 						<div className="tag">
 							<span className="floatBottom">
@@ -183,7 +190,7 @@ class WorkFilter extends React.Component{
 			let callback=this.filterClick;
 			filterNodes=this.props.val.map(function(val,index){
 						return(
-							<span className="filterName" key={index} ref={val} onClick={callback}>{val}</span>		
+							<WorkFilterNode className="filterName" key={index} ref={val} text={val} onClick={callback}  />		
 						);
 					});
 		}
@@ -214,14 +221,46 @@ class WorkFilter extends React.Component{
 	}
 	resetActive(){
 		for(var v in this.props.val){
-				ReactDOM.findDOMNode(this.refs[this.props.val[v]]).classList.remove('active');
+			//ReactDOM.findDOMNode(this.refs[this.props.val[v]]).classList.remove('active');
+			this.refs[this.props.val[v]].resetActive();
 		}
 	}
-	filterClick(e){		
-		this.props.filterHandler(this.props.name,e.target.innerText);
-		
+	filterClick(text_){		
+		this.props.filterHandler(this.props.name,text_);		
 		this.resetActive();
-		e.target.classList.add('active');
 	}
 }
 
+class WorkFilterNode extends React.Component{
+	constructor(props){
+		super(props);
+		this.state={
+			'active':false
+		};
+		this.setActive=this.setActive.bind(this);
+	}
+	render(){
+		return(
+			<span onClick={this.setActive}>
+			<GlitchText ref="_text"
+					className={this.props.className}
+					text={String(this.props.text)}
+					font_size={10}
+					hover={true}
+					font={'mmlabWebText'}
+					amp={1.0}
+					>
+					</GlitchText>
+			</span>
+		);
+	}
+	setActive(){
+		console.log("click!");
+		this.props.onClick(this.props.text);
+		this.refs._text.setActive(true);
+	}
+	resetActive(){
+		this.refs._text.setActive(false);
+	}
+
+}

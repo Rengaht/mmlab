@@ -1,58 +1,86 @@
 import React from 'react'
 import Title from './title'
-import {GoogleMapLoader, GoogleMap, Marker} from 'react-google-maps'
+import GoogleMap from 'google-map-react';
+import GlitchText from './glitch_text'
 
 export default class Contact extends React.Component{
   constructor(props){
+		
 		super(props);
-	  	this.state={
-	  		'markers':[
-	  			{
-		            position: {
+	  	this.position={
 		              lat: 25.047692,
 		              lng: 121.566613
-		            },
-		            defaultAnimation: 2,
-		            key: Date.now()
-	          	}
-	        ]
-	  	};
+		            };
+		this.map_options={
+			panControl: false,
+      		mapTypeControl: false,
+      		scrollwheel: true,
+      		styles:[{
+      			stylers:[{'saturation':-100}, 
+      					 {'gamma':0.2},
+      					 {'lightness':-100},
+      					 {'visibility':'on'}]},
+      			{featureType: "road",
+				 elementType: "geometry",
+				 stylers:[
+				    {lightness: 50},
+				    {visibility:"simplified"}
+				 ]},
+				{featureType: "road",
+				 elementType: "labels.text.fill",
+				 stylers:[
+				    {lightness: 50}
+				]},
+				{featureType: "poi",
+				 elementType: "all",
+				 stylers:[
+				    {visibility:'off'}
+				]},
+				{featureType: "landscape",
+				 elementType: "geometry.stroke",
+				 stylers:[
+				    {lightness:100},
+				    {visibility:'on'}
+				]}
+      		]
+		};
   }
   render() {
     return(
     	<div className="mainContainer">
+    	<iframe src="background_stack.html" className="indexFrame"></iframe>                
      	<Title text="CONTACT">
      		<a href="https://vimeo.com/merlinsmustache" target="_blank">
-     			<img className="socialLink" src="image/vimeo.png"/>
+     			<GlitchText className="socialLink" 
+     						img_src="image/vimeo.png"
+     						hover={true}
+     						amp={1.0}
+							line_height={3.0}/>
      		</a>
      		<a href="https://www.facebook.com/merlin.mustache/" target="_blank">
-     		<img className="socialLink" src="image/facebook.png"/>
+     			<GlitchText className="socialLink" 
+     						img_src="image/facebook.png"
+     						hover={true}
+     						amp={1.0}
+							line_height={3.0}/>
      		</a>
      		<a href="https://www.youtube.com/channel/UCSIxHgMr4UvZRsG5hWoVolQ" target="_blank">
-     		<img className="socialLink" src="image/youtube.png"/>
+     			<GlitchText className="socialLink" 
+     						img_src="image/youtube.png"
+     						hover={true}
+     						amp={1.0}
+							line_height={3.0}/>
      		</a>
      	</Title>
      	<div className="content center">
-	     	<GoogleMapLoader
-		        containerElement={
-		          <div
-		            className="fullImage contactMap"
-		          />
-		        }
-		        googleMapElement={
-		          <GoogleMap
-		            defaultZoom={30}
-		            defaultCenter={{ lat: 25.047692,lng: 121.566613}}	
-		            disableDefaultUI={true}	            
-		          >
-		            {this.state.markers.map((marker, index) => {
-		              return (
-		                <Marker {...marker}/>
-		              );
-		            })}
-		          </GoogleMap>
-		        }
-		     />
+     		<div className="fullImage contactMap">
+	     		<GoogleMap
+	        		defaultCenter={{lat:25.047651,lng:121.565632}}
+	        		defaultZoom={18}
+	        		options={this.map_options}>
+	        		<MapMarker lat={this.position.lat} lng={this.position.lng}/>
+	        	</GoogleMap>
+	        </div>
 
 	     	<div className="contactDetail">
 	     		<div>Work with us:</div>
@@ -74,4 +102,18 @@ export default class Contact extends React.Component{
 
     );
   }
+}
+
+class MapMarker extends React.Component{
+	render(){
+		return (
+			<div className="mapMarker">
+				<GlitchText  
+					img_src="image/map_logo.png"
+					hover={false}
+					amp={1.0}
+					line_height={5.0}/>							
+			</div>
+		);
+	}
 }
