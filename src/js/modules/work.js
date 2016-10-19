@@ -4,74 +4,137 @@ import {Link} from 'react-router'
 import Title from './title'
 import GlitchImage from './glitch_image'
 import GlitchText from './glitch_text'
+import * as DConst from '../request_constants'
 
 export default class Work extends React.Component{
 	constructor(props){
 		super(props);
-		this.work_url="data/work.json";
-		this.filter_url="data/filter.json";
+
+		
+		this.work_url=DConst.URL+DConst.WorkPath+'?'+DConst.Token+'&status=1&sort_order=DESC&columns_show=title_en,title_ch,year,thumb_image';
+		this.filter_url=DConst.URL+DConst.TypePath+'?'+DConst.Token;
+		this.work_type_url=DConst.URL+DConst.WorkTypePath+'?'+DConst.Token;
 		this.state={
 			'filter':{
 				'year':[],
 				'type':[]
 			}
 		};
+		
 
-		//load filter
+
+		this.loadFilter=this.loadFilter.bind(this);
+		this.loadWork=this.loadWork.bind(this);
+		this.loadWorkTypeJunction=this.loadWorkTypeJunction.bind(this);
+
+		this.applyFilter=this.applyFilter.bind(this);
+		this.toggleFilter=this.toggleFilter.bind(this);
+
+
+		this.loadFilter();
+
+	}
+	loadFilter(){
+
+		console.log("load filter....");
+
 		$.ajax({
 			url:this.filter_url,
-			dataType:'json',
-			cache:false,
-			success: function(data){
-				this.setState({filter:data});
+			success: function(data){								
+
+				var filter_=this.state.filter;
+				filter_.type=data.rows;
+				this.setState({filter:filter_});
+				console.log("finish load filter: ");
+				console.log(filter_);
+
+				this.loadWork();
+
 			}.bind(this),
 			error: function(xhr, status, err){
 				console.error(this.url, status, err.toString());
 			}.bind(this)
 		});
+	}
+	loadWork(){
 
-		//load work
+		console.log("load work....");
 		$.ajax({
 			url:this.work_url,
 			dataType:'json',
 			cache:false,
 			success: function(data){
-				this.setState({data:data});
+				
+
+				//retreive year
+				var arr_=[];
+				for(var val in data.rows){
+					var y=data.rows[val].year;
+					if(!arr_.includes(y)) arr_.push(y);
+				}		
+				var filter_=this.state.filter;
+				var year_=arr_.map(function(val,index){
+					return {id:val, text:val};
+				});
+				filter_.year=year_;				
+				console.log("finish load work....");
+				console.log(data.rows);
+
+				this.setState({data:data.rows,filter:filter_});
+				this.loadWorkTypeJunction();
+
 			}.bind(this),
 			error: function(xhr, status, err){
 				console.error(this.url, status, err.toString());
 			}.bind(this)
 		});
-
-		this.applyFilter=this.applyFilter.bind(this);
-		this.toggleFilter=this.toggleFilter.bind(this);
 	}
+	loadWorkTypeJunction(){
+
+		console.log("load work type junction....");
+
+		$.ajax({
+			url:this.work_type_url,
+			dataType:'json',
+			cache:false,
+			success: function(data){
+				
+				//this.setState({work_type:data.rows});
+
+				let filter_=this.state.filter;
+				let load_work=this.state.data;
+
+				for(var work in load_work){				
+					var id_=load_work[work].id;
+					load_work[work].type=data.rows.filter(function(val){ return val.work==id_; })
+												  .map(function(val){ return val.type; });				
+				}
+				
+				this.setState({data:load_work});
+				console.log("finish load work type junction....");
+				console.log(load_work);
+
+			}.bind(this),
+			error: function(xhr, status, err){
+				console.error(this.url, status, err.toString());
+			}.bind(this)
+		});		
+	}
+
+	componentWillMount(){
+        initBackgroundType(1);
+  	}
 	render(){
-		// return(
-		// 	<div className="mainContainer">
-		//      	<Title text="WORK">
-		//      		<WorkFilter ref="_all" name="ALL" showFilter={this.toggleFilter}/>
-		//      		<span className="filterGap">|</span>
-		//      		<WorkFilter ref="_year" name="YEAR" val={this.state.filter.year} filterHandler={this.applyFilter} showFilter={this.toggleFilter}/>
-		//      		<span className="filterGap">|</span>
-		//      		<WorkFilter ref="_type" name="TYPE" val={this.state.filter.type} filterHandler={this.applyFilter} showFilter={this.toggleFilter}/>
-		//      	</Title>
-		//      	<div className="mainContent content center">
-		// 			<WorkList ref="_list" data={this.state.data} filter_type={this.state.filter} filter_val={this.state.filter_value}/>			
-		// 	 	</div>
-  //    		</div>
-			
-		// );
 		return(
 			<div className="mainContainer">
-				<iframe src="background_float.html" className="indexFrame"></iframe>
-		     	<Title text="WORK">
+				<Title text="WORK">
 		     		<WorkFilter ref="_year" name="YEAR" val={this.state.filter.year} filterHandler={this.applyFilter} showFilter={this.toggleFilter}/>
 		     		<span className="filterGap">|</span>
 		     		<WorkFilter ref="_type" name="TYPE" val={this.state.filter.type} filterHandler={this.applyFilter} showFilter={this.toggleFilter}/>
 		     	</Title>
 		     	<div className="content center">
-					<WorkList ref="_list" data={this.state.data} filter_type={this.state.filter} filter_val={this.state.filter_value}/>			
+					<WorkList ref="_list" data={this.state.data} type={this.state.filter.type}
+							  filter_type={this.state.filter} filter_val={this.state.filter_value}/>			
 			 	</div>
      		</div>
 			
@@ -102,16 +165,33 @@ class WorkList extends React.Component{
 		if(this.props.data!==undefined){
 			let name=this.state.name;
 			let val=this.state.val;
-			workNodes=this.props.data.work
+			let type=this.props.type; 
+			workNodes=this.props.data
 					.filter(function(work){
 						if(name=='YEAR') return work.year==val;
 						if(name=='TYPE') return work.type.includes(val);
 						return true;
 					})
 					.map(function(work,index){
-						return(
-							<WorkThumb key={work.id} work={work} index={index} />				
-						);
+						if(work.type && work.type.length>0){
+							
+							var t_=work.type.map(function(tid){
+								var ty_=type.find(function(val){
+									return val.id==tid;
+								});
+								return ty_.text;
+							});
+
+							// var t_=type.find(function(val){
+							// 	return val.id==work.type[0];
+							// });
+
+							return(
+								<WorkThumb key={work.id} work={work} index={index} type_text={t_.join(' , ')}/>				
+							);
+						}else return(
+								<WorkThumb key={work.id} work={work} index={index} type_text={''}/>				
+							);
 					});
 		}
 		return(
@@ -130,6 +210,7 @@ class WorkThumb extends React.Component{
 		super(props);
 		this.onMouseEnter=this.onMouseEnter.bind(this);
 		this.onMouseLeave=this.onMouseLeave.bind(this);
+		
 	}
 	onMouseEnter(){
 		//console.log("enter!");
@@ -139,8 +220,15 @@ class WorkThumb extends React.Component{
 		//console.log("leave!");
 		this.refs._img.onMouseLeave();
 	}
+	componentDidMount(){
+		
+	}
 	render(){
 		//console.log(this.props.index);
+
+		// var foot=(this.props.work.type)?<span className="floatBottom">{this.props.work.year}&nbsp;/&nbsp;{this.props.work.type[0]}</span>:
+		// 								<span className="floatBottom">{this.props.work.year}</span>;
+
 		return(
 			<div className={this.props.index%3==2?"workItem last-in-row":"workItem"}>
 			<Link to={"/work/"+this.props.work.id}>
@@ -148,8 +236,8 @@ class WorkThumb extends React.Component{
 					 onMouseEnter={this.onMouseEnter}
 					 onMouseLeave={this.onMouseLeave}>
 					<GlitchImage ref="_img" 
-							last={500.0}
-							src={"data/thumb/p"+(this.props.work.id+1)+".jpg"}/>
+							last={200.0}
+							src={DConst.FilePath+this.props.work.thumb_image.name}/>
 					<div ref="_descript" className="workThumbDescript">
 						<div className="english">
 							<GlitchText hover={false}
@@ -160,9 +248,7 @@ class WorkThumb extends React.Component{
 						</div>
 						<div className="chinese">{this.props.work.title_ch}</div>
 						<div className="tag">
-							<span className="floatBottom">
-							{this.props.work.year}&nbsp;/&nbsp;{this.props.work.type[0]}
-							</span>
+							<span className="floatBottom">{this.props.work.year}&nbsp;/&nbsp;{this.props.type_text}</span>
 						</div>			
 					</div>									
 				</div>
@@ -190,9 +276,9 @@ class WorkFilter extends React.Component{
 			let callback=this.filterClick;
 			filterNodes=this.props.val.map(function(val,index){
 						return(
-							<WorkFilterNode className="filterName" key={index} ref={val} text={val} onClick={callback}  />		
+							<WorkFilterNode className="filterName" key={index} ref={val.text} id={val.id} text={val.text} onClick={callback}  />		
 						);
-					});
+					});			
 		}
 		return(
 			<div className="workFilter">
@@ -222,7 +308,7 @@ class WorkFilter extends React.Component{
 	resetActive(){
 		for(var v in this.props.val){
 			//ReactDOM.findDOMNode(this.refs[this.props.val[v]]).classList.remove('active');
-			this.refs[this.props.val[v]].resetActive();
+			this.refs[this.props.val[v].text].resetActive();
 		}
 	}
 	filterClick(text_){		
@@ -245,6 +331,7 @@ class WorkFilterNode extends React.Component{
 			<GlitchText ref="_text"
 					className={this.props.className}
 					text={String(this.props.text)}
+					id={this.props.id}
 					font_size={10}
 					hover={true}
 					font={'mmlabWebText'}
@@ -256,7 +343,7 @@ class WorkFilterNode extends React.Component{
 	}
 	setActive(){
 		console.log("click!");
-		this.props.onClick(this.props.text);
+		this.props.onClick(this.props.id);
 		this.refs._text.setActive(true);
 	}
 	resetActive(){

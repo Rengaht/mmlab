@@ -19,7 +19,7 @@ export default class Main extends React.Component{
 		     	<MainMenuItem to="/">HOME</MainMenuItem>
 	     		<MainMenuItem to="/about">ABOUT</MainMenuItem>
 	     		<MainMenuItem to="/work">WORK</MainMenuItem>
-	     		<a href="./blog.html" target="_blank" className='MainMenuItem'>
+	     		<a href="http://mmlab.com.tw/blog/" target="_blank" className='MainMenuItem'>
 	     			<GlitchText 
 	     				text={'BLOG'}
 	    				font_size={40}

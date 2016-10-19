@@ -30,15 +30,15 @@ LLeg.prototype.update=function(){
 	this._pos[1]+=this._vel[1];
 	this._pos[2]+=this._vel[2];
 
-	var t=this._pos[0]/Const.DestRad.toFixed(2);
+	var t=this._pos[0]/LogoConst.DestRad.toFixed(2);
 	if(t<0.5){
-		this._vel[0]+=Const.PreVelDiff[0];
-		this._vel[1]*=Const.PreVelDiff[1];
-		this._vel[2]*=Const.PreVelDiff[2];
+		this._vel[0]+=LogoConst.PreVelDiff[0];
+		this._vel[1]*=LogoConst.PreVelDiff[1];
+		this._vel[2]*=LogoConst.PreVelDiff[2];
 	}else{
-		this._vel[0]*=Const.VelDiff[0];
-		this._vel[1]*=Const.VelDiff[1];
-		this._vel[2]*=Const.VelDiff[2];
+		this._vel[0]*=LogoConst.VelDiff[0];
+		this._vel[1]*=LogoConst.VelDiff[1];
+		this._vel[2]*=LogoConst.VelDiff[2];
 	}
 	if(t>1) this._dead=true;
 
@@ -65,7 +65,7 @@ LLeg.prototype.getRot=function(){
 }
 LLeg.prototype.getScale=function(){
 	var _shrink_dest=0.5;
-	var t=(this._pos[0]/Const.DestRad.toFixed(2));
+	var t=(this._pos[0]/LogoConst.DestRad.toFixed(2));
 	if(t>_shrink_dest) t=_shrink_dest;
 
 	var s=t*(0.8/_shrink_dest)+0.2;

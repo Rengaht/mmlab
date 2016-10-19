@@ -10,6 +10,8 @@ import Blog from './modules/blog'
 import Work from './modules/work'
 import AWork from './modules/awork'
 
+
+
 //import createBrowserHistory from 'history/lib/createBrowserHistory';
 import { createHashHistory } from 'history'
 
@@ -27,7 +29,7 @@ ReactDOM.render((
 	    	<Route path="/work" component={Work}/>
 	    	
     	</Route>
-    	<Route path="/work/:title" component={AWork}/>	    	
+    	<Route path="/work/:id" component={AWork}/>	    	
 	    	
   	</Router>), 
 	document.getElementById('app')

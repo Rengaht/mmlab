@@ -9,7 +9,7 @@ function FloatLeg(p_,v_){
 		angle:{value:Math.random()*Math.PI},
 		seed_x:{value:0.0},
 		seed_y:{value:0.0},
-		texture:{value:_leg_texture},		
+		texture:{value:_rotate_leg_texture},		
 		damp:{value:0},
 		dvel:{value:20},
 		alpha:{value:0.6}

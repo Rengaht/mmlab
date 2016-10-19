@@ -47,7 +47,11 @@ Temporary Items
 .apdisk
 node_modules
 include
+m
+build
 
 *.png
 *.jpg
 *.json
+
+

@@ -7,10 +7,12 @@ export default class Contact extends React.Component{
   constructor(props){
 		
 		super(props);
-	  	this.position={
-		              lat: 25.047692,
-		              lng: 121.566613
-		            };
+	  	this.state={
+  			position:{
+	              lat: 25.047692,
+	              lng: 121.566613
+	        }
+		};
 		this.map_options={
 			panControl: false,
       		mapTypeControl: false,
@@ -45,10 +47,15 @@ export default class Contact extends React.Component{
       		]
 		};
   }
+  componentDidMount(){
+	this.setState({position:{lat: 25.047692,lng: 121.566613}});		
+  }
+  componentWillMount(){
+	initBackgroundType(2);	
+  }
   render() {
     return(
-    	<div className="mainContainer">
-    	<iframe src="background_stack.html" className="indexFrame"></iframe>                
+    	<div className="mainContainer">    	            
      	<Title text="CONTACT">
      		<a href="https://vimeo.com/merlinsmustache" target="_blank">
      			<GlitchText className="socialLink" 
@@ -78,7 +85,7 @@ export default class Contact extends React.Component{
 	        		defaultCenter={{lat:25.047651,lng:121.565632}}
 	        		defaultZoom={18}
 	        		options={this.map_options}>
-	        		<MapMarker lat={this.position.lat} lng={this.position.lng}/>
+	        		<MapMarker lat={this.state.position.lat} lng={this.state.position.lng}/>
 	        	</GoogleMap>
 	        </div>
 

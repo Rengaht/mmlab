@@ -118,11 +118,14 @@ a {
 .mainContainer .content .part {
   margin-top: 20px;
 }
-.indexFrame {
+#_BackEffect {
   position: fixed;
   width: 100%;
   height: 100%;
   border: none;
+}
+.edgeShadow {
+  box-shadow: 0 0px 40px -5px black;
 }
 #_main {
   transition: .2s;
@@ -174,6 +177,7 @@ a {
   position: fixed;
   width: 100%;
   height: 8%;
+  z-index: 5;
 }
 .titleContent {
   position: relative;
@@ -229,6 +233,7 @@ a {
   font-family: 'Assistant';
   font-size: 40px;
   text-transform: uppercase;
+  width: 100%;
 }
 .AWorkLeft .AWorkLeftTop .Chinese {
   font-size: 24px;
@@ -238,10 +243,9 @@ a {
   flex: 1;
   border-left: 1px white solid;
   height: 100%;
-  width: 100%;
+  width: 90%;
 }
 .AWorkLeft .AWorkLeftBottom .floatBottom div {
-  margin-top: 20px;
   margin-left: 10px;
 }
 .AWorkLeft .AWorkLeftBottom .AWorkTag {
@@ -377,20 +381,19 @@ a {
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 33.33%;
+  height: 30%;
   background-color: rgba(0, 0, 0, 0.5);
   opacity: 0;
   transition: .3s;
+  padding: 5px;
 }
 .AWorkRelated .relatedContainer .relatedTag div:first-child {
   text-transform: uppercase;
   font-family: 'Assistant';
-  margin: 2px;
 }
 .AWorkRelated .relatedContainer .relatedTag div:last-child {
   text-transform: uppercase;
   font-family: 'mmlabWebTitle';
-  margin: 2px;
 }
 .AWorkRelated .relatedContainer:hover .relatedTag {
   opacity: 1;
@@ -438,15 +441,14 @@ a {
 }
 .workThumbDescript .english {
   width: 100%;
-  height: 40px;
   margin-left: 4%;
-  margin-top: 4%;
+  margin-top: 3px;
 }
 .workThumbDescript .chinese {
   font-family: mmlabWebTitle;
   font-size: 22px;
   margin-left: 4%;
-  margin-top: 5px;
+  margin-top: 4px;
 }
 .workThumbDescript .tag {
   width: 100%;
@@ -457,13 +459,14 @@ a {
   margin-bottom: 4%;
   margin-left: 5%;
   font-weight: bold;
+  font-family: 'Assistant';
 }
 .workThumbDescript .tag .floatBottom {
   bottom: 4%;
 }
 .workThumbDescript:hover {
   opacity: 1;
-  transition: 0.2s ease-in-out 0.4s;
+  transition: 0.1s ease-in-out 0.1s;
 }
 /* filter */
 .workFilter {
