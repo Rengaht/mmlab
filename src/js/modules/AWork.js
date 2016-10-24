@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router'
 import GlitchText from './glitch_text'
+import WorkThumb from './work_thumb'
 import * as DConst from '../request_constants'
 
 
@@ -18,7 +19,9 @@ export default class AWork extends React.Component{
 	}
 	loadData(id_){
 		
-		let url=DConst.URL+DConst.WorkPath+'/'+id_+'?'+DConst.Token;	
+		// let url=DConst.URL+DConst.WorkPath+'/'+id_+'?'+DConst.Token;	
+		let url="data/data.json"
+
 		$.ajax({
 			url:url,
 			dataType:'json',
@@ -57,42 +60,52 @@ export default class AWork extends React.Component{
 						<div className="AWorkLeftTop">
 							<div className="English">
 								<GlitchText hover={false}
-									font_size={36}
+									font_size={45}
 									text={this.state.work.title_en}/>										
 							</div>
 							<div className="Chinese">{this.state.work.title_ch}</div>
-						</div>
-						<div className="AWorkLeftBottom">
-							<div className="floatBottom">
+							
+							<div className="AWorkLeftBottom">
 								<div>{this.state.work.client}</div>
 								<div>{this.state.work.descript}</div>
 								<div className="AWorkTag">{this.state.work.year}{this.state.tag_list}</div>
 							</div>
 						</div>
+						
 					</div>
 					<div className="AWorkRight">
 						
 						<WorkVideo src={this.state.work.video}/>
-						<div className="AWorkText Chinese" dangerouslySetInnerHTML={{__html:this.state.work.text_ch}}></div>
-						<div className="AWorkGap"></div>
-						<div className="AWorkText English" dangerouslySetInnerHTML={{__html:this.state.work.text_en}}></div>
+
+						<div className="AWorkText">
+							<div className="title">作品簡介</div>
+							<div className="text" dangerouslySetInnerHTML={{__html:this.state.work.text_ch}}></div>
+						</div>
+
+						<div className="AWorkText">
+							<div className="title">Introduction</div>
+							<div className="text" dangerouslySetInnerHTML={{__html:this.state.work.text_en}}></div>
+						</div>
 
 						<ImageSlide image={this.state.work.image.rows}/>
 
 						<RelateWork id={this.state.work.id}/>
 					</div>
 					<Link to={"/work"} className="AWorkClose">						
-						<GlitchText 
-     						img_src="image/x.png"
-     						hover={true}
-     						amp={1.0}
-							line_height={3.0}/>
+						<img src="image/x.png"/>
 					</Link>
 
 				</div>
 			</div>
 
 		);
+		//<Link to={"/work"} className="AWorkClose">						
+		//				<GlitchText 
+     	//					img_src="image/x.png"
+     	//					hover={true}
+     	//					amp={1.0}
+		//					line_height={3.0}/>
+		//			</Link>
 	}	
 	componentWillReceiveProps(props_){
 		//console.log(props_);
@@ -142,19 +155,20 @@ class ImageSlide extends React.Component{
 			});
 		}	
 		return(
-			<div className="AWorkImageContainer">
-				<div className="AWorkImageView">
-					<div ref="_slider" className="slider">
-					{imageNodes}
-					</div>
-					<div className="control">
-						<div className="imageArrow left" onClick={this.goLeft}/>
-						<div className="imageArrow right" onClick={this.goRight}/>
-					
-						<div className="dotContainer">
-							<div className="center">{dotNodes}</div>
+			<div>
+				<div className="AWorkImageContainer">
+					<div className="AWorkImageView">
+						<div ref="_slider" className="slider">
+						{imageNodes}
 						</div>
+						<div className="control">
+							<div className="imageArrow left" onClick={this.goLeft}/>
+							<div className="imageArrow right" onClick={this.goRight}/>										
+						</div>				
 					</div>
+				</div>
+				<div className="dotContainer">
+						<div className="center">{dotNodes}</div>
 				</div>
 			</div>
 		);		
@@ -178,7 +192,8 @@ class RelateWork extends React.Component{
 		super(props);
 		this.state={};
 		//load related item by id		
-		let url=DConst.URL+DConst.WorkPath+'/?'+DConst.Token+'&status=1&sort_order=DESC&columns_show=title_en,title_ch,thumb_image';
+		// let url=DConst.URL+DConst.WorkPath+'/?'+DConst.Token+'&status=1&sort_order=DESC&columns_show=title_en,title_ch,thumb_image';
+		let url="data/work.json";
 		var id_=this.props.id;
 		$.ajax({
 			url:url,
@@ -214,18 +229,21 @@ class RelateWork extends React.Component{
 		relateNodes=this.state.work.map(function(work_,index){
 			return(				
 				<div key={index} className="relatedContainer">
-					<Link to={"/work/"+work_.id}>
-						<img className="workThumbImage" src={DConst.FilePath+work_.thumb_image.name} /> 
-						<div className="relatedTag">
-							<div>{work_.title_en}</div>
-							<div>{work_.title_ch}</div>
-						</div>
-					</Link>
+					<WorkThumb key={work_.id} work={work_} type_text={''} small={true}/>
 				</div>				
 			);
 		});
+		//<Link to={"/work/"+work_.id}>
+		//	<img className="workThumbImage" src={DConst.FilePath+work_.thumb_image.name} /> 
+		//	<div className="relatedTag">
+		//		<div>{work_.title_en}</div>
+		//		<div>{work_.title_ch}</div>
+		//	</div>
+		//</Link>
+
 		return(
 			<div className="AWorkRelated">
+				<div className="more">More Projects</div>
 				{relateNodes}
 			</div>
 		);

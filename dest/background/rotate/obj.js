@@ -15,7 +15,7 @@ function RotateSlice(p_,a_,i_){
 		texture:{value:_tex},
 		damp:{value:Math.random()*.3+.1},
 		dvel:{value:this.distort_vel},
-		alpha:{value:1.2}
+		alpha:{value:3.2}
 	};
 
 	this._shader_uniform.texture.value.wrapS=this._shader_uniform.texture.value.wrapT=THREE.RepeatWrapping;

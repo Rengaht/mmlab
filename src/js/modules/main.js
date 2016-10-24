@@ -3,31 +3,27 @@ import ReactDOM from 'react-dom'
 import {Link} from 'react-router'
 import {MainMenu, MainMenuItem} from './menu'
 import GlitchText from './glitch_text'
+import MainContainer from './main_container'
+import {Title,CopyRight} from './title'
 
 export default class Main extends React.Component{
 	constructor(props){
 		super(props);
 		this.setBlur=this.setBlur.bind(this);
+		
 	}
+	
   	render(){
 	    return(
 	    <div>
+	    	<Title text={this.props.location.pathname}/>
 	    	<div ref="_main" id="_main">
-	    	 {this.props.children}
+	    	  <MainContainer path={this.props.location.pathname}>
+		     	{this.props.children}
+		     </MainContainer>
 	    	 </div>
-		     <MainMenu backBlur={this.setBlur}>
-		     	<MainMenuItem to="/">HOME</MainMenuItem>
-	     		<MainMenuItem to="/about">ABOUT</MainMenuItem>
-	     		<MainMenuItem to="/work">WORK</MainMenuItem>
-	     		<a href="http://mmlab.com.tw/blog/" target="_blank" className='MainMenuItem'>
-	     			<GlitchText 
-	     				text={'BLOG'}
-	    				font_size={40}
-	    				hover={true}
-	    			/>
-	     		</a>
-	     		<MainMenuItem to="/contact">CONTACT</MainMenuItem>	     		
-		     </MainMenu>
+		     <MainMenu backBlur={this.setBlur}/>
+		    
 
 	    </div>
 	    );

@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {Router,Route,hashHistory,IndexRoute,useRouterHistory} from 'react-router'
+import { createHashHistory } from 'history'
 
 import Main from './modules/main'
 import Home from './modules/home'
@@ -12,8 +13,8 @@ import AWork from './modules/awork'
 
 
 
+
 //import createBrowserHistory from 'history/lib/createBrowserHistory';
-import { createHashHistory } from 'history'
 
 const appHistory = useRouterHistory(createHashHistory)({ queryKey: false })
 
@@ -27,9 +28,9 @@ ReactDOM.render((
 	    	<Route path="/about" component={About}/>	    	
 	    	
 	    	<Route path="/work" component={Work}/>
-	    	
+	    	<Route path="/work/:id" component={AWork}/>	
     	</Route>
-    	<Route path="/work/:id" component={AWork}/>	    	
+    	    	
 	    	
   	</Router>), 
 	document.getElementById('app')

@@ -54,13 +54,14 @@ export default class GlitchImage extends React.Component{
 		ctx.drawImage(this.img,0,0,w_,h_);
 
 		if(!this.state.glitch) return;
-		if(this.density<0) return;
+		if(this.density<0 && this.props.last>0) return;
 
 		// this._options.stereoscopic={
 	 //            red: 10*this.randomRange(1,3),
 	 //            green: 5*this.randomRange(1,3),
 	 //            blue: 30*this.randomRange(1,3)
 	 //    };
+	 	if(ctx.width*ctx.height==0) return;
 
 		var imageData=ctx.getImageData(0,0,w_,h_),
 			pixels=imageData.data,
@@ -124,7 +125,8 @@ export default class GlitchImage extends React.Component{
     		}
     	}
 
-		this.density-=1.0/(this.props.last/this._options.frame_rate);
+    	if(this.props.last>0)
+			this.density-=1.0/(this.props.last/this._options.frame_rate);
 		//if(this.density<w_) this.density++;
 		//console.log(offset+' '+this.density);
 		

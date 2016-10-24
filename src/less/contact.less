@@ -1,18 +1,28 @@
 
-.socialLink{
-	margin:4px 20px;
 
+.contactInfo{	
+	&>div{
+		width:25%;
+		margin-top: @vert_margin;
+		display: inline-block;
+	}
+	.contactDetail{	
+		white-space: pre-line;
+		xfont-size: @text_size;
+	}
+	.socialLink{
+		a{
+			float:right;
+			margin-right:@horiz_margin;
+		}
+	}
 }
-.contactDetail{
-	display: inline-block;
-	width:33%;
-	white-space: pre-line;
-	margin-top: 32px;
-	font-size: 18px;
-}
+
 .contactMap{
+	width:100%;	
 	height:80%;
-	background-color: white;
+	// height:60vh;
+	background-color: black;
 
 }
 .mapMarker{

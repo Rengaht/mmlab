@@ -1,7 +1,7 @@
 
 function StackConstants(){
 	this.MSlice=9;	
-	this.SliceSize=420;	
+	this.SliceSize=750;	
 	this.MStack=2;
 }
 
@@ -59,14 +59,14 @@ function initSliceStack(){
 	
 	for(j=0;j<StackConst.MStack;++j){
 
-		var mslice=Math.round(Math.random()*3)+3;
+		var mslice=Math.round(Math.random()*3)+4;
 		var slice=[];
 		
 		// create random index to slice
 		shuffleArray(random_arr);
 		
 		let spos_=[(ww_*.5+ww_*.3*random(0,1))*(j*2-1),
-				   wh_*.3*random(-1,1),
+				   wh_*(.3+.2*random(0,1))*(j%2==0?1:-1),
 				   random(20,120)];
 		var samp_=[random(20,80),random(20,80),random(-10,10)];
 		var stack=new FloatSlice(spos_,samp_,-1);

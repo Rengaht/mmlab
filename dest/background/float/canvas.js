@@ -1,7 +1,7 @@
 
 function FloatConstants(){
 	this.MSlice=7;	
-	this.SliceSize=280;
+	this.SliceSize=240;
 	this.DestRad;
 }
 
@@ -46,12 +46,13 @@ function initSliceFloat(){
 	var i;
 
 
-	_mslice=Math.round(Math.random()*4)+3;
+	_mslice=12;
 	
 	// create random index to slice
 	var random_arr=[];
-	for(i=1;i<=FloatConst.MSlice;++i) random_arr.push(i);
+	for(i=1;i<=_mslice;++i) random_arr.push(i%FloatConst.MSlice);
 	shuffleArray(random_arr);
+	//console.log(random_arr);
 	
 	let ww_=window.innerWidth.toFixed(2);
 	let wh_=window.innerHeight.toFixed(2);
@@ -59,7 +60,7 @@ function initSliceFloat(){
 	for(i=0;i<_mslice;i++){
 
 		//var pos_=[random(0,ww_*.1),random(0,wh_*.1),100];
-		var pos_=[random(ww_*.2,ww_*.5)*(random(0,2)<1?1:-1),random(-wh_*.5,wh_*.5),random(50,550)];
+		var pos_=[random(0,ww_)*(random(0,2)<1?1.0:-1.0),random(-1.0,1.0)*wh_,random(50,550)];
 		var amp_=[random(20,80),random(20,80),random(-10,10)];
 
 		var slice_=new FloatSlice(pos_,amp_,random_arr[i]);
@@ -92,7 +93,7 @@ function createMaterialFloat(uniforms_,tex_index_){
 		vertexShader:_vertexshader,
 		fragmentShader:_float_fragshader,
 		transparent:true,
-		opacity:0.9,
+		opacity:1,
 		blending:THREE.AdditiveBlending
 	});
 	// return new THREE.MeshBasicMaterial({

@@ -1,7 +1,34 @@
 
-.serviceTitle{
-	font-size:22px;
+.about{
+	padding-top: 5%;
+
+	.part{
+		width:50%;
+		display:table-cell;
+		padding-left:@horiz_margin;
+		padding-right:@horiz_margin;
+
+		.title{
+			margin-top: @vert_margin*2;
+			font-size:@title_size;
+		}
+		.text{
+			margin-top: @vert_margin;
+		}
+	}
+	img{
+		width:100%;
+	}
 }
-.aboutTopSub{
-	margin-left: 20px;
+.blurBack{	
+	width:100%;	
+	height:20%;
+	
+	z-index: -1;
+	overflow: hidden;
+	display: none;
+	img{
+		width:100%;	
+		filter:blur(5px);
+	}
 }

@@ -153,7 +153,7 @@ function draw(){
 
 function initBackgroundType(type_){
 
-
+	if(_Background_Type==type_) return;
 	console.log('Init Background Type: '+type_);
 
 	clearLogo();

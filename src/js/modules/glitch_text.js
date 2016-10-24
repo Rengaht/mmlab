@@ -120,7 +120,8 @@ export default class GlitchText extends React.Component{
 		if(!this.state.glitch && !this.active) return;
 		// if(this.density<0) return;
 		//if(!this.props.hover && this.randomRange(1,5)>1) return;
-		
+		if(ctx.width*ctx.height==0) return;
+
 		var imageData=ctx.getImageData(0,0,w_,h_),
 			pixels=imageData.data,
 			length=pixels.length,
