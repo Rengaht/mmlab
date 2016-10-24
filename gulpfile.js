@@ -27,6 +27,7 @@ gulp.task('build_js', function () {
     .pipe(gulp.dest('dest'))
     .pipe(refresh());
 });
+
 gulp.task('build_css', function () {
   return gulp.src(['src/less/app.less'])
     .pipe(less())
@@ -45,4 +46,4 @@ gulp.task('watch_css', function () {
 
 gulp.task('watch', ['watch_js', 'watch_css']);
 
-gulp.task('default', ['watch', 'build_js', 'build_css']);
+gulp.task('default', ['build_js', 'build_css']);
