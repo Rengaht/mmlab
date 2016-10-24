@@ -1,0 +1,40 @@
+{
+  "name": "mmlab",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulp-build.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
+    "babelify": "^7.3.0",
+    "browserify": "^13.1.0",
+    "react-dom": "^15.3.2",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "dependencies": {
+    "glslCanvas": "0.0.17",
+    "google-map-react": "^0.20.0",
+    "gulp-babel": "^6.1.2",
+    "gulp-concat": "^2.6.0",
+    "gulp-less": "^3.1.0",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-refresh": "^1.1.0",
+    "gulp-util": "^3.0.7",
+    "history": "^4.3.0",
+    "mobile-detect": "^1.3.3",
+    "react": "^15.3.2",
+    "react-motion": "^0.4.5",
+    "react-router": "^3.0.0-alpha.3",
+    "react-router-transition": "0.0.6"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  }
+}
