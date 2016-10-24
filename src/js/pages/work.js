@@ -14,7 +14,6 @@ export default class Work extends React.Component {
   constructor(props) {
     super(props);
 
-
     // this.work_url=DConst.URL+DConst.WorkPath+'?'+DConst.Token+'&status=1&sort_order=DESC&columns_show=title_en,title_ch,year,thumb_image';
     // this.filter_url=DConst.URL+DConst.TypePath+'?'+DConst.Token;
     // this.work_type_url=DConst.URL+DConst.WorkTypePath+'?'+DConst.Token;
@@ -23,15 +22,12 @@ export default class Work extends React.Component {
     this.filter_url = 'data/type.json';
     this.work_type_url = 'data/work_type.json';
 
-
     this.state = {
       'filter': {
         'year': [],
         'type': []
       }
     };
-
-
 
     this.loadFilter = this.loadFilter.bind(this);
     this.loadWork = this.loadWork.bind(this);
@@ -204,10 +200,10 @@ class WorkList extends React.Component {
     if (work_.type) {
       let type = this.props.type;
       t_ = work_.type.map(function (tid) {
-                var ty_ = type.find(function (val) {
+        var ty_ = type.find(function (val) {
           return val.id == tid;
-                });
-                return ty_.text;
+        });
+        return ty_.text;
       });
     }
 
@@ -373,25 +369,25 @@ class WorkFilterNode extends React.Component {
     return (
       <div onClick={this.setActive}>
         <GlitchText ref='_text'
-  				className={this.props.className}
-					text={String(this.props.text)}
-					id={this.props.id}
-					font_size={10}
-					hover={true}
-					font={'mmlabWebText'}
-					amp={1.0}
-					>
-				</GlitchText>
-			</div>
-		);
-	}
-	setActive() {
-		console.log('click!');
-		this.props.onClick(this.props.id);
-		this.refs._text.setActive(true);
-	}
-	resetActive() {
-		this.refs._text.setActive(false);
-	}
+          className={this.props.className}
+          text={String(this.props.text)}
+          id={this.props.id}
+          font_size={10}
+          hover={true}
+          font={'mmlabWebText'}
+          amp={1.0}
+          >
+        </GlitchText>
+      </div>
+    );
+  }
+  setActive() {
+    console.log('click!');
+    this.props.onClick(this.props.id);
+    this.refs._text.setActive(true);
+  }
+  resetActive() {
+    this.refs._text.setActive(false);
+  }
 
 }
