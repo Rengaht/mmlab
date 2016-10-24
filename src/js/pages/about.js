@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router'
 
-import { Title, CopyRight } from './title'
+import { Title, CopyRight } from './components/title'
 // import MainContainer from './main_container'
 
 class About extends React.Component {

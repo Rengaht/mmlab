@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
-import GlitchText from './glitch_text'
-import WorkThumb from './work_thumb'
+import GlitchText from './components/glitch_text'
+import WorkThumb from './components/work_thumb'
 import * as DConst from '../request_constants'
 
 

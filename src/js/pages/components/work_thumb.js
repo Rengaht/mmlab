@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router'
 import GlitchImage from './glitch_image'
 import GlitchText from './glitch_text'
-import * as DConst from '../request_constants'
+import * as DConst from '../../request_constants'
 
 export default class WorkThumb extends React.Component {
   constructor(props) {

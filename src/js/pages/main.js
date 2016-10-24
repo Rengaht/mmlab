@@ -1,10 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Link } from 'react-router'
-import { MainMenu, MainMenuItem } from './menu'
-import GlitchText from './glitch_text'
-import MainContainer from './main_container'
-import { Title, CopyRight } from './title'
+import { MainMenu, MainMenuItem } from './components/menu'
+import GlitchText from './components/glitch_text'
+import MainContainer from './components/main_container'
+import { Title, CopyRight } from './components/title'
 
 export default class Main extends React.Component {
   constructor(props) {
