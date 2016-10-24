@@ -19,19 +19,19 @@ import AWork from './modules/awork'
 const appHistory = useRouterHistory(createHashHistory)({ queryKey: false })
 
 ReactDOM.render((
-	<Router history={hashHistory}>
-		<Route path='/' component={Main}>
+  <Router history={hashHistory}>
+    <Route path='/' component={Main}>
 
-			<IndexRoute component={Home} />
+      <IndexRoute component={Home} />
 
-			<Route path='/contact' component={Contact} />
-			<Route path='/about' component={About} />
+      <Route path='/contact' component={Contact} />
+      <Route path='/about' component={About} />
 
-			<Route path='/work' component={Work} />
-			<Route path='/work/:id' component={AWork} />
-		</Route>
+      <Route path='/work' component={Work} />
+      <Route path='/work/:id' component={AWork} />
+    </Route>
 
 
-	</Router>),
-	document.getElementById('app')
+  </Router>),
+  document.getElementById('app')
 );
