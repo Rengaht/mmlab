@@ -49,6 +49,4 @@ node_modules
 m
 build
 _pre
-
-
-
+npm-debug.log
