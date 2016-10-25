@@ -25,7 +25,7 @@ export default class GlitchText extends React.Component{
     		glitch:false
     	};
     	this.density=1.0;
-    	this.font='Assistant';
+    	this.font='mmlabWebTitle';
     	this.text;
     	this.linedText;
     	this.img;

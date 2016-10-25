@@ -9,7 +9,7 @@ export class Title extends React.Component{
   	//console.log(path);
   	if(path[1].length>0){
 	    return(
-		    <div className="cornerTitle">
+		    <div className={this.props.show?"cornerTitle show":"cornerTitle hide"}>
 				<span>|</span>
 				<span>{path[1]}</span>
 				<span>|</span>			

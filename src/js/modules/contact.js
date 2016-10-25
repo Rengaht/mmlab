@@ -79,47 +79,54 @@ class Contact extends React.Component{
 	     
 	    
 	     	<div className="content center">
-	     			<img className="contactMap" src="image/map.png"/>
+	     		<div className="contactHello">We<br/>should<br/>talk</div>
+	     		<div className="contactEmail">[ merlin.mustache@mmlab.tw ]</div>
 	     	    <div className="contactInfo">
-			     	<div className="contactDetail">
-			     		<div>Work with us:</div>
-			     		<div>merlin.mustache@mmlab.tw</div>
-			     	</div>
-					
-					<div className="contactDetail">
-						<div>Tel:</div>
-			     		<div>+886 2 8768-1100 #135</div>
-			     	</div>
-			     	
-			     	<div className="contactDetail">
-			     		<div>Address:</div>
-			     		<div>11070 台北市信義區東興路45號9F</div>
-			     	</div>	
+	     	    	<div className="title">梅林斯行銷有限公司</div>
+	     	    	<div>
+			     		<div>
+				     		<span>T</span>
+				     		<span>02 8768-1100 #135</span>
+			     		</div>
+						<div>
+				     		<span>A</span>
+				     		<span>11070 台北市信義區東興路45號9F</span>
+			     		</div>
+			     		<div>
+				     		<span>統一編號</span>
+				     		<span>53913223</span>
+			     		</div>
+			     	</div>				     	
+			    </div>
+			    <div className="contactInfo">
+	     	    	<div className="title">MERLINS'S MUSTACHE LAB</div>
+	     	    	<div>
+			     		<div>
+				     		<span>T</span>
+				     		<span>02 8768-1100 #135</span>
+			     		</div>
+						<div>
+				     		<span>A</span>
+				     		<span>9F., No.45, Dongxing Rd., Xinyi Dist., Taipei City 110, Taiwan (R.O.C)</span>
+			     		</div>
+			     	</div>				     	
+			    </div>
 
-			     	<div className="socialLink">
-				     	<a href="https://vimeo.com/merlinsmustache" target="_blank">
-			     			<GlitchText className="socialLink" 
-			     						img_src="image/vimeo.png"
-			     						hover={true}
-			     						amp={1.0}
-										line_height={3.0}/>
-			     		</a>
-			     		<a href="https://www.facebook.com/merlin.mustache/" target="_blank">
-			     			<GlitchText className="socialLink" 
-			     						img_src="image/facebook.png"
-			     						hover={true}
-			     						amp={1.0}
-										line_height={3.0}/>
-			     		</a>
-			     		<a href="https://www.youtube.com/channel/UCSIxHgMr4UvZRsG5hWoVolQ" target="_blank">
-			     			<GlitchText className="socialLink" 
-			     						img_src="image/youtube.png"
-			     						hover={true}
-			     						amp={1.0}
-										line_height={3.0}/>
-			     		</a>
+			   	<img className="contactMap" src="image/map.png"/>
+
+		     	<div className="socialLink">
+		     		<div>
+			     	<a href="https://vimeo.com/merlinsmustache" target="_blank">
+		     			<img src="image/vimeo.png"/>
+		     		</a>
+		     		<a href="https://www.facebook.com/merlin.mustache/" target="_blank">
+		     			<img src="image/facebook.png"/>
+		     		</a>
+		     		<a href="https://www.youtube.com/channel/UCSIxHgMr4UvZRsG5hWoVolQ" target="_blank">
+		     			<img src="image/youtube.png"/>
+		     		</a>
 		     		</div>
-		     	</div>
+	     		</div>
 		     	
 		     	 <CopyRight/>
 	     	</div>

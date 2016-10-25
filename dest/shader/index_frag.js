@@ -2,6 +2,7 @@
 var _index_fragshader=[
 	"uniform float amount;",
 	"uniform float angle;",
+	"uniform float alpha;",
 	"uniform float seed_x;",
 	"uniform float seed_y;",
 	"uniform sampler2D texture;",
@@ -34,7 +35,7 @@ var _index_fragshader=[
 	"	p.x+=normal.x*seed_x*(seed/5.);",
 	"	p.y+=normal.y*seed_y*(seed/5.);",
 		//base from RGB shift shader
-	"	vec2 offset = amount*0.03 * vec2( cos(angle), sin(angle));",
+	"	vec2 offset = amount*0.045 * vec2( cos(angle), sin(angle));",
 	"	vec4 cr = texture2D(texture, p + offset);",
 	"	vec4 cga = texture2D(texture, p);",
 	"	vec4 cb = texture2D(texture, p - offset);",
@@ -43,13 +44,13 @@ var _index_fragshader=[
 	"	cb*=amount;",
 	"",		
 	"",
-	"	gl_FragColor = vec4(cga.r+cr.r, cga.g+cb.b, cga.b+cr.r+cb.b,(cga.a+cr.a+cb.a)*12.0);",
+	"	gl_FragColor = vec4(cga.r+cr.r, cga.g+cb.b, cga.b+cr.r+cb.b,(cga.a+cr.a+cb.a)*12.0*alpha);",
 	"",		
 	"",		
 	"	if(gl_FragColor.r<=0.1 && gl_FragColor.b<=0.1 && gl_FragColor.g<=0.1) gl_FragColor.a=0.0;",
 	"	else{",
 	"",		
-	"		vec4 snow =amount*vec4(rand(vec2(xs * seed,ys * seed*50.))*0.2);",
+	"		vec4 snow =amount*vec4(rand(vec2(xs * seed,ys * seed))*0.01*alpha);",
 	"		gl_FragColor = gl_FragColor+ snow;",
 	"	}",
 	"}"].join("\n");

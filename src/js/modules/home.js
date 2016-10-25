@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router'
 
 export default class Home extends React.Component{
 	componentWillMount(){
@@ -16,7 +17,19 @@ export default class Home extends React.Component{
 	}
 	render(){
 		return (
-			<div/>
+			<div className="home">
+				<div className="hello">	
+						<div>We believe digital<br/>technology is the magic<br/> of modern real world.</div>
+						<img src="image/logo.png"/>
+						<div>
+							<Link to="/work">
+								See our projects!
+							</Link>
+						</div>				
+					
+				</div>
+			</div>
+		
 		);
 	}
 }

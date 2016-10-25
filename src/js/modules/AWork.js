@@ -83,7 +83,7 @@ export default class AWork extends React.Component{
 						</div>
 
 						<div className="AWorkText">
-							<div className="title">Introduction</div>
+							<div className="title en">Introduction</div>
 							<div className="text" dangerouslySetInnerHTML={{__html:this.state.work.text_en}}></div>
 						</div>
 
@@ -149,8 +149,8 @@ class ImageSlide extends React.Component{
 			var go_=this.goNum;
 			dotNodes=this.props.image.map(function(img,index){
 				return(
-					<img key={index} id={index} src={index==show_?"image/gray_o.png":"image/white_o.png"}
-						onClick={go_} className="dot"/>
+					<div key={index} id={index} onClick={go_} 
+						className={index==show_?"dot active":"dot"}/>
 				);
 			});
 		}	

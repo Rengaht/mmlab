@@ -11,7 +11,9 @@ function LLeg(p_,v_,g_){
 		seed_x:{value:0.0},
 		seed_y:{value:0.0},
 		texture:{value:_leg_texture},
-		gold:{value:g_}			
+		gold:{value:g_},
+		alpha:{value:0.0}
+
 	};
 	if(g_){
 		this._shader_uniform.texture.value=_special_texture;
@@ -30,11 +32,11 @@ LLeg.prototype.update=function(){
 	this._pos[1]+=this._vel[1];
 	this._pos[2]+=this._vel[2];
 
-	var t=this._pos[0]/LogoConst.DestRad.toFixed(2);
-	if(t<0.5){
+	var t=(this._pos[0]-LogoConst.StartRad)/(LogoConst.DestRad-LogoConst.StartRad);
+	if(t<0.22){
 		this._vel[0]+=LogoConst.PreVelDiff[0];
 		this._vel[1]*=LogoConst.PreVelDiff[1];
-		this._vel[2]*=LogoConst.PreVelDiff[2];
+		this._vel[2]+=LogoConst.PreVelDiff[2];
 	}else{
 		this._vel[0]*=LogoConst.VelDiff[0];
 		this._vel[1]*=LogoConst.VelDiff[1];
@@ -49,11 +51,13 @@ LLeg.prototype.update=function(){
 	//t=(t-gstart)/(gend-gstart);
 	//console.log(t);
 	if(!this._gold){
-		this._shader_uniform.amount.value=t;
-		this._shader_uniform.angle.value=t*(Math.random()-0.5)*2.0*Math.PI*.4;
+		this._shader_uniform.amount.value=t*3.5;
+		this._shader_uniform.angle.value=t*(Math.random()-0.5)*2.0*Math.PI;
 		this._shader_uniform.seed_x.value=t*(Math.random()-0.5)*2.0*0.02;
 		this._shader_uniform.seed_y.value=t*(Math.random()-0.5)*2.0*0.03;
 	}
+		this._shader_uniform.alpha.value=(t<.1)?t/.1:1.0;
+	
 	//console.log(this._pos[2]+" - "+t+" - "+this._shader_uniform.amount.value);
 
 }
@@ -61,7 +65,7 @@ LLeg.prototype.getPos=function(){
 	return [this._pos[0]*Math.sin(this._pos[1]),this._pos[0]*Math.cos(this._pos[1]),this._pos[2]];
 }
 LLeg.prototype.getRot=function(){
-	return -this._pos[1]-Math.PI/2-0.4;
+	return -this._pos[1]-Math.PI/2-0.4+0.4*this._pos[2]/Const.EndPoint*Math.PI;
 }
 LLeg.prototype.getScale=function(){
 	var _shrink_dest=0.5;
@@ -70,5 +74,5 @@ LLeg.prototype.getScale=function(){
 
 	var s=t*(0.8/_shrink_dest)+0.2;
 	//return new THREE.Vector3(s,s,s);
-	return s;
+	return s*LogoConst.ShapeScale;
 }

@@ -14,20 +14,27 @@
 	&>div{
 		padding-bottom: @work_margin;		
 		padding-right: @work_margin;	
-		
+
 	}
 	
 	
 }
-.workItem.last-in-row{
-	margin-right:0;	
-}
+
 
 /* thumb */
 .workThumbContainer{
 	position: relative;
 	padding-bottom: 66.66%; /* 3:2 */	
 	height: 0;
+	opacity: 0;
+	transition:.2s ease-in-out;	
+
+	&.show{
+		opacity: 1;
+		transition-duration:.2s;
+		transition-timing-function:ease-in-out;
+	}
+
 	>canvas{
 		position: absolute;
 		top: 0;

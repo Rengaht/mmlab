@@ -2,7 +2,7 @@
 
 function Constants(){
 	this.StartPoint=1;
-	this.EndPoint=1800;
+	this.EndPoint=2200;
 }
 
 // common variable
@@ -86,8 +86,8 @@ function onDocumentMouseMove(event){
 
 	var mouseX=event.clientX-window.innerWidth/2;
 	var mouseY=event.clientY-window.innerHeight/2;
-	_camera.position.x=mouseX.toFixed(2)/5.0;
-	_camera.position.y=mouseY.toFixed(2)/5.0;
+	_camera.position.x=mouseX.toFixed(2)/3.0;
+	_camera.position.y=mouseY.toFixed(2)/3.0;
 
 	
 	_mouse.x=(event.clientX/window.innerWidth)*2-1;

@@ -15,6 +15,17 @@
   background: black url('../../image/small_triangle.png') no-repeat;
 }
 @font-face {
+  font-family: mmlabWebText;
+  font-style: normal;
+  src: local('Microsoft JhengHei');
+}
+@font-face {
+  font-family: mmlabWebText;
+  font-style: normal;
+  src: local('Futura LT Book Regular'), local('Futura-LT-Book'), url(../../font/Futura-LT-Book.woff);
+  unicode-range: U+000-5FF, U+1e00-1fff, U+2000-2300;
+}
+@font-face {
   font-family: mmlabWebTitle;
   font-weight: bold;
   src: local('Microsoft JhengHei');
@@ -22,61 +33,9 @@
 @font-face {
   font-family: mmlabWebTitle;
   font-style: normal;
-  font-weight: 800;
-  src: local('Assistant ExtraBold'), local('Assistant-ExtraBold'), url(https://fonts.gstatic.com/s/assistant/v1/-mTR0sX8a0RsadH4AMDT8Ogdm0LZdjqr5-oayXSOefg.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
-}
-@font-face {
-  font-family: mmlabWebText;
-  font-style: normal;
-  src: local('Microsoft JhengHei');
-}
-@font-face {
-  font-family: mmlabWebText;
-  font-style: normal;
-  font-weight: 400;
-  src: local('Hind Vadodara'), local('HindVadodara-Regular'), url(https://fonts.gstatic.com/s/hindvadodara/v2/9c6KKeibr6NtFqknnNxZB8I79x-VWsl9ZLFyGx7L0Fo.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
-}
-/* hebrew */
-@font-face {
-  font-family: 'Assistant';
-  font-style: normal;
-  font-weight: 300;
-  src: local('Assistant ExtraBold'), local('Assistant-ExtraBold'), url(https://fonts.gstatic.com/s/assistant/v1/-mTR0sX8a0RsadH4AMDT8EByb1TKJa77egybnpn19yM.woff2) format('woff2');
-  unicode-range: U+0590-05FF, U+20AA, U+25CC, U+FB1D-FB4F;
-}
-/* latin */
-@font-face {
-  font-family: 'Assistant';
-  font-style: normal;
-  font-weight: 300;
-  src: local('Assistant ExtraBold'), local('Assistant-ExtraBold'), url(https://fonts.gstatic.com/s/assistant/v1/-mTR0sX8a0RsadH4AMDT8Ogdm0LZdjqr5-oayXSOefg.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
-}
-/* gujarati */
-@font-face {
-  font-family: 'Hind Vadodara';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Hind Vadodara'), local('HindVadodara-Regular'), url(https://fonts.gstatic.com/s/hindvadodara/v2/9c6KKeibr6NtFqknnNxZByUZf6SPjCvTHKwPaGj40_g.woff2) format('woff2');
-  unicode-range: U+0964-0965, U+0A80-0AFF, U+200B-200D, U+20B9, U+25CC, U+A830-A839;
-}
-/* latin-ext */
-@font-face {
-  font-family: 'Hind Vadodara';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Hind Vadodara'), local('HindVadodara-Regular'), url(https://fonts.gstatic.com/s/hindvadodara/v2/9c6KKeibr6NtFqknnNxZBxLE1M_n0V67aubpfN9Cf9U.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
-@font-face {
-  font-family: 'Hind Vadodara';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Hind Vadodara'), local('HindVadodara-Regular'), url(https://fonts.gstatic.com/s/hindvadodara/v2/9c6KKeibr6NtFqknnNxZB8I79x-VWsl9ZLFyGx7L0Fo.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+  font-weight: bold;
+  src: local('Futura'), url(../../font/Futura-bold.woff);
+  unicode-range: U+000-5FF, U+1e00-1fff, U+2000-2300;
 }
 #ham_menu {
   position: fixed;
@@ -211,6 +170,16 @@ a {
 .edgeShadow {
   box-shadow: 0 0px 40px -5px black;
 }
+.show {
+  visibility: visible;
+  opacity: 1;
+  transition: .2s;
+}
+.hide {
+  visibility: hidden;
+  opacity: 0;
+  transition: .2s;
+}
 .mainMenu {
   position: fixed;
   top: 20px;
@@ -250,7 +219,7 @@ a {
   height: 5%;
   margin-top: 5%;
   text-align: center;
-  font-family: 'Assistant';
+  font-family: mmlabWebTitle;
 }
 .mainMenuItem:hover {
   color: red;
@@ -270,8 +239,28 @@ a {
 .copyright {
   text-align: center;
   font-size: 12px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+.home {
+  position: fixed;
+  bottom: 40%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.home .hello > div:first-child {
+  font-size: 22px;
+  display: none;
+}
+.home .hello > div:last-child {
   margin-top: 20px;
-  margin-bottom: 20px;
+  border: 1px white solid;
+  text-align: center;
+  padding: 0 20px;
+  font-size: 22px;
+  cursor: pointer;
 }
 .about {
   padding-top: 5%;
@@ -283,6 +272,7 @@ a {
   padding-right: 20px;
 }
 .about .part .title {
+  font-family: mmlabWebTitle;
   margin-top: 40px;
   font-size: 22px;
 }
@@ -331,7 +321,6 @@ a {
   font-family: mmlabWebTitle;
 }
 .AWorkLeft .AWorkLeftTop .English {
-  font-family: 'Assistant';
   font-size: 45px;
   text-transform: uppercase;
   width: 100%;
@@ -345,12 +334,10 @@ a {
 }
 .AWorkLeft .AWorkLeftBottom {
   margin-top: 40px;
+  font-family: mmlabWebText;
 }
 .AWorkLeft .AWorkLeftBottom div {
   margin-bottom: 10px;
-}
-.AWorkLeft .AWorkLeftBottom .AWorkTag {
-  font-weight: bold;
 }
 .AWorkRight {
   position: relative;
@@ -366,6 +353,7 @@ a {
   white-space: pre-wrap;
 }
 .AWorkRight .AWorkText .title {
+  font-family: mmlabWebTitle;
   font-size: 22px;
   padding-bottom: 20px;
 }
@@ -451,8 +439,31 @@ a {
   align-items: center;
 }
 .dotContainer .dot {
+  position: relative;
+  display: inline-block;
   margin: 0px 10px;
   cursor: pointer;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #353535;
+  transition: 0.3s ease-in-out;
+}
+.dotContainer .dot::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: '';
+  border-radius: 50%;
+  background-color: white;
+  transform: scale(0);
+  transition: 0.3s ease-in-out;
+}
+.dotContainer .dot.active::after {
+  transform: scale(1);
+  transition: 0.3s ease-in-out;
 }
 .AWorkClose {
   position: fixed;
@@ -460,6 +471,7 @@ a {
   right: 30px;
 }
 .AWorkRelated .more {
+  font-family: mmlabWebTitle;
   font-size: 22px;
   margin-bottom: 20px;
 }
@@ -515,15 +527,19 @@ a {
   padding-bottom: 10px;
   padding-right: 10px;
 }
-.workItem.last-in-row {
-  margin-right: 0;
-}
 /* thumb */
 .workThumbContainer {
   position: relative;
   padding-bottom: 66.66%;
   /* 3:2 */
   height: 0;
+  opacity: 0;
+  transition: 0.2s ease-in-out;
+}
+.workThumbContainer.show {
+  opacity: 1;
+  transition-duration: .2s;
+  transition-timing-function: ease-in-out;
 }
 .workThumbContainer > canvas {
   position: absolute;
@@ -599,26 +615,49 @@ a {
 .filterGap {
   margin: 0 20px;
 }
-.contactInfo > div {
-  width: 25%;
-  margin-top: 20px;
+.contactHello {
+  margin-top: 10%;
+  font-size: 66px;
+  font-family: mmlabWebTitle;
+}
+.contactEmail {
+  margin-top: 40px;
+  font-size: 22px;
+}
+.contactInfo {
+  margin-top: 40px;
   display: inline-block;
+  width: 50%;
+  font-size: 16px;
+  vertical-align: top;
 }
-.contactInfo .contactDetail {
-  white-space: pre-line;
-  xfont-size: 16px;
+.contactInfo div {
+  margin-top: 10px;
 }
-.contactInfo .socialLink a {
-  float: right;
+.contactInfo .title {
+  font-weight: bold;
+}
+.contactInfo span {
   margin-right: 20px;
 }
 .contactMap {
   width: 100%;
-  height: 80%;
+  height: 40%;
   background-color: black;
+  margin-top: 20px;
 }
 .mapMarker {
   position: relative;
   left: -40px;
   top: -20px;
+}
+.socialLink {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+.socialLink > div {
+  text-align: center;
+}
+.socialLink a {
+  margin-right: 20px;
 }

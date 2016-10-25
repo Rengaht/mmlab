@@ -9,6 +9,9 @@ export default class WorkThumb extends React.Component{
 		super(props);
 		this.onMouseEnter=this.onMouseEnter.bind(this);
 		this.onMouseLeave=this.onMouseLeave.bind(this);
+		this.state={
+			show:false
+		};
 
 	}
 	onMouseEnter(){
@@ -20,7 +23,14 @@ export default class WorkThumb extends React.Component{
 		this.refs._img.onMouseLeave();
 	}
 	componentDidMount(){
-		
+		this.setState({show:true,delay:(this.props.index+1)*.1});
+	}
+	componentWillUnmount(){
+		// console.log("thumb will unmount");
+		// this.setState({show:false});	
+	}
+	hide(){
+		this.setState({show:false,delay:0});		
 	}
 
 	render(){
@@ -36,7 +46,7 @@ export default class WorkThumb extends React.Component{
 									line_height={3.0}
 									text={this.props.work.title_en}/>
 						</div>
-						<div className="chinese" style={{'font-size':ch_size}}>{this.props.work.title_ch}</div>
+						<div className="chinese" style={{'fontSize':ch_size}}>{this.props.work.title_ch}</div>
 					</div>);
 		if(this.props.small){
 			en_size=20;
@@ -49,15 +59,16 @@ export default class WorkThumb extends React.Component{
 										line_height={3.0}
 										text={this.props.work.title_en}/>
 						</div>
-						<div className="chinese" style={{'font-size':ch_size}}>{this.props.work.title_ch}</div>
+						<div className="chinese" style={{'fontSize':ch_size}}>{this.props.work.title_ch}</div>
 					</div>);
 		}
 		return(
 			//<div className={this.props.index%3==2?"workItem last-in-row":"workItem"}>				
 			<Link to={"/work/"+this.props.work.id}>
-				<div className="workThumbContainer" 
+				<div className={this.state.show?"workThumbContainer show":"workThumbContainer"}
 					 onMouseEnter={this.onMouseEnter}
-					 onMouseLeave={this.onMouseLeave}>
+					 onMouseLeave={this.onMouseLeave}
+					 style={{transitionDelay:this.state.delay+'s'}}>
 					<GlitchImage ref="_img" 
 							last={0.0}
 							src={DConst.FilePath+this.props.work.thumb_image.name}/>

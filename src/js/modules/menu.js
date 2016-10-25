@@ -15,6 +15,7 @@ export class MainMenu extends React.Component{
 
 	render(){
 		return(
+			<div className={this.props.show?"show":"hide"}>
 			<div className="mainMenu" onClick={this.toggleShow}>
 				<div className={this.state.show?"wrap show":"wrap"}>
 					<div>
@@ -24,14 +25,16 @@ export class MainMenu extends React.Component{
 			     	<MainMenuItem to="/contact">CONTACT</MainMenuItem>	     				     	
 			     	</div>
 			     	<CopyRight/>
-				</div>
+				</div>		
 				<HamMenu open={this.state.show} onClick={this.toggleShow}/>		
-				<div className="logo">
+			
+			</div>
+				<div className="logo" onClick={this.closeShow}>
 				    <Link to="/">
 			     		<img src="image/map_logo.png"/>
 			     	</Link>
 		     	</div>		
-			</div>
+		    </div>
 		);		
 	}
 	closeShow(){

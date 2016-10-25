@@ -5,10 +5,12 @@ import {Title,CopyRight} from './title'
 import GlitchImage from './glitch_image'
 import GlitchText from './glitch_text'
 import WorkThumb from './work_thumb'
+import WorkFilter from './work_filter'
 
 import * as DConst from '../request_constants'
 import {RouteTransition} from 'react-router-transition'
 import {TransitionMotion,spring} from 'react-motion'
+
 
 export default class Work extends React.Component{
 	constructor(props){
@@ -173,10 +175,13 @@ export default class Work extends React.Component{
 			this.refs._year.resetActive(); 	
 			this.refs._year.toggleShow(false);	
 		} 
-		if(name=='ALL') this.applyFilter('','');
+		if(name=='ALL') this.applyFilter('ALL','ALL');
 		// this.applyFilter('','');
 	}
 	applyFilter(name,val){
+
+
+		
 		if(name!='TYPE') this.refs._type.resetActive();
 		if(name!='YEAR') this.refs._year.resetActive(); 
 		//console.log("apply filter! "+name+'  '+val);
@@ -188,16 +193,18 @@ class WorkList extends React.Component{
 	constructor(props){
 		super(props);
 		this.state={
-			'name':'',
-			'val':''
+			'name':'ALL',
+			'val':'ALL'
 		};
+		this.showNodes=[];
+		
 		this.willLeave=this.willLeave.bind(this);
 		this.willEnter=this.willLeave.bind(this);
 		this.createThumb=this.createThumb.bind(this);
 		this.getStlyes=this.getStlyes.bind(this);
 		this.getDefaultStyles=this.getDefaultStyles.bind(this);
 	}
-	createThumb(work_){
+	createThumb(work_,index_){
 		var t_=[];
 		if(work_.type){
 			let type=this.props.type; 
@@ -209,7 +216,8 @@ class WorkList extends React.Component{
 							});
 		 }
 
-		return (<WorkThumb key={work_.id} work={work_} index={0} type_text={t_.join(' , ')}/>);
+		return (<WorkThumb key={work_.id} ref={work_.id}
+							work={work_} index={index_} type_text={t_.join(' , ')}/>);
 	}
 	getStlyes(work_,index_){
 		return[{
@@ -245,46 +253,26 @@ class WorkList extends React.Component{
 			let willLeave=this.willLeave;
 			let willEnter=this.willEnter;
 
-			workNodes=this.props.data
+			let createThumb=this.createThumb;
+
+
+			let showNodes=this.props.data
 					.filter(function(work){
+						if(name=='null') return false;
 						if(name=='YEAR') return work.year==val;
 						if(name=='TYPE') return work.type.includes(val);
 						return true;
-					})
-					.map(function(work,index){
-						// if(work.type && work.type.length>0){
-							
-							
-
-							// var t_=type.find(function(val){
-							// 	return val.id==work.type[0];
-							// });
-
-							return(
-									<TransitionMotion
-									styles={getStlyes(work,index)}
-									defaultStyles={getDefaultStyles(work,index)}
-									willLeave={willLeave}											
-									key={work.id}								
-								>			
-									{interpolatedStyles =>
-						         		 <div className={index%3==2?"workItem last-in-row":"workItem"}>
-						            	{interpolatedStyles.map(config => {
-						              		return (
-						              			<div key={config.key} style={config.style}>
-						              			{config.data}
-						              			</div>
-						              		);
-						            	})}
-						          		</div>
-					        		}			
-								</TransitionMotion>
-								//<WorkThumb key={work.id} work={work} index={index} type_text={t_.join(' , ')}/>				
-							);
-						// }else return(
-						// 		<WorkThumb key={work.id} work={work} index={index} type_text={''}/>				
-						// 	);
 					});
+			this.showNodes=showNodes;		
+
+			workNodes=showNodes.map(function(work,index){
+						return (<div className="workItem" key={index}>
+									<div>
+									{createThumb(work,index)}
+									</div>
+								</div>);			
+			});
+			
 		}
 		return(
 			<div className="workList">
@@ -293,103 +281,22 @@ class WorkList extends React.Component{
 		);
 	}
 	applyFilter(name,val){
-		this.setState({'name':name,'val':val});
-	}
-}
+		
+		if(name==this.state.name && val==this.state.val) return;
 
-
-class WorkFilter extends React.Component{
-	constructor(props){
-		super(props);
-		this.state={
-			show:false
-		};
-		this.toggleShow=this.toggleShow.bind(this);
-		this.filterClick=this.filterClick.bind(this);
-		this.resetActive=this.resetActive.bind(this);
-	}
-	render(){
-
-		var filterNodes=[];
-		if(this.props.val!==undefined){
-			let callback=this.filterClick;
-			filterNodes=this.props.val.map(function(val,index){
-						return(
-							<WorkFilterNode className="filterName" key={index} ref={val.text} id={val.id} text={val.text} onClick={callback}  />		
-						);
-					});			
+		//hide all
+		for(var work in this.showNodes){
+			this.refs[this.showNodes[work].id].hide();
+			// ReactDOM.findDOMNode(this.refs[this.showNodes[work].id]).classList.remove('show');
 		}
-		console.log("filter: "+this.state.show);
-		return(
-			<div className="workFilter" onClick={this.toggleShow}>
-				<div className="filterTitle">{this.props.name}</div>
-				<div className={this.state.show?'filterContent show':'filterContent'}>
-					{filterNodes}
-				</div>
-			</div>
-		);
-	}
-	toggleShow(show_){
 
-		if(typeof show_==='boolean'){
-			this.setState({show:show_});			
-		}else{
-			//no self-closing
-			if(this.props.val
-				&& this.state.show) return;
 
-			this.props.showFilter(this.props.name);
-			this.setState({show:!this.state.show});				
-			
-			this.resetActive();	
-		} 
-		if(!this.props.val) this.props.filterHandler(this.props.name,'');
-
-	}
-	resetActive(){
-		if(!this.props.val) return;
-		for(var v in this.props.val){
-			//ReactDOM.findDOMNode(this.refs[this.props.val[v]]).classList.remove('active');
-			this.refs[this.props.val[v].text].resetActive();
-		}
-	}
-	filterClick(text_){		
-		this.props.filterHandler(this.props.name,text_);		
-		this.resetActive();
+		let this_=this;
+		setTimeout(function(){
+			//console.log(name+' '+val);
+			this_.setState({'name':name,'val':val});	
+		},350);		
 	}
 }
 
-class WorkFilterNode extends React.Component{
-	constructor(props){
-		super(props);
-		this.state={
-			'active':false
-		};
-		this.setActive=this.setActive.bind(this);
-	}
-	render(){
-		return(
-			<div onClick={this.setActive}>
-			<GlitchText ref="_text"
-					className={this.props.className}
-					text={String(this.props.text)}
-					id={this.props.id}
-					font_size={10}
-					hover={true}
-					font={'mmlabWebText'}
-					amp={1.0}
-					>
-					</GlitchText>
-			</div>
-		);
-	}
-	setActive(){
-		console.log("click!");
-		this.props.onClick(this.props.id);
-		this.refs._text.setActive(true);
-	}
-	resetActive(){
-		this.refs._text.setActive(false);
-	}
 
-}

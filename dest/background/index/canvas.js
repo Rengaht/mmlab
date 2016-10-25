@@ -1,14 +1,16 @@
 
 function LogoConstants(){
-	this.ShapeScale=.4;
-	this.AddInterval=52;
-	this.StartVel=[0,3.14159/20.0,4.2];
-	this.PreVelDiff=[0.015,0.987,1.0];
-	this.VelDiff=[0.99,0.999,0.998];
-	this.GoldInterval=20;
-	this.MBranch=8;
+	this.ShapeScale;
+	this.AddInterval=32;
+	this.StartVel=[0,3.14159/40.0,1.25];
+	this.PreVelDiff=[0.01,0.985,0.03];
+	this.VelDiff=[1.01,0.999,0.97];
+	this.GoldInterval=52;
+	this.MBranch=18;
 	this.LegSize=320;
 	this.LegRatio=1.0;
+	this.LogoSize=500;
+	this.StartRad;
 	this.DestRad;
 }
 
@@ -20,17 +22,28 @@ var _leg_shape,_leg_gemoetry,_leg_material;
 var _selected_material;
 var _gold_interval;
 
+var _logo_texture;
+var _logo_geometry,_logo_material;
+var _logo_id;
+
+
 
 function initLogo(){
 
-	LogoConst.DestRad=window.innerWidth.toFixed(2)*0.5;
+	LogoConst.StartRad=window.innerWidth.toFixed(2)*0.15;
+	LogoConst.DestRad=window.innerWidth.toFixed(2)*1.2;
+	LogoConst.ShapeScale=LogoConst.DestRad*.2/LogoConst.LegSize;
+
 	_gold_interval=LogoConst.GoldInterval;
 
 	_leg_geometry=new THREE.PlaneGeometry(LogoConst.LegSize,LogoConst.LegSize*LogoConst.LegRatio);
+	_logo_geometry=new THREE.PlaneGeometry(LogoConst.LogoSize,LogoConst.LogoSize);
 
 	_leg_texture=new THREE.TextureLoader().load('image/leg-01.png',function(texture){		
 		_special_texture=new THREE.TextureLoader().load('image/gold-01.png',function(texture){
-			initLogoLeg();			
+			_logo_texture=new THREE.TextureLoader().load('image/logo_square.png',function(texture){
+				initLogoLeg();			
+			});		
 		});		
 	});
 
@@ -38,6 +51,7 @@ function initLogo(){
 function clearLogo(){
 	let mleg=_logo_leg.length;
 	
+	_scene.remove(_scene.getObjectById(_logo_id));
 	if(mleg<1) return;
 
 	for(let i=mleg-1;i>=0;i--){		
@@ -51,8 +65,8 @@ function updateLogo(){
 	let mleg=_logo_leg.length;
 	for(let i=mleg-1;i>=0;i--){		
 		if(_logo_leg[i]._dead){
-			_logo_leg.splice(i,1);
-			_scene.remove(_scene.children[i]);
+			_scene.remove(_scene.getObjectById(_logo_leg[i].id,true));
+			_logo_leg.splice(i,1);			
 		}else{
 			_logo_leg[i].update();
 			updatePosLogo(_scene.getObjectById(_logo_leg[i].id,true),_logo_leg[i]);
@@ -68,7 +82,7 @@ function addLogo(){
 	//console.log("add");
 
 	for(var i=0;i<LogoConst.MBranch;++i){
-		var start_=[0,Math.PI*2.0/LogoConst.MBranch*i,Const.StartPoint+LogoConst.StartVel[2]*i];
+		var start_=[LogoConst.StartRad,Math.PI*2.0/LogoConst.MBranch*i,Const.StartPoint+LogoConst.StartVel[2]*10*i];
 		var vel_=[LogoConst.StartVel[0],LogoConst.StartVel[1],LogoConst.StartVel[2]];
 
 		var leg_=new LLeg(start_,vel_,readyToAddGold());
@@ -95,12 +109,18 @@ function initLogoLeg(){
 
 	//TODO:
 	_selected_material=new THREE.MeshBasicMaterial( {color:0xff0000,map:_leg_texture,transparent:true} );
+	//center logo:
+	// _logo_material=new THREE.MeshBasicMaterial( {color:0xffffff,map:_logo_texture,transparent:true} );
+	// var _logo_mesh=new THREE.Mesh(_logo_geometry,_logo_material);
+	// _scene.add(_logo_mesh);
+	// _logo_id=_logo_mesh.id;
+	
 
 	for(var j=0;j<LogoConst.MBranch;j+=1){
 		
 		for(var i=0;i<12;i+=1){
 
-			var start_=[0,Math.PI*2.0/LogoConst.MBranch*j,Const.StartPoint];
+			var start_=[LogoConst.StartRad,Math.PI*2.0/LogoConst.MBranch*(j),Const.StartPoint+LogoConst.StartVel[2]*10*j];
 			var vel_=[LogoConst.StartVel[0],LogoConst.StartVel[1],LogoConst.StartVel[2]];
 
 			var leg_=new LLeg(start_,vel_,readyToAddGold());
@@ -134,7 +154,7 @@ function createMaterialLogo(uniforms_){
 		uniforms:uniforms_,
 		vertexShader:_vertexshader,
 		fragmentShader:_index_fragshader,
-		transparent:true				
+		transparent:true
 	});
 	
 	

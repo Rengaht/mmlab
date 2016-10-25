@@ -1,32 +1,54 @@
 
+.contactHello{
+	margin-top:10%; 
+	font-size: @title_size*3;
+	font-family: mmlabWebTitle;
 
+}
+.contactEmail{
+	margin-top: @vert_margin*2;	
+	font-size: @title_size;
+}
 .contactInfo{	
-	&>div{
-		width:25%;
-		margin-top: @vert_margin;
-		display: inline-block;
+	margin-top: @vert_margin*2;
+	display: inline-block;
+	width:50%;
+	font-size: @text_size;
+	vertical-align: top;
+	
+	div{
+		margin-top: @vert_margin*.5;
 	}
-	.contactDetail{	
-		white-space: pre-line;
-		xfont-size: @text_size;
+	.title{
+		font-weight: bold;
 	}
-	.socialLink{
-		a{
-			float:right;
-			margin-right:@horiz_margin;
-		}
+	span{
+		margin-right: @horiz_margin;		
 	}
 }
 
 .contactMap{
 	width:100%;	
-	height:80%;
+	height:40%;
 	// height:60vh;
 	background-color: black;
-
+	margin-top: @vert_margin;
 }
+
 .mapMarker{
 	position: relative;
 	left:-40px;
 	top:-20px;
+}
+
+.socialLink{
+	margin-top: @vert_margin*2;
+	margin-bottom: @vert_margin*2;
+	//width:100%;
+	>div{
+		text-align: center;
+	}
+	a{
+		margin-right:@horiz_margin;
+	}
 }
