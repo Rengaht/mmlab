@@ -1,19 +1,3 @@
-::-webkit-scrollbar {
-  width: 12px;
-}
-::-webkit-scrollbar-thumb {
-  background-color: #cecece;
-  border-radius: 6px;
-  height: 30px;
-  border: 3px solid transparent;
-  background-clip: content-box;
-}
-::-webkit-scrollbar-button:vertical:increment {
-  background: black url('../../image/small_triangle_down.png') no-repeat;
-}
-::-webkit-scrollbar-button:vertical:decrement {
-  background: black url('../../image/small_triangle.png') no-repeat;
-}
 @font-face {
   font-family: mtextFont;
   font-style: normal;
@@ -98,6 +82,22 @@
   font-family: mtextFont;
   font-size: 22px;
   letter-spacing: 2.2px;
+}
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #cecece;
+  border-radius: 6px;
+  height: 30px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-button:vertical:increment {
+  background: black url('../../image/small_triangle_down.png') no-repeat;
+}
+::-webkit-scrollbar-button:vertical:decrement {
+  background: black url('../../image/small_triangle.png') no-repeat;
 }
 #ham_menu {
   position: fixed;
@@ -389,6 +389,7 @@ a {
 }
 .mainContainer {
   width: 100%;
+  min-width: 900px;
   height: 100%;
 }
 .mainContainer .content {
@@ -560,6 +561,225 @@ a {
 .blurBack img {
   width: 100%;
   filter: blur(5px);
+}
+.workList {
+  padding-top: 10%;
+  width: 100%;
+  min-height: 100%;
+}
+.workItem {
+  position: relative;
+  display: inline-block;
+  width: 33.33%;
+  margin-left: 0;
+}
+.workItem > div {
+  padding-bottom: 10px;
+  padding-right: 10px;
+}
+/* thumb */
+.workThumbContainer {
+  position: relative;
+  padding-bottom: 66.66%;
+  /* 3:2 */
+  height: 0;
+  opacity: 0;
+  transition: 0.2s ease-in-out;
+}
+.workThumbContainer.show {
+  opacity: 1;
+  transition-duration: .2s;
+  transition-timing-function: ease-in-out;
+}
+.workThumbContainer > canvas,
+.workThumbContainer > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.workThumbDescript {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 101%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  transition: .3s;
+}
+.workThumbDescript .wrap {
+  margin: 0 20px;
+}
+.workThumbDescript .wrap .tag {
+  font-family: mtextFont;
+  letter-spacing: 1.6px;
+  line-height: 180%;
+  font-size: 16px;
+}
+.workThumbDescript .wrap .english {
+  font-family: mtitleFont;
+  font-size: 22px;
+  letter-spacing: 2.2px;
+  font-size: 32px;
+  text-transform: uppercase;
+}
+.workThumbDescript .wrap .chinese {
+  font-family: mtitleFont;
+  font-size: 22px;
+  letter-spacing: 2.2px;
+}
+.workThumbDescript:hover {
+  opacity: 1;
+  transition: 0.1s ease-in-out 0.1s;
+}
+/* filter */
+.filter {
+  position: fixed;
+  right: 30px;
+  bottom: 20%;
+  text-align: right;
+}
+.workFilter {
+  display: block;
+}
+.workFilter div {
+  margin-top: 10px;
+}
+.workFilter .filterTitle {
+  cursor: pointer;
+  font-family: mtextFont;
+  font-size: 16px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+}
+.filterContent {
+  display: none;
+}
+.filterContent.show {
+  display: block;
+}
+.filterName {
+  cursor: pointer;
+  margin-left: 10px;
+  color: white;
+  font-family: mtextFont;
+  font-size: 12px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+.filterName.active {
+  color: red;
+}
+.filterGap {
+  margin: 0 20px;
+}
+/* thumb */
+.workThumbContainer {
+  position: relative;
+  padding-bottom: 66.66%;
+  /* 3:2 */
+  height: 0;
+  opacity: 0;
+  transition: 0.2s ease-in-out;
+}
+.workThumbContainer.show {
+  opacity: 1;
+  transition-duration: .2s;
+  transition-timing-function: ease-in-out;
+}
+.workThumbContainer > canvas,
+.workThumbContainer > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.workThumbDescript {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 101%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.7);
+  opacity: 0;
+  transition: .3s;
+}
+.workThumbDescript .wrap {
+  margin: 0 20px;
+}
+.workThumbDescript .wrap .tag {
+  font-family: mtextFont;
+  letter-spacing: 1.6px;
+  line-height: 180%;
+  font-size: 16px;
+}
+.workThumbDescript .wrap .english {
+  font-family: mtitleFont;
+  font-size: 22px;
+  letter-spacing: 2.2px;
+  font-size: 32px;
+  text-transform: uppercase;
+}
+.workThumbDescript .wrap .chinese {
+  font-family: mtitleFont;
+  font-size: 22px;
+  letter-spacing: 2.2px;
+}
+.workThumbDescript:hover {
+  opacity: 1;
+  transition: 0.1s ease-in-out 0.1s;
+}
+/* filter */
+.filter {
+  position: fixed;
+  right: 30px;
+  bottom: 20%;
+  text-align: right;
+}
+.workFilter {
+  display: block;
+}
+.workFilter div {
+  margin-top: 10px;
+}
+.workFilter .filterTitle {
+  cursor: pointer;
+  font-family: mtextFont;
+  font-size: 16px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+}
+.filterContent {
+  display: none;
+}
+.filterContent.show {
+  display: block;
+}
+.filterName {
+  cursor: pointer;
+  margin-left: 10px;
+  color: white;
+  font-family: mtextFont;
+  font-size: 12px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+.filterName.active {
+  color: red;
+}
+.filterGap {
+  margin: 0 20px;
 }
 .AWorkContainer {
   position: absolute;
@@ -797,123 +1017,6 @@ a {
 }
 .AWorkRelated .relatedContainer:hover .relatedTag {
   opacity: 1;
-}
-.workList {
-  padding-top: 10%;
-  width: 100%;
-  min-height: 100%;
-}
-.workItem {
-  position: relative;
-  display: inline-block;
-  width: 33.33%;
-  margin-left: 0;
-}
-.workItem > div {
-  padding-bottom: 10px;
-  padding-right: 10px;
-}
-/* thumb */
-.workThumbContainer {
-  position: relative;
-  padding-bottom: 66.66%;
-  /* 3:2 */
-  height: 0;
-  opacity: 0;
-  transition: 0.2s ease-in-out;
-}
-.workThumbContainer.show {
-  opacity: 1;
-  transition-duration: .2s;
-  transition-timing-function: ease-in-out;
-}
-.workThumbContainer > canvas,
-.workThumbContainer > img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-.workThumbDescript {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 101%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  background-color: rgba(0, 0, 0, 0.7);
-  opacity: 0;
-  transition: .3s;
-}
-.workThumbDescript .wrap {
-  margin: 0 20px;
-}
-.workThumbDescript .wrap .tag {
-  font-family: mtextFont;
-  letter-spacing: 1.6px;
-  line-height: 180%;
-  font-size: 16px;
-}
-.workThumbDescript .wrap .english {
-  font-family: mtitleFont;
-  font-size: 22px;
-  letter-spacing: 2.2px;
-  font-size: 32px;
-  text-transform: uppercase;
-}
-.workThumbDescript .wrap .chinese {
-  font-family: mtitleFont;
-  font-size: 22px;
-  letter-spacing: 2.2px;
-}
-.workThumbDescript:hover {
-  opacity: 1;
-  transition: 0.1s ease-in-out 0.1s;
-}
-/* filter */
-.filter {
-  position: fixed;
-  right: 30px;
-  bottom: 20%;
-  text-align: right;
-}
-.workFilter {
-  display: block;
-}
-.workFilter div {
-  margin-top: 10px;
-}
-.workFilter .filterTitle {
-  cursor: pointer;
-  font-family: mtextFont;
-  font-size: 16px;
-  letter-spacing: 1.6px;
-  text-transform: uppercase;
-}
-.filterContent {
-  display: none;
-}
-.filterContent.show {
-  display: block;
-}
-.filterName {
-  cursor: pointer;
-  margin-left: 10px;
-  color: white;
-  font-family: mtextFont;
-  font-size: 12px;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-}
-.filterName.active {
-  color: red;
-}
-.filterGap {
-  margin: 0 20px;
 }
 .contactHello {
   margin-top: 10%;

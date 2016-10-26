@@ -1,5 +1,4 @@
 import React from 'react'
-import GlitchText from './glitch_text'
 
 export class Title extends React.Component{
 	

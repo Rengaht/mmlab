@@ -1,15 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {Link} from 'react-router'
-import {Title,CopyRight} from './title'
-import GlitchImage from './glitch_image'
-import GlitchText from './glitch_text'
-import WorkThumb from './work_thumb'
-import WorkFilter from './work_filter'
-
-import * as DConst from '../request_constants'
 import {RouteTransition} from 'react-router-transition'
 import {TransitionMotion,spring} from 'react-motion'
+
+import {Title,CopyRight} from '../components/title'
+import WorkThumb from '../components/work_thumb'
+import WorkFilter from '../components/work_filter'
+
+import * as DConst from '../request_constants'
 
 
 export default class Work extends React.Component{

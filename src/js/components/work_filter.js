@@ -1,6 +1,5 @@
 import React from 'react'
 import {Link} from 'react-router'
-import GlitchText from './glitch_text'
 
 import * as DConst from '../request_constants'
 

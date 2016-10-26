@@ -3,10 +3,11 @@
 @titleheight: 8%;
 @bottomheight: 15%;
 
-@import 'scroll.less';
 @import 'font.less';
-@import 'hamburger.less';
-@import 'glitch.less';
+
+@import 'components/scroll.less';
+@import 'components/hamburger.less';
+@import 'components/glitch.less';
 
 // @import 'glitch.less';
 
@@ -19,13 +20,18 @@
 @work_margin:10px;
 
 
-@import 'main.less';
-@import 'menu.less';
-@import 'title.less';
+@import 'pages/main.less';
+@import 'components/menu.less';
+@import 'components/title.less';
 
-@import 'home.less';
-@import 'about.less';
-@import 'awork.less';
-@import 'work.less';
-@import 'contact.less';
+@import 'pages/home.less';
+@import 'pages/about.less';
+
+@import 'pages/work.less';
+@import 'components/work_thumb.less';
+@import 'components/work_filter.less';
+
+@import 'pages/awork.less';
+
+@import 'pages/contact.less';
 

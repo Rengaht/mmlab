@@ -1,7 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router'
 import GlitchImage from './glitch_image'
-import GlitchText from './glitch_text'
 import * as DConst from '../request_constants'
 
 export default class WorkThumb extends React.Component{
@@ -16,11 +15,11 @@ export default class WorkThumb extends React.Component{
 	}
 	onMouseEnter(){
 		//console.log("enter!");
-		this.refs._img.onMouseEnter();
+		// this.refs._img.onMouseEnter();
 	}
 	onMouseLeave(){
 		//console.log("leave!");
-		this.refs._img.onMouseLeave();
+		// this.refs._img.onMouseLeave();
 	}
 	componentDidMount(){
 		this.setState({show:true,delay:(this.props.index+1)*.1});
@@ -65,9 +64,7 @@ export default class WorkThumb extends React.Component{
 					 onMouseEnter={this.onMouseEnter}
 					 onMouseLeave={this.onMouseLeave}
 					 style={{transitionDelay:this.state.delay+'s'}}>
-					 <GlitchImage ref="_img" 
-					  	last={0.0}
-						src={DConst.FilePath+this.props.work.thumb_image.name}/>	
+					 <img src={DConst.FilePath+this.props.work.thumb_image.name} ref="_img"/>
 					 <div ref="_descript" className="workThumbDescript">												
 						{wrap_}					
 					</div>									

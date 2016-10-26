@@ -40,7 +40,7 @@ function initLogo(){
 	_logo_geometry=new THREE.PlaneGeometry(LogoConst.LogoSize,LogoConst.LogoSize);
 
 	_leg_texture=new THREE.TextureLoader().load('image/leg-01.png',function(texture){		
-		_special_texture=new THREE.TextureLoader().load('image/gold-01.png',function(texture){
+		_special_texture=new THREE.TextureLoader().load('image/golden.png',function(texture){
 			_logo_texture=new THREE.TextureLoader().load('image/index_logo.png',function(texture){
 				initLogoLeg();			
 			});		

@@ -1,5 +1,4 @@
 import React,{cloneElement} from 'react'
-//import {TransitionMotion,spring} from 'react-motion';
 import {RouteTransition} from 'react-router-transition'
 
 export default class MainContainer extends React.Component{

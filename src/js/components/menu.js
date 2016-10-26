@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router'
-import GlitchText from './glitch_text'
+
 import {CopyRight} from './title'
 
 export class MainMenu extends React.Component{

@@ -1,0 +1,42 @@
+/* filter */
+.filter{
+	position: fixed;
+	right:@in_margin;
+	bottom:20%;
+	text-align: right;
+}
+
+.workFilter{
+	display: block;	
+	div{
+		margin-top: @vert_margin*.5;
+	}
+	.filterTitle{
+		//font-family: 'Assistant';
+		cursor: pointer;
+		.fontFilterTitle;
+	}	
+}
+
+.filterContent{
+	display: none;
+	&.show{
+		display: block;	
+	}
+}
+.filterName{
+	cursor: pointer;
+	margin-left:10px;
+	color:white;
+	.fontFilterText;
+	
+
+
+	&.active{
+		color:red;	
+	}
+}
+
+.filterGap{
+	margin:0 20px;
+}

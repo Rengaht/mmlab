@@ -1,8 +1,7 @@
 import React from 'react'
 import {withRouter} from 'react-router'
 
-import {Title,CopyRight} from './title'
-// import MainContainer from './main_container'
+import {Title,CopyRight} from '../components/title'
 
 class About extends React.Component{
   componentWillMount(){
