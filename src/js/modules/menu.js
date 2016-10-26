@@ -50,12 +50,13 @@ export class MainMenu extends React.Component{
 }
 export class MainMenuItem extends React.Component{
 	render(){
-		let text_=(<GlitchText  
-		    				text={this.props.children}
-		    				font_size={37.5}
-		    				hover={true}
-		    				amp={5}
-		    				/>);
+		// let text_=(<GlitchText  
+		//     				text={this.props.children}
+		//     				font_size={37.5}
+		//     				hover={true}
+		//     				amp={5}
+		//     				/>);
+		let text_=<div className="glitch" data-text={this.props.children}>{this.props.children}</div>;
 		if(this.props.to)
 			return(
 				<div {...this.props} className="mainMenuItem">

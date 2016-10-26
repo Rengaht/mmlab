@@ -77,26 +77,19 @@ class WorkFilterNode extends React.Component{
 	render(){
 		return(
 			<div onClick={this.setActive}>
-			<GlitchText ref="_text"
-					className={this.props.className}
-					text={String(this.props.text)}
-					id={this.props.id}
-					font_size={10}
-					hover={true}
-					font={'mmlabWebText'}
-					amp={1.0}
-					>
-					</GlitchText>
+			<div className="filterName glitch" data-text={String(this.props.text)} ref="_text" id={this.props.id}>
+				{String(this.props.text)}
+			</div>			
 			</div>
 		);
 	}
 	setActive(){
 		// console.log("click!");
 		this.props.onClick(this.props.id);
-		this.refs._text.setActive(true);
+		// this.refs._text.setActive(true);
 	}
 	resetActive(){
-		this.refs._text.setActive(false);
+		// this.refs._text.setActive(false);
 	}
 
 }

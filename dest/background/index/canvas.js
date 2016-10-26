@@ -41,7 +41,7 @@ function initLogo(){
 
 	_leg_texture=new THREE.TextureLoader().load('image/leg-01.png',function(texture){		
 		_special_texture=new THREE.TextureLoader().load('image/gold-01.png',function(texture){
-			_logo_texture=new THREE.TextureLoader().load('image/logo_square.png',function(texture){
+			_logo_texture=new THREE.TextureLoader().load('image/index_logo.png',function(texture){
 				initLogoLeg();			
 			});		
 		});		
@@ -114,6 +114,26 @@ function initLogoLeg(){
 	// var _logo_mesh=new THREE.Mesh(_logo_geometry,_logo_material);
 	// _scene.add(_logo_mesh);
 	// _logo_id=_logo_mesh.id;
+
+	// var div_=document.createElement('div');
+	// div_.className='hello';
+
+	// var logo_=document.createElement('div');
+	// var logo_img=document.createElement('img');
+	// logo_img.src="image/index_logo.png";
+	// logo_.appendChild(logo_img);
+	// div_.appendChild(logo_);
+
+	// var see_=document.createElement('a');
+	// see_.href="/work";
+	// var button_=document.createElement('div') ;
+	// button_.textContent="See our projects!";
+	// see_.appendChild(button_);
+
+	// div_.appendChild(see_);
+
+	// var logo_object=new THREE.CSS3DObject(div_);
+	// scene.add(object);
 	
 
 	for(var j=0;j<LogoConst.MBranch;j+=1){

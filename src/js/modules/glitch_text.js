@@ -52,6 +52,7 @@ export default class GlitchText extends React.Component{
 			if(this.refs._canvas){
 				const ctx=this.refs._canvas.getContext('2d');
 				ctx.textBaseline="alphabetic";
+				ctx.letterSpacing="100%";
 				ctx.font=this.props.font_size+'pt '+this.font;		
 	 			
 	 			var s_=ctx.measureText(this.text);

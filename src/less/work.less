@@ -34,8 +34,8 @@
 		transition-duration:.2s;
 		transition-timing-function:ease-in-out;
 	}
-
-	>canvas{
+	
+	>canvas,>img{
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -50,7 +50,7 @@
 	position: absolute;
 	left:0;
 	top:0;
-	width: 100%;
+	width: 101%;
 	height: 100%;	
 
 	display: flex;	
@@ -65,21 +65,20 @@
 		
 		margin:0 @horiz_margin;
 		.tag{	
+			.fontText;
 			font-size:@text_size;
+			 // line-height: 100%;
 		}
 		.english{
-			// font-family: 'Assistant';
-			// font-size: 34px;
-			// text-transform: uppercase;
-			// width:100%;。
-			//height:40px;
-
+			.fontTitle;
 			font-size: @work_title_size;		
+			text-transform: uppercase;
 		}
-		.chinese{
-			font-family: mmlabWebTitle;
-			font-size: @title_size;			
-			margin-top: @vert_margin*.5;
+		.chinese{			
+			.fontTitle;
+		}
+		div{
+			// margin-top: @vert_margin*.2;
 		}
 	}
 	&:hover{
@@ -107,7 +106,7 @@
 	.filterTitle{
 		//font-family: 'Assistant';
 		cursor: pointer;
-		font-size: @text_size;
+		.fontFilterTitle;
 	}	
 }
 
@@ -121,7 +120,9 @@
 	cursor: pointer;
 	margin-left:10px;
 	color:white;
-	font-size: @small_text_size;
+	.fontFilterText;
+	
+
 
 	&.active{
 		color:red;	

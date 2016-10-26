@@ -17,13 +17,13 @@ export default class Work extends React.Component{
 		super(props);
 
 		
-		// this.work_url=DConst.URL+DConst.WorkPath+'?'+DConst.Token+'&status=1&sort_order=DESC&columns_show=title_en,title_ch,year,thumb_image';
-		// this.filter_url=DConst.URL+DConst.TypePath+'?'+DConst.Token;
-		// this.work_type_url=DConst.URL+DConst.WorkTypePath+'?'+DConst.Token;
+		this.work_url=DConst.URL+DConst.WorkPath+'?'+DConst.Token+'&status=1&sort_order=DESC&columns_show=title_en,title_ch,year,thumb_image';
+		this.filter_url=DConst.URL+DConst.TypePath+'?'+DConst.Token;
+		this.work_type_url=DConst.URL+DConst.WorkTypePath+'?'+DConst.Token;
 
-		this.work_url='data/work.json';
-		this.filter_url='data/type.json';
-		this.work_type_url='data/work_type.json';
+		// this.work_url='data/work.json';
+		// this.filter_url='data/type.json';
+		// this.work_type_url='data/work_type.json';
 
 
 		this.state={

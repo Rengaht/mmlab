@@ -18,7 +18,7 @@ export default class GlitchImage extends React.Component{
 	        },
 	        lineOffset:{
 	            value:8.0,
-	            lineHeight: 8
+	            lineHeight:25
 	        },
 	        frame_rate: 30.0
     	};
@@ -42,7 +42,12 @@ export default class GlitchImage extends React.Component{
 
 		if(!this.refs._canvas) return;
 		
+		this.refs._canvas.width=this.img.width;
+		this.refs._canvas.height=this.img.height;
+
 		const ctx=this.refs._canvas.getContext('2d');
+
+
 
 		let w_=this.refs._canvas.width;
 		let h_=this.refs._canvas.height;

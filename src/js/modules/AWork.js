@@ -19,8 +19,8 @@ export default class AWork extends React.Component{
 	}
 	loadData(id_){
 		
-		// let url=DConst.URL+DConst.WorkPath+'/'+id_+'?'+DConst.Token;	
-		let url="data/data.json"
+		let url=DConst.URL+DConst.WorkPath+'/'+id_+'?'+DConst.Token;	
+		// let url="data/data.json"
 
 		$.ajax({
 			url:url,
@@ -58,10 +58,8 @@ export default class AWork extends React.Component{
 				<div key={this.state.key} className="AWorkContent center">
 					<div className="AWorkLeft">
 						<div className="AWorkLeftTop">
-							<div className="English">
-								<GlitchText hover={false}
-									font_size={45}
-									text={this.state.work.title_en}/>										
+							<div className="English glitch_always" data-text={this.state.work.title_en}>
+								{this.state.work.title_en}
 							</div>
 							<div className="Chinese">{this.state.work.title_ch}</div>
 							
@@ -74,9 +72,9 @@ export default class AWork extends React.Component{
 						
 					</div>
 					<div className="AWorkRight">
-						
-						<WorkVideo src={this.state.work.video}/>
-
+						<div>
+							<WorkVideo src={this.state.work.video}/>
+						</div>
 						<div className="AWorkText">
 							<div className="title">作品簡介</div>
 							<div className="text" dangerouslySetInnerHTML={{__html:this.state.work.text_ch}}></div>

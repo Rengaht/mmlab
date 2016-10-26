@@ -44,7 +44,7 @@ var _index_fragshader=[
 	"	cb*=amount;",
 	"",		
 	"",
-	"	gl_FragColor = vec4(cga.r+cr.r, cga.g+cb.b, cga.b+cr.r+cb.b,(cga.a+cr.a+cb.a)*12.0*alpha);",
+	"	gl_FragColor = vec4(cga.r+cr.r, cga.g+cb.b, cga.b+cb.b,(cga.a+cr.a+cb.a)*12.0*alpha);",
 	"",		
 	"",		
 	"	if(gl_FragColor.r<=0.1 && gl_FragColor.b<=0.1 && gl_FragColor.g<=0.1) gl_FragColor.a=0.0;",

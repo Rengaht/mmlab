@@ -18,7 +18,7 @@
 }
 .AWorkLeft{
 	position:fixed;
-	top:10%;
+	top:@vert_margin*5;
 	//left:10%;
 	width:25%;
 	height:80%;	
@@ -30,37 +30,27 @@
 
 		width: 100%;	
 		z-index: 2;
-		font-family: mmlabWebTitle;	
+		
 
 		.English{
-			font-size: @awork_en_size;
-			text-transform: uppercase;
+			.fontAWorkTitleEn;
 			width:100%;
 		}
 		.Chinese{
-			font-size: @awork_ch_size;
-			margin-top: 10px;
+			.fontAWorkTitleCh;			
 		}
 
 		div{
-			margin-bottom:@vert_margin;	
+			margin-bottom:@vert_margin*.5;	
 		}
 	}
 	.AWorkLeftBottom{
-		
-		margin-top:@vert_margin*2;
-		font-family: mmlabWebText;	
-		div{
-			margin-bottom:@vert_margin*.5;		
-		}
-		.AWorkTag{
-			
-		}
+		.fontText;
 	}
 }
 .AWorkRight{
 	position: relative;
-	top:10%;
+	top:@vert_margin*5;
 	left:37.5%;
 	width:62.5%;
 	// height:82%;
@@ -78,13 +68,16 @@
 		// padding:20px 0px;	
 		white-space: pre-wrap;
 		.title{
-			font-family: mmlabWebTitle;
-			font-size: @title_size;		
+			.fontTitle;
 			padding-bottom: @vert_margin;
+			text-transform: uppercase;
 		}
 		.text{
-			font-size: @text_size;		
+			.fontText;
 			padding-bottom: @vert_margin;
+			table{
+				.fontText;
+			}
 		}
 	}
 }
@@ -160,15 +153,16 @@
 		
 		background-repeat: no-repeat;
 		background-size: contain;
-
+		cursor:pointer;
+		
 		&.right{
 			right:0;
-			background-image: url('../../image/arrow-right.png');
+			background-image: url('../../image/arrow_right.png');
 			background-position: right;
 		}
 		&.left{
 			left:0;
-			background-image:url('../../image/arrow-left.png');
+			background-image:url('../../image/arrow_left.png');
 		}
 	}
 	
@@ -227,9 +221,9 @@
 .AWorkRelated{
 
 	.more{
-		font-family: mmlabWebTitle;
-		font-size: @title_size;
+		.fontTitle;
 		margin-bottom: @vert_margin;
+		text-transform: uppercase;
 	}
 	.relatedContainer{
 		position: relative;
@@ -248,7 +242,8 @@
 			margin-right: 0;
 		}
 		.relatedTag{
-			font-size: @text_size;
+			.fontText;
+
 			position: absolute;
 			bottom:0;
 			width: 100%;

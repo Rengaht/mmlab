@@ -40,24 +40,20 @@ export default class WorkThumb extends React.Component{
 		let wrap_=(<div className="wrap">
 						<div className="tag">{this.props.work.year}&nbsp;/&nbsp;{this.props.type_text}</div>			
 						<div className="english">
-							<GlitchText hover={false}
-									font_size={en_size}
-									amp={1.0}
-									line_height={3.0}
-									text={this.props.work.title_en}/>
+							<div className="glitch_always" data-text={this.props.work.title_en}>
+							{this.props.work.title_en}
+							</div>							
 						</div>
 						<div className="chinese" style={{'fontSize':ch_size}}>{this.props.work.title_ch}</div>
 					</div>);
 		if(this.props.small){
-			en_size=20;
+			en_size=22;
 			ch_size=16;
 			wrap_=(<div className="wrap">
 						<div className="english">
-							<GlitchText hover={false}
-										font_size={en_size}
-										amp={1.0}
-										line_height={3.0}
-										text={this.props.work.title_en}/>
+							<div className="glitch_always" data-text={this.props.work.title_en} style={{'fontSize':en_size}}> 
+							{this.props.work.title_en}
+							</div>							
 						</div>
 						<div className="chinese" style={{'fontSize':ch_size}}>{this.props.work.title_ch}</div>
 					</div>);
@@ -69,16 +65,20 @@ export default class WorkThumb extends React.Component{
 					 onMouseEnter={this.onMouseEnter}
 					 onMouseLeave={this.onMouseLeave}
 					 style={{transitionDelay:this.state.delay+'s'}}>
-					<GlitchImage ref="_img" 
-							last={0.0}
-							src={DConst.FilePath+this.props.work.thumb_image.name}/>
-					<div ref="_descript" className="workThumbDescript">												
+					 <GlitchImage ref="_img" 
+					  	last={0.0}
+						src={DConst.FilePath+this.props.work.thumb_image.name}/>	
+					 <div ref="_descript" className="workThumbDescript">												
 						{wrap_}					
 					</div>									
 				</div>
 			</Link>
 			);
-	
+		//<img src={DConst.FilePath+this.props.work.thumb_image.name} ref="_img"/>
+					 
+		//<GlitchImage ref="_img" 
+		//last={0.0}
+		//src={DConst.FilePath+this.props.work.thumb_image.name}/>	
 	}
 
 }
