@@ -58,7 +58,6 @@ export default class MainContainer extends React.Component{
 	}
 	render(){
 		//console.log(this.getStlyes());
-<<<<<<< HEAD
 		// return(
 		// 	<RouteTransition
 		// 		pathname={this.props.path}
@@ -75,19 +74,7 @@ export default class MainContainer extends React.Component{
 			<div className="mainContainer">
 			{this.props.children}
 			</div>
-=======
-		return(
-			<RouteTransition
-				pathname={this.props.path}
-				atEnter={{opacity:0,scale:0}}
-				atLeave={{opacity:0,scale:0}}
-				atActive={{opacity:1,scale:0}}
-				mapStyles={styles=>({opacity:styles.opacity})}	
-				className="mainContainer"
-			>
-			{this.props.children}
-			</RouteTransition>
->>>>>>> dc5c6c3fd21eaa3d573fc2bf711d78a1a8d057cb
+
 		);
 		
 	}

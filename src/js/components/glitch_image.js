@@ -12,13 +12,8 @@ export default class GlitchImage extends React.Component{
 
 		this._options={	       
 	        lineOffset:{
-<<<<<<< HEAD:src/js/components/glitch_image.js
 	            value:5.0,
 	            lineHeight:40
-=======
-	            value:8.0,
-	            lineHeight:25
->>>>>>> dc5c6c3fd21eaa3d573fc2bf711d78a1a8d057cb:src/js/components/glitch_image.js
 	        },
 	        frame_rate: 60.0,
 	        vel:0.2
@@ -42,11 +37,7 @@ export default class GlitchImage extends React.Component{
 	draw(){
 
 		if(!this.refs._canvas) return;
-<<<<<<< HEAD:src/js/components/glitch_image.js
 		// console.log("draw!");
-=======
-		
->>>>>>> dc5c6c3fd21eaa3d573fc2bf711d78a1a8d057cb:src/js/components/glitch_image.js
 		this.refs._canvas.width=this.img.width;
 		this.refs._canvas.height=this.img.height;
 
@@ -64,11 +55,7 @@ export default class GlitchImage extends React.Component{
 		ctx.drawImage(this.img,0,0,w_,h_);
 
 		if(!this.state.glitch) return;
-<<<<<<< HEAD:src/js/components/glitch_image.js
 		// if(this.density<0 && this.props.last>0) return;
-=======
-		if(this.density<0 && this.props.last>0) return;
->>>>>>> dc5c6c3fd21eaa3d573fc2bf711d78a1a8d057cb:src/js/components/glitch_image.js
 
 		// this._options.stereoscopic={
 	 //            red: 10*this.randomRange(1,3),
@@ -143,13 +130,8 @@ export default class GlitchImage extends React.Component{
     		}
     	}
 
-<<<<<<< HEAD:src/js/components/glitch_image.js
     	//if(this.props.last>0)
 			this.density+=this._options.vel;
-=======
-    	if(this.props.last>0)
-			this.density-=1.0/(this.props.last/this._options.frame_rate);
->>>>>>> dc5c6c3fd21eaa3d573fc2bf711d78a1a8d057cb:src/js/components/glitch_image.js
 		//if(this.density<w_) this.density++;
 		//console.log(offset+' '+this.density);
 		

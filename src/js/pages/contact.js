@@ -4,11 +4,7 @@ import {withRouter} from 'react-router'
 import {Title,CopyRight} from '../components/title'
 // import MainContainer from './main_container'
 
-<<<<<<< HEAD
 //import GoogleMap from 'google-map-react';
-=======
-import GoogleMap from 'google-map-react';
->>>>>>> dc5c6c3fd21eaa3d573fc2bf711d78a1a8d057cb
 
 
 class Contact extends React.Component{
@@ -56,7 +52,6 @@ class Contact extends React.Component{
 		};
   }
   componentDidMount(){
-<<<<<<< HEAD
 	//this.setState({position:{lat: 25.047692,lng: 121.566613}});		
     let map=new google.maps.Map(document.getElementById('_map'),{
     	center:{lat:25.047651,lng:121.565632},
@@ -69,40 +64,17 @@ class Contact extends React.Component{
     });
     marker.setMap(map);
 
-=======
-	this.setState({position:{lat: 25.047692,lng: 121.566613}});		
-    // let main=this.refs._main;
-    // this.props.route.onEnter=function(){
-    //     main.enter();
-    // };
-    // this.props.route.onLeave=function(){
-    //     main.leave();
-    // };
->>>>>>> dc5c6c3fd21eaa3d573fc2bf711d78a1a8d057cb
   }
     
   componentWillMount(){
 	initBackgroundType(2);	
   }
   render() {
-<<<<<<< HEAD
-  	
-=======
-  	 // 	<div className="contactMap">
-		    //  		<GoogleMap
-		    //     		defaultCenter={{lat:25.047651,lng:121.565632}}
-		    //     		defaultZoom={18}
-		    //     		options={this.map_options}>
-		    //     		<MapMarker lat={this.state.position.lat} lng={this.state.position.lng}/>
-		    //     	</GoogleMap>
-		    // </div>
->>>>>>> dc5c6c3fd21eaa3d573fc2bf711d78a1a8d057cb
     return(
     	<div>    	            
 	     
 	    
 	     	<div className="content center">
-<<<<<<< HEAD
 	     		<div className="contactHello">
 	     		 	<div className="glitch_always" data-text="We">We</div>
 	     			<div className="glitch_always" data-text="should">should</div>
@@ -115,10 +87,6 @@ class Contact extends React.Component{
 		     		<span><a href="mailto:merlin.mustache.mmlab.tw">merlin.mustache@mmlab.tw</a></span>
 		     		<span>]</span>
 	     		</div>
-=======
-	     		<div className="contactHello">We<br/>should<br/>talk</div>
-	     		<div className="contactEmail">[ merlin.mustache@mmlab.tw ]</div>
->>>>>>> dc5c6c3fd21eaa3d573fc2bf711d78a1a8d057cb
 	     	    <div className="contactInfo">
 	     	    	<div className="title">梅林斯行銷有限公司</div>
 	     	    	<div>
@@ -150,20 +118,15 @@ class Contact extends React.Component{
 			     	</div>				     	
 			    </div>
 
-<<<<<<< HEAD
 			   	<div className="contactMap">
 			   		<div id="_map">
 			      		
 			        </div>
 		    	</div>
-=======
-			   	<img className="contactMap" src="image/map.png"/>
->>>>>>> dc5c6c3fd21eaa3d573fc2bf711d78a1a8d057cb
 
 		     	<div className="socialLink">
 		     		<div>
 			     	<a href="https://vimeo.com/merlinsmustache" target="_blank">
-<<<<<<< HEAD
 		     			<img src="image/vimeo1.png"/>
 		     		</a>
 		     		<a href="https://www.facebook.com/merlin.mustache/" target="_blank">
@@ -171,15 +134,6 @@ class Contact extends React.Component{
 		     		</a>
 		     		<a href="https://www.youtube.com/channel/UCSIxHgMr4UvZRsG5hWoVolQ" target="_blank">
 		     			<img src="image/youtube1.png"/>
-=======
-		     			<img src="image/vimeo.png"/>
-		     		</a>
-		     		<a href="https://www.facebook.com/merlin.mustache/" target="_blank">
-		     			<img src="image/facebook.png"/>
-		     		</a>
-		     		<a href="https://www.youtube.com/channel/UCSIxHgMr4UvZRsG5hWoVolQ" target="_blank">
-		     			<img src="image/youtube.png"/>
->>>>>>> dc5c6c3fd21eaa3d573fc2bf711d78a1a8d057cb
 		     		</a>
 		     		</div>
 	     		</div>
@@ -189,7 +143,6 @@ class Contact extends React.Component{
      	</div>
 
     );
-<<<<<<< HEAD
 
     //<GoogleMap
  	//	defaultCenter={{lat:25.047651,lng:121.565632}}
@@ -197,8 +150,6 @@ class Contact extends React.Component{
  	//	options={this.map_options}>
  	//	<MapMarker lat={this.state.position.lat} lng={this.state.position.lng}/>
  	//</GoogleMap>
-=======
->>>>>>> dc5c6c3fd21eaa3d573fc2bf711d78a1a8d057cb
   }
 }
 
