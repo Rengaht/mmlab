@@ -2,7 +2,11 @@
 
 function Constants(){
 	this.StartPoint=1;
+<<<<<<< HEAD
 	this.EndPoint=4200;
+=======
+	this.EndPoint=2200;
+>>>>>>> dc5c6c3fd21eaa3d573fc2bf711d78a1a8d057cb
 }
 
 // common variable
@@ -22,6 +26,7 @@ var _raycaster;
 var _mouse=new THREE.Vector2(),_intersected;
 
 
+<<<<<<< HEAD
 //for controlling framerate
 var _now;
 var _then=Date.now();
@@ -29,11 +34,17 @@ var _frame_interval=1000.0/60.0;
 var _delta;
 
 
+=======
+>>>>>>> dc5c6c3fd21eaa3d573fc2bf711d78a1a8d057cb
 function init(){
 
 
 	_scene=new THREE.Scene();
+<<<<<<< HEAD
 	_camera=new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,Const.StartPoint,Const.EndPoint);
+=======
+	_camera=new THREE.PerspectiveCamera(50,window.innerWidth/window.innerHeight,Const.StartPoint,Const.EndPoint);
+>>>>>>> dc5c6c3fd21eaa3d573fc2bf711d78a1a8d057cb
 	_camera.position.z=Const.EndPoint;
 	// _camera=new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
 	// _camera.position.z=5;
@@ -151,6 +162,7 @@ function draw(){
 
 	
 	requestAnimationFrame(draw);
+<<<<<<< HEAD
 	
 	_now=Date.now();
 	_delta=_now-_then;
@@ -161,6 +173,11 @@ function draw(){
 	}
 	_renderer.render(_scene, _camera);
 
+=======
+
+	update();
+	_renderer.render(_scene, _camera);
+>>>>>>> dc5c6c3fd21eaa3d573fc2bf711d78a1a8d057cb
 	// _composer.render();
 
 }

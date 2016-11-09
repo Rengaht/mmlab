@@ -93,7 +93,11 @@ function initSliceRotate(){
 
 	for(i=0;i<RotateConst.MRotate;i+=1.0){
 		
+<<<<<<< HEAD
 		var pos_=[RotateConst.RotateRadius,etheta*i,(Const.EndPoint*.75+Const.StartPoint*.25)];
+=======
+		var pos_=[RotateConst.RotateRadius,etheta*i,0];
+>>>>>>> dc5c6c3fd21eaa3d573fc2bf711d78a1a8d057cb
 		var vel_=[0,RotateConst.RotateVel,0];
 
 		var leg_=new FloatLeg(pos_,vel_);
@@ -116,7 +120,11 @@ function initSliceRotate(){
 	for(i=0;i<RotateConst.MSlice;i++){
 
 		//var pos_=[random(0,ww_*.1),random(0,wh_*.1),100];
+<<<<<<< HEAD
 		var pos_=[random(-ww_*.5,ww_*.5),wh_*.5*(1-2.0/RotateConst.MSlice*i+random(-.5,.5)),(Const.EndPoint*.7+Const.StartPoint*.3)-random(0,100)];
+=======
+		var pos_=[random(-ww_*.5,ww_*.5),wh_*.5*(1-2.0/RotateConst.MSlice*i+random(-.5,.5)),100];
+>>>>>>> dc5c6c3fd21eaa3d573fc2bf711d78a1a8d057cb
 		var amp_=[random(20,80),random(20,80),random(-10,10)];
 
 		var slice_=new RotateSlice(pos_,amp_,random_arr[i]);

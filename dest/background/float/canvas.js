@@ -60,7 +60,11 @@ function initSliceFloat(){
 	for(i=0;i<_mslice;i++){
 
 		//var pos_=[random(0,ww_*.1),random(0,wh_*.1),100];
+<<<<<<< HEAD
 		var pos_=[random(0,ww_)*(random(0,2)<1?1.0:-1.0),random(-1.0,1.0)*wh_,(Const.EndPoint*.8+Const.StartPoint*.2)+random(-50,50)];
+=======
+		var pos_=[random(0,ww_)*(random(0,2)<1?1.0:-1.0),random(-1.0,1.0)*wh_,random(50,550)];
+>>>>>>> dc5c6c3fd21eaa3d573fc2bf711d78a1a8d057cb
 		var amp_=[random(20,80),random(20,80),random(-10,10)];
 
 		var slice_=new FloatSlice(pos_,amp_,random_arr[i]);
@@ -74,7 +78,10 @@ function initSliceFloat(){
 
 
 		updatePosFloat(mesh_,slice_);
+<<<<<<< HEAD
 	
+=======
+>>>>>>> dc5c6c3fd21eaa3d573fc2bf711d78a1a8d057cb
 
 		_slice_float.push(slice_);
 		_scene.add(mesh_);

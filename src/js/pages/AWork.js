@@ -117,6 +117,7 @@ export default class AWork extends React.Component{
 }
 class WorkVideo extends React.Component{
 	render(){
+<<<<<<< HEAD
 
 		if(this.props.src.type.includes("embed"))
 			return(
@@ -129,6 +130,12 @@ class WorkVideo extends React.Component{
 					<img src={this.props.src.url}/>
 				</div>
 			);
+=======
+		return(
+			<div className="AWorkVideo" dangerouslySetInnerHTML={{__html:this.props.src.html}}>			
+			</div>
+		);
+>>>>>>> dc5c6c3fd21eaa3d573fc2bf711d78a1a8d057cb
 	}
 }
 

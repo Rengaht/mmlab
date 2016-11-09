@@ -75,7 +75,11 @@ function initSliceStack(){
 		for(i=0;i<mslice;i++){
 
 			//var pos_=[random(0,ww_*.1),random(0,wh_*.1),100];
+<<<<<<< HEAD
 			var pos_=[random(-20,20),random(-20,20),(Const.EndPoint*.8+Const.StartPoint*.2)+random(-10,10)];
+=======
+			var pos_=[random(-20,20),random(-20,20),random(-10,10)];
+>>>>>>> dc5c6c3fd21eaa3d573fc2bf711d78a1a8d057cb
 			var amp_=[random(0,60),random(0,60),random(0,10)];
 
 			var slice_=new FloatSlice(pos_,amp_,random_arr[i]);

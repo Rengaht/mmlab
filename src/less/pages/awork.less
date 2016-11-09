@@ -9,11 +9,17 @@
 	z-index: 20;
 }
 .AWorkContent{
+<<<<<<< HEAD
 	position: relative;	
 	z-index: 20;
 
 	.mainRWD;
 		
+=======
+	position: relative;
+	width:75%;
+	z-index: 20;
+>>>>>>> dc5c6c3fd21eaa3d573fc2bf711d78a1a8d057cb
 	// height:100%;
 	// overflow: hidden;
 	//pointer-events: none;
@@ -68,7 +74,10 @@
 	.AWorkText{
 		width:100%;
 		// padding:20px 0px;	
+<<<<<<< HEAD
 		text-align: justify;
+=======
+>>>>>>> dc5c6c3fd21eaa3d573fc2bf711d78a1a8d057cb
 		white-space: pre-wrap;
 		.title{
 			.fontTitle;
@@ -93,6 +102,7 @@
 	padding-bottom: 56.25% !important; /* 16:9 */
 	padding-top: 25px;
 	height: 0;
+<<<<<<< HEAD
 
 	iframe,img{
 		position: absolute;
@@ -101,6 +111,15 @@
 		width: 100%;
 		height: 100%;
 	}
+=======
+}
+.AWorkVideo iframe{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+>>>>>>> dc5c6c3fd21eaa3d573fc2bf711d78a1a8d057cb
 }
 
 
@@ -245,12 +264,44 @@
 		&:last-child{
 			margin-right: 0;
 		}
+<<<<<<< HEAD
 		.english{
 			.fontTitle;
 		}
 		.chinese{
 			.fontText;
 		}
+=======
+		.relatedTag{
+			.fontText;
+
+			position: absolute;
+			bottom:0;
+			width: 100%;
+			height:33.33%;
+			background-color: rgba(0,0,0,.5);
+			
+			opacity: 0;
+			transition:.3s;
+			padding-left: @horiz_margin;
+			padding-right: @horiz_margin;
+			
+			div:first-child{
+				text-transform: uppercase;
+				font-family: 'Assistant';
+				//margin: 2px;
+			}
+			div:last-child{
+				text-transform: uppercase;
+				font-family: 'mmlabWebTitle';
+				//margin: 2px;
+			}
+		}
+		&:hover .relatedTag{
+			opacity: 1;				
+		}
+		
+>>>>>>> dc5c6c3fd21eaa3d573fc2bf711d78a1a8d057cb
 	}
 	
 }
