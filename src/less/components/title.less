@@ -1,0 +1,27 @@
+
+
+.cornertitle{
+	position:fixed;	
+	left:@in_margin;
+	bottom:@in_margin*5;
+
+	transform: rotate(-90deg);
+	
+	text-transform: uppercase;
+	.fontCornerTitle;
+
+	span{
+		margin-right: 5px;
+	}
+
+	@media @pad{
+		display: none;
+	}
+}
+.copyright{
+	text-align: center;
+	.fontCopyright;
+
+	margin-top: @vert_margin*2;
+	margin-bottom: @vert_margin*2;
+}

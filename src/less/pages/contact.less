@@ -1,0 +1,69 @@
+
+.contactHello{
+	margin-top:@page_top; 
+	font-style: italic;
+	.fontHello;	
+}
+.contactEmail{
+	margin-top: @vert_margin*2;	
+	.fontEmail;	
+	img{
+		vertical-align: middle;
+		margin-right:@horiz_margin;
+	}
+	span{
+		margin-right:@horiz_margin;
+	}
+}
+.contactInfo{	
+	margin-top: @vert_margin*2;
+	display: inline-block;
+	width:50%;
+	vertical-align: top;
+	
+	.fontText;
+
+	div{
+		margin-top: @vert_margin*.5;
+	}
+	.title{
+		font-weight: bold;
+	}
+	span{
+		margin-right: @horiz_margin;		
+	}
+}
+
+.contactMap{
+	position: relative;
+	padding-bottom: 40%; /* 16:9 */	
+	height: 0;
+	width:100%;	
+	
+	background-color: black;
+	margin-top: @vert_margin;
+
+	&>div{
+		position: absolute;
+		width:100%;
+		height:100%;
+	}
+}
+
+.mapMarker{
+	position: relative;
+	left:-40px;
+	top:-20px;
+}
+
+.socialLink{
+	margin-top: @vert_margin*2;
+	margin-bottom: @vert_margin*2;
+	//width:100%;
+	>div{
+		text-align: center;
+	}
+	a{
+		margin-right:@horiz_margin;
+	}
+}

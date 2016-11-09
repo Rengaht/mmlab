@@ -1,0 +1,26 @@
+
+
+
+// for screen
+@pad:~"only screen and (max-width:1363px)";
+// for small
+@small:~"only screen and (max-width:948px)";
+// for too small
+@tiny:~"(max-width:420px), (max-height:320px)";
+
+
+.mainRWD{
+	width:75%;
+	min-width: 1200px;		
+	@media @pad{
+		width:88%;
+		min-width: 900px;
+	}
+	@media @small{
+		width:95%;
+		min-width: 400px;
+	}
+	@media @tiny{
+		display: none;
+	}
+}

@@ -1,0 +1,35 @@
+
+.about{
+	padding-top: @page_top;
+
+	.part{
+		width:50%;
+		display:table-cell;
+		padding-left:@horiz_margin;
+		padding-right:@horiz_margin;
+
+		.title{
+			.fontTitle;
+			margin-top: @vert_margin*2;
+		}
+		.text{			
+			.fontText;
+			margin-top: @vert_margin;
+		}
+	}
+	img{
+		width:100%;
+	}
+}
+.blurBack{	
+	width:100%;	
+	height:20%;
+	
+	z-index: -1;
+	overflow: hidden;
+	display: none;
+	img{
+		width:100%;	
+		filter:blur(5px);
+	}
+}

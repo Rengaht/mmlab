@@ -1,0 +1,53 @@
+/* filter */
+.filter{
+	position: fixed;
+	right:@in_margin;
+	bottom:20%;
+	text-align: right;
+
+	@media @pad{
+		display: none;
+	}
+}
+
+.workFilter{
+	display: block;	
+	margin-top: @vert_margin*.5;
+	
+	.filterTitle{
+		//font-family: 'Assistant';
+		cursor: pointer;
+		.fontFilterTitle;
+	}	
+}
+
+.filterContent{
+	margin-top: 0;
+	max-height:0;
+	overflow: hidden;
+	//opacity: 0;	
+	transition:.3s ease-in-out;
+		
+	&.show{
+		max-height:220px;
+		//opacity: 1;
+		transition:.5s .3s ease-in-out;
+
+	}
+}
+.filterName{
+	cursor: pointer;
+	margin-left:10px;
+	color:white;
+	margin-top: @vert_margin*.5;
+	transition:.3s ease-in;
+
+	.fontFilterText;
+	&.active{
+		color:red;	
+	}
+}
+
+.filterGap{
+	margin:0 20px;
+}

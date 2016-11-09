@@ -1,66 +1,189 @@
+
+@text_size:16px;
+@title_size:22px;
+
+@small_text_size:12px;
+
+@menu_text_size:37.5px;
+
+@work_title_size:32px;
+
+@awork_en_size:45px;
+@awork_ch_size:25px;
+
+@copyright_size:11px;
+
+
+
+
+@pad_text_size:12px;
+@pad_title_size:16px;
+
+@pad_small_text_size:9px;
+
+@pad_menu_text_size:28px;
+
+@pad_work_title_size:22px;
+
+@pad_awork_en_size:33px;
+@pad_awork_ch_size:18px;
+
+@pad_copyright_size:8px;
+
+
+
+
 @font-face{
-	font-family:mmlabWebTitle;	
-	font-weight: bold;
+	font-family:mtextFont;	
+	font-style: normal;
 	src: local('Microsoft JhengHei');
 }
 @font-face{
-	font-family:mmlabWebTitle;	
+	font-family:mtextFont;
 	font-style: normal;
-  	font-weight: 800;
- 	src: local('Assistant ExtraBold'), local('Assistant-ExtraBold'),url(https://fonts.gstatic.com/s/assistant/v1/-mTR0sX8a0RsadH4AMDT8Ogdm0LZdjqr5-oayXSOefg.woff2) format('woff2');
- 	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+  src: url(../../font/Futura-LT-Book.woff);
+  unicode-range: U+000-5FF, U+1e00-1fff, U+2000-2300;
 }
 
+
 @font-face{
-	font-family:mmlabWebText;	
-	font-style: normal;
-	src: local('Microsoft JhengHei');
+  font-family:mtitleFont; 
+  font-weight: bold;
+  src: local('Microsoft JhengHei');
 }
 @font-face{
-	font-family:mmlabWebText;
-	font-style: normal;
-  	font-weight: 400;
-  	src: local('Hind Vadodara'), local('HindVadodara-Regular'), url(https://fonts.gstatic.com/s/hindvadodara/v2/9c6KKeibr6NtFqknnNxZB8I79x-VWsl9ZLFyGx7L0Fo.woff2) format('woff2');
-  	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+  font-family:mtitleFont;
+  font-weight: bold;
+  src: url(../../font/Futura-LT-Bold.woff);
+  unicode-range: U+000-5FF, U+1e00-1fff, U+2000-2300;
 }
 
-/* hebrew */
-@font-face {
-  font-family: 'Assistant';
-  font-style: normal;
-  font-weight: 300;
-  src: local('Assistant ExtraBold'), local('Assistant-ExtraBold'), url(https://fonts.gstatic.com/s/assistant/v1/-mTR0sX8a0RsadH4AMDT8EByb1TKJa77egybnpn19yM.woff2) format('woff2');
-  unicode-range: U+0590-05FF, U+20AA, U+25CC, U+FB1D-FB4F;
+
+@font-face{
+  font-family:mmenuFont;
+  src:url(../../font/Futura-Koyu.woff);  
 }
-/* latin */
-@font-face {
-  font-family: 'Assistant';
-  font-style: normal;
-  font-weight: 300;
-  src: local('Assistant ExtraBold'), local('Assistant-ExtraBold'), url(https://fonts.gstatic.com/s/assistant/v1/-mTR0sX8a0RsadH4AMDT8Ogdm0LZdjqr5-oayXSOefg.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+
+//global
+.fontMenu{  
+  font-family: mmenuFont;
+  font-size:@menu_text_size;
+  letter-spacing:@menu_text_size*.15;
+
+  @media @pad{
+    font-size: @pad_menu_text_size;
+    letter-spacing:@pad_menu_text_size*.15;
+  }
 }
-/* gujarati */
-@font-face {
-  font-family: 'Hind Vadodara';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Hind Vadodara'), local('HindVadodara-Regular'), url(https://fonts.gstatic.com/s/hindvadodara/v2/9c6KKeibr6NtFqknnNxZByUZf6SPjCvTHKwPaGj40_g.woff2) format('woff2');
-  unicode-range: U+0964-0965, U+0A80-0AFF, U+200B-200D, U+20B9, U+25CC, U+A830-A839;
+
+.fontCopyright{
+  font-family: mtextFont;
+  font-size:@copyright_size;
+  letter-spacing:@copyright_size*.2; 
+
+  @media @pad{
+    font-size:@pad_copyright_size;
+    letter-spacing:@pad_copyright_size*.2; 
+  }
 }
-/* latin-ext */
-@font-face {
-  font-family: 'Hind Vadodara';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Hind Vadodara'), local('HindVadodara-Regular'), url(https://fonts.gstatic.com/s/hindvadodara/v2/9c6KKeibr6NtFqknnNxZBxLE1M_n0V67aubpfN9Cf9U.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+
+.fontCornerTitle{
+  font-family: mtextFont;
+  font-size:@small_text_size;
+  letter-spacing:@small_text_size*.3; 
+
+  @media @pad{
+    font-size:@pad_small_text_size;
+    letter-spacing:@pad_small_text_size*.3; 
+  }
 }
-/* latin */
-@font-face {
-  font-family: 'Hind Vadodara';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Hind Vadodara'), local('HindVadodara-Regular'), url(https://fonts.gstatic.com/s/hindvadodara/v2/9c6KKeibr6NtFqknnNxZB8I79x-VWsl9ZLFyGx7L0Fo.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+
+.fontText{
+  font-family: mtextFont;
+  font-size:@text_size;
+  letter-spacing:@text_size*.1;  
+  line-height:180%;
+
+  @media @pad{
+    font-size:@pad_text_size;
+    letter-spacing:@pad_text_size*.1;  
+  }
+}
+.fontTitle{
+  font-family: mtitleFont;
+  font-weight: bold;
+  font-size:@title_size;
+  letter-spacing:@title_size*.1;   
+  // line-height: 98%;
+  @media @pad{
+    font-size:@pad_title_size;
+    letter-spacing:@pad_title_size*.1;   
+  }
+}
+
+//work
+.fontFilterTitle{
+  font-family: mtextFont;
+  font-size:@text_size;
+  letter-spacing:@text_size*.1; 
+  text-transform: uppercase; 
+  @media @pad{
+    font-size:@pad_text_size;
+    letter-spacing:@pad_text_size*.1; 
+  }
+}
+.fontFilterText{
+  font-family: mtextFont;
+  font-size:@small_text_size;
+  letter-spacing:@small_text_size*.1;  
+  text-transform: uppercase;
+  @media @pad{
+    font-size:@pad_small_text_size;
+    letter-spacing:@pad_small_text_size*.1;  
+  }
+}
+
+//awork
+.fontAWorkTitleEn{
+  font-family: mtitleFont;
+  font-size:@awork_en_size;
+  letter-spacing:@awork_en_size*.1;   
+  text-transform: uppercase;
+  font-weight: bold;
+  @media @pad{
+    font-size:@pad_awork_en_size;
+    letter-spacing:@pad_awork_en_size*.1;   
+  }
+  // line-height: 98%;
+}
+.fontAWorkTitleCh{
+  font-family: mtitleFont;
+  font-weight: bold;
+  font-size:@awork_ch_size;
+  letter-spacing:@awork_ch_size*.1;   
+  @media @pad{
+    font-size:@pad_awork_ch_size;
+    letter-spacing:@pad_awork_ch_size*.1;   
+  }
+}
+
+//contact
+.fontHello{
+  font-family: mtitleFont;
+  font-weight: bold;
+  font-size:@title_size*3;
+  letter-spacing:@title_size*3*.1;  
+  @media @pad{
+    font-size:@pad_title_size*3;
+    letter-spacing:@pad_title_size*3*.1;  
+  }
+}
+.fontEmail{
+  font-family: mtextFont;
+  font-size:@title_size*1.5;
+  letter-spacing:@title_size*1.5*.1;   
+  @media @pad{
+    font-size:@pad_title_size*1.5;
+    letter-spacing:@pad_title_size*1.5*.1;   
+  }
 }

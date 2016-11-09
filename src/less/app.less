@@ -3,17 +3,38 @@
 @titleheight: 8%;
 @bottomheight: 15%;
 
-@import 'scroll.less';
 @import 'font.less';
+
+@import 'components/scroll.less';
+@import 'components/hamburger.less';
+@import 'components/glitch.less';
 
 // @import 'glitch.less';
 
-@import 'main.less';
-@import 'menu.less';
-@import 'title.less';
+@out_margin:10px;
+@in_margin:30px;
 
-@import 'about.less';
-@import 'awork.less';
-@import 'work.less';
-@import 'contact.less';
+@vert_margin:20px;
+@horiz_margin:20px;
+
+@work_margin:10px;
+
+@page_top: @in_margin*2 + @ham_size;
+
+
+@import 'pages/rwd.less';
+@import 'pages/main.less';
+@import 'components/menu.less';
+@import 'components/title.less';
+
+@import 'pages/home.less';
+@import 'pages/about.less';
+
+@import 'pages/work.less';
+@import 'components/work_thumb.less';
+@import 'components/work_filter.less';
+
+@import 'pages/awork.less';
+
+@import 'pages/contact.less';
 

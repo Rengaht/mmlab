@@ -24,7 +24,7 @@ gulp.task('build_js', function () {
         .transform('babelify', {presets: ['es2015', 'react']})
         .bundle()
         .pipe(source('main.js'))
-        .pipe(gulp.dest('dist'))
+        .pipe(gulp.dest('dest'))
         .pipe(refresh());
 });
 gulp.task('build_css',function(){
@@ -32,7 +32,7 @@ gulp.task('build_css',function(){
 				.pipe(less())
 				//.pipe(concat('app.css'))
 				//.pipe(cssmin())
-				.pipe(gulp.dest('dist/css'))
+				.pipe(gulp.dest('dest/css'))
 				.pipe(refresh());
 });
 
