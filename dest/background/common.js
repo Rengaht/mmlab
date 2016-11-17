@@ -4,6 +4,7 @@ function Constants(){
 	this.StartPoint=1;
 	this.EndPoint=4200;
 	this.MouseMoveThres=20;
+	this.EndPoint=4200;
 }
 
 // common variable
@@ -35,6 +36,12 @@ var _delta;
 
 var _dotScreenEffect;
 
+
+//for controlling framerate
+var _now;
+var _then=Date.now();
+var _frame_interval=1000.0/60.0;
+var _delta;
 
 function init(){
 
@@ -232,6 +239,7 @@ function draw(){
 
 	_composer.render();
 
+	
 }
 
 function initBackgroundType(type_){

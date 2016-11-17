@@ -27,7 +27,6 @@ var _leg_shape,_leg_gemoetry,_leg_material;
 
 var _special_material,_special_geometry;
 var _special_mesh;
-
 var _gold_interval;
 
 var _logo_texture;
@@ -151,7 +150,6 @@ function initLogoLeg(){
 	// _logo_mesh.position.z=(Const.EndPoint-Const.StartPoint)*.6+Const.StartPoint;
 	// _scene.add(_logo_mesh);
 	// _logo_id=_logo_mesh.id;
-
 	for(var j=0;j<LogoConst.StartNum;j+=1){
 		addLogo(j);	
 	}
@@ -190,7 +188,6 @@ function createMaterialLogo(uniforms_){
 		fragmentShader:_index_fragshader,
 		transparent:true
 	});
-	// return new THREE.MeshBasicMaterial({map:_leg_texture});
 	
 }
 function updatePosLogo(mesh_,leg_){
