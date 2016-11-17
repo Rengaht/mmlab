@@ -11,16 +11,16 @@ function RotateConstants(ww_){
 	this.SliceHeight=ww_*.05;
 }
 
-let RotateConst;
+var RotateConst;
 
 
 var _rotate_leg_geometry;
 var _rotate_leg_texture;
 
 //var _mslice;
-let _rotate_slice=[];
+var _rotate_slice=[];
 
-let _rotate_leg=[];
+var _rotate_leg=[];
 
 
 
@@ -36,17 +36,17 @@ function initRotate(){
 
 }		
 function clearRotate(){
-	let mslice=_rotate_slice.length;
+	var mslice=_rotate_slice.length;
 	if(mslice>1){
-		for(let i=mslice-1;i>=0;i--){		
+		for(var i=mslice-1;i>=0;i--){		
 			_scene.remove(_scene.getObjectById(_rotate_slice[i].id,true));
 			_rotate_slice.splice(i,1);		
 		}
 	}
 
-	let mleg=_rotate_leg.length;
+	var mleg=_rotate_leg.length;
 	if(mleg>1){
-		for(let i=mleg-1;i>=0;i--){		
+		for(var i=mleg-1;i>=0;i--){		
 			_scene.remove(_scene.getObjectById(_rotate_leg[i].id,true));
 			_rotate_leg.splice(i,1);		
 		}
@@ -86,14 +86,14 @@ function initSliceRotate(){
 	for(i=1;i<=RotateConst.MSlice;++i) random_arr.push(i);
 	shuffleArray(random_arr);
 	
-	let ww_=window.innerWidth.toFixed(2);
-	let wh_=window.innerHeight.toFixed(2);
+	var ww_=window.innerWidth.toFixed(2);
+	var wh_=window.innerHeight.toFixed(2);
 
-	let etheta=Math.PI*2.0/RotateConst.MRotate;
+	var etheta=Math.PI*2.0/RotateConst.MRotate;
 
 	for(i=0;i<RotateConst.MRotate;i+=1.0){
 		
-		var pos_=[RotateConst.RotateRadius,etheta*i,0];
+		var pos_=[RotateConst.RotateRadius,etheta*i,(Const.EndPoint*.75+Const.StartPoint*.25)];
 		var vel_=[0,RotateConst.RotateVel,0];
 
 		var leg_=new FloatLeg(pos_,vel_);
@@ -116,7 +116,7 @@ function initSliceRotate(){
 	for(i=0;i<RotateConst.MSlice;i++){
 
 		//var pos_=[random(0,ww_*.1),random(0,wh_*.1),100];
-		var pos_=[random(-ww_*.5,ww_*.5),wh_*.5*(1-2.0/RotateConst.MSlice*i+random(-.5,.5)),100];
+		var pos_=[random(-ww_*.5,ww_*.5),wh_*.5*(1-2.0/RotateConst.MSlice*i+random(-.5,.5)),(Const.EndPoint*.7+Const.StartPoint*.3)-random(0,100)];
 		var amp_=[random(20,80),random(20,80),random(-10,10)];
 
 		var slice_=new RotateSlice(pos_,amp_,random_arr[i]);
@@ -158,7 +158,7 @@ function createMaterialRotate(uniforms_,tex_index_){
 }
 function updatePosRotate(mesh_,slice_){
 	
-	let pos=slice_.getPos();
+	var pos=slice_.getPos();
 
 	mesh_.position.x=pos[0];
 	mesh_.position.y=pos[1];

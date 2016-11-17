@@ -5,7 +5,7 @@ function StackConstants(){
 	this.MStack=2;
 }
 
-let StackConst=new StackConstants();
+var StackConst=new StackConstants();
 var _stack=[];
 
 function initStack(){
@@ -14,11 +14,11 @@ function initStack(){
 
 }		
 function clearStack(){
-	let mstack=_stack.length;
+	var mstack=_stack.length;
 	
 	if(mstack<1) return;
 
-	for(let i=mstack-1;i>=0;i--){		
+	for(var i=mstack-1;i>=0;i--){		
 		var mslice=_stack[i].slice.length;
 		for(j=mslice-1;j>=0;--j){
 			_scene.remove(_scene.getObjectById(_stack[i].slice[j].id));
@@ -52,8 +52,8 @@ function initSliceStack(){
 	var random_arr=[];
 	for(i=1;i<=StackConst.MSlice;++i) random_arr.push(i);
 		
-	let ww_=window.innerWidth.toFixed(2);
-	let wh_=window.innerHeight.toFixed(2);
+	var ww_=window.innerWidth.toFixed(2);
+	var wh_=window.innerHeight.toFixed(2);
 
 
 	
@@ -65,7 +65,7 @@ function initSliceStack(){
 		// create random index to slice
 		shuffleArray(random_arr);
 		
-		let spos_=[(ww_*.5+ww_*.3*random(0,1))*(j*2-1),
+		var spos_=[(ww_*.5+ww_*.3*random(0,1))*(j*2-1),
 				   wh_*(.3+.2*random(0,1))*(j%2==0?1:-1),
 				   random(20,120)];
 		var samp_=[random(20,80),random(20,80),random(-10,10)];
@@ -75,7 +75,7 @@ function initSliceStack(){
 		for(i=0;i<mslice;i++){
 
 			//var pos_=[random(0,ww_*.1),random(0,wh_*.1),100];
-			var pos_=[random(-20,20),random(-20,20),random(-10,10)];
+			var pos_=[random(-20,20),random(-20,20),(Const.EndPoint*.8+Const.StartPoint*.2)+random(-10,10)];
 			var amp_=[random(0,60),random(0,60),random(0,10)];
 
 			var slice_=new FloatSlice(pos_,amp_,random_arr[i]);
@@ -121,8 +121,8 @@ function createMaterialStack(uniforms_,tex_index_){
 	
 }
 function updatePosStack(stack_,mesh_,slice_){
-	let spos=stack_.getPos();
-	let pos=slice_.getPos();
+	var spos=stack_.getPos();
+	var pos=slice_.getPos();
 
 	mesh_.position.x=spos[0]+pos[0];
 	mesh_.position.y=spos[1]+pos[1];

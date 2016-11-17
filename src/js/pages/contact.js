@@ -4,7 +4,7 @@ import {withRouter} from 'react-router'
 import {Title,CopyRight} from '../components/title'
 // import MainContainer from './main_container'
 
-import GoogleMap from 'google-map-react';
+//import GoogleMap from 'google-map-react';
 
 
 class Contact extends React.Component{
@@ -52,35 +52,41 @@ class Contact extends React.Component{
 		};
   }
   componentDidMount(){
-	this.setState({position:{lat: 25.047692,lng: 121.566613}});		
-    // let main=this.refs._main;
-    // this.props.route.onEnter=function(){
-    //     main.enter();
-    // };
-    // this.props.route.onLeave=function(){
-    //     main.leave();
-    // };
+	//this.setState({position:{lat: 25.047692,lng: 121.566613}});		
+    let map=new google.maps.Map(document.getElementById('_map'),{
+    	center:{lat:25.047651,lng:121.565632},
+    	scrollwheel:true,
+    	zoom:18
+    });
+    map.setOptions({styles:this.map_options.styles});
+    let marker=new google.maps.Marker({
+    	position:this.state.position    	
+    });
+    marker.setMap(map);
+
   }
     
   componentWillMount(){
 	initBackgroundType(2);	
   }
   render() {
-  	 // 	<div className="contactMap">
-		    //  		<GoogleMap
-		    //     		defaultCenter={{lat:25.047651,lng:121.565632}}
-		    //     		defaultZoom={18}
-		    //     		options={this.map_options}>
-		    //     		<MapMarker lat={this.state.position.lat} lng={this.state.position.lng}/>
-		    //     	</GoogleMap>
-		    // </div>
     return(
     	<div>    	            
 	     
 	    
 	     	<div className="content center">
-	     		<div className="contactHello">We<br/>should<br/>talk</div>
-	     		<div className="contactEmail">[ merlin.mustache@mmlab.tw ]</div>
+	     		<div className="contactHello">
+	     		 	<div className="glitch_always" data-text="We">We</div>
+	     			<div className="glitch_always" data-text="should">should</div>
+	     			<div className="glitch_always" data-text="talk">talk</div>
+	     		</div>
+
+	     		<div className="contactEmail">
+		     		<img src="image/arrow_contact.png"/>
+		     		<span>[</span>
+		     		<span><a href="mailto:merlin.mustache.mmlab.tw">merlin.mustache@mmlab.tw</a></span>
+		     		<span>]</span>
+	     		</div>
 	     	    <div className="contactInfo">
 	     	    	<div className="title">梅林斯行銷有限公司</div>
 	     	    	<div>
@@ -112,18 +118,22 @@ class Contact extends React.Component{
 			     	</div>				     	
 			    </div>
 
-			   	<img className="contactMap" src="image/map.png"/>
+			   	<div className="contactMap">
+			   		<div id="_map">
+			      		
+			        </div>
+		    	</div>
 
 		     	<div className="socialLink">
 		     		<div>
 			     	<a href="https://vimeo.com/merlinsmustache" target="_blank">
-		     			<img src="image/vimeo.png"/>
+		     			<img src="image/vimeo1.png"/>
 		     		</a>
 		     		<a href="https://www.facebook.com/merlin.mustache/" target="_blank">
-		     			<img src="image/facebook.png"/>
+		     			<img src="image/facebook1.png"/>
 		     		</a>
 		     		<a href="https://www.youtube.com/channel/UCSIxHgMr4UvZRsG5hWoVolQ" target="_blank">
-		     			<img src="image/youtube.png"/>
+		     			<img src="image/youtube1.png"/>
 		     		</a>
 		     		</div>
 	     		</div>
@@ -133,6 +143,13 @@ class Contact extends React.Component{
      	</div>
 
     );
+
+    //<GoogleMap
+ 	//	defaultCenter={{lat:25.047651,lng:121.565632}}
+ 	//	defaultZoom={18}
+ 	//	options={this.map_options}>
+ 	//	<MapMarker lat={this.state.position.lat} lng={this.state.position.lng}/>
+ 	//</GoogleMap>
   }
 }
 

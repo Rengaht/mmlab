@@ -9,9 +9,11 @@
 	z-index: 20;
 }
 .AWorkContent{
-	position: relative;
-	width:75%;
+	position: relative;	
 	z-index: 20;
+
+	.mainRWD;
+		
 	// height:100%;
 	// overflow: hidden;
 	//pointer-events: none;
@@ -66,6 +68,7 @@
 	.AWorkText{
 		width:100%;
 		// padding:20px 0px;	
+		text-align: justify;
 		white-space: pre-wrap;
 		.title{
 			.fontTitle;
@@ -90,13 +93,14 @@
 	padding-bottom: 56.25% !important; /* 16:9 */
 	padding-top: 25px;
 	height: 0;
-}
-.AWorkVideo iframe{
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
+
+	iframe,img{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
 }
 
 
@@ -216,6 +220,7 @@
 	position: fixed;
 	top:@in_margin;
 	right:@in_margin;
+	cursor: pointer;
 }
 
 .AWorkRelated{
@@ -241,36 +246,12 @@
 		&:last-child{
 			margin-right: 0;
 		}
-		.relatedTag{
+		.english{
+			.fontTitle;
+		}
+		.chinese{
 			.fontText;
-
-			position: absolute;
-			bottom:0;
-			width: 100%;
-			height:33.33%;
-			background-color: rgba(0,0,0,.5);
-			
-			opacity: 0;
-			transition:.3s;
-			padding-left: @horiz_margin;
-			padding-right: @horiz_margin;
-			
-			div:first-child{
-				text-transform: uppercase;
-				font-family: 'Assistant';
-				//margin: 2px;
-			}
-			div:last-child{
-				text-transform: uppercase;
-				font-family: 'mmlabWebTitle';
-				//margin: 2px;
-			}
 		}
-		&:hover .relatedTag{
-			opacity: 1;				
-		}
-		
 	}
 	
 }
-

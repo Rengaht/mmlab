@@ -1,7 +1,8 @@
 
-@ham_size: 25px;
+@ham_size: 25px; //height
+@ham_width: 27px;
 @ham_line:2px;
-@ham_gap:5px;
+@ham_gap:(@ham_size - @ham_line*3)*.35;
 
 @ham_time:.3s;
 
@@ -11,7 +12,7 @@
   top:@in_margin;
   right:@in_margin;
 
-  width: @ham_size;
+  width: @ham_width;
   height: @ham_size;
 
   margin: 0px auto;

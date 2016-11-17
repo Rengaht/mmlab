@@ -10,19 +10,21 @@ import WorkFilter from '../components/work_filter'
 
 import * as DConst from '../request_constants'
 
+var cachedWorkData=null;
+var cachedFilter=null;
 
 export default class Work extends React.Component{
 	constructor(props){
 		super(props);
 
 		
-		this.work_url=DConst.URL+DConst.WorkPath+'?'+DConst.Token+'&status=1&sort_order=DESC&columns_show=title_en,title_ch,year,thumb_image';
-		this.filter_url=DConst.URL+DConst.TypePath+'?'+DConst.Token;
-		this.work_type_url=DConst.URL+DConst.WorkTypePath+'?'+DConst.Token;
+		// this.work_url=DConst.URL+DConst.WorkPath+'?'+DConst.Token+'&status=1&sort_order=DESC&columns_show=title_en,title_ch,year,thumb_image';
+		// this.filter_url=DConst.URL+DConst.TypePath+'?'+DConst.Token;
+		// this.work_type_url=DConst.URL+DConst.WorkTypePath+'?'+DConst.Token;
 
-		// this.work_url='data/work.json';
-		// this.filter_url='data/type.json';
-		// this.work_type_url='data/work_type.json';
+		this.work_url='data/work.json';
+		this.filter_url='data/type.json';
+		this.work_type_url='data/work_type.json';
 
 
 		this.state={
@@ -41,7 +43,9 @@ export default class Work extends React.Component{
 		this.applyFilter=this.applyFilter.bind(this);
 		this.toggleFilter=this.toggleFilter.bind(this);
 
-
+		
+	}
+	componentDidMount(){
 		this.loadFilter();
 
 	}
@@ -49,56 +53,84 @@ export default class Work extends React.Component{
 
 		console.log("load filter....");
 
-		$.ajax({
-			url:this.filter_url,
-			success: function(data){								
+		if(cachedFilter){
+			
+			this.setState({filter:cachedFilter});
+			console.log("Load cached filter!");
+			
+			this.loadWork();
 
-				var filter_=this.state.filter;
-				filter_.type=data.rows;
-				this.setState({filter:filter_});
-				console.log("finish load filter: ");
-				console.log(filter_);
+		}else{
 
-				this.loadWork();
+			$.ajax({
+				url:this.filter_url,
+				success: function(data){								
 
-			}.bind(this),
-			error: function(xhr, status, err){
-				console.error(this.url, status, err.toString());
-			}.bind(this)
-		});
+					cachedFilter=data;
+
+					var filter_=this.state.filter;
+					filter_.type=data.rows;
+					this.setState({filter:filter_});
+
+					cachedFilter=filter_;
+
+					console.log("finish load filter! ");
+					// console.log(filter_);
+
+					this.loadWork();
+
+				}.bind(this),
+				error: function(xhr, status, err){
+					console.error(this.url, status, err.toString());
+				}.bind(this)
+			});
+		}
 	}
 	loadWork(){
 
 		console.log("load work....");
-		$.ajax({
-			url:this.work_url,
-			dataType:'json',
-			cache:false,
-			success: function(data){
-				
 
-				//retreive year
-				var arr_=[];
-				for(var val in data.rows){
-					var y=data.rows[val].year;
-					if(!arr_.includes(y)) arr_.push(y);
-				}		
-				var filter_=this.state.filter;
-				var year_=arr_.map(function(val,index){
-					return {id:val, text:val};
-				});
-				filter_.year=year_;				
-				console.log("finish load work....");
-				console.log(data.rows);
+		if(cachedWorkData){
+			
+			this.setState({data:cachedWorkData});
+			console.log("Load cached work!");
 
-				this.setState({data:data.rows,filter:filter_});
-				this.loadWorkTypeJunction();
+		}else{
 
-			}.bind(this),
-			error: function(xhr, status, err){
-				console.error(this.url, status, err.toString());
-			}.bind(this)
-		});
+			$.ajax({
+				url:this.work_url,
+				dataType:'json',
+				cache:false,
+				success: function(data){
+					
+					cachedWorkData=data;
+					//retreive year
+					var arr_=[];
+					for(var val in data.rows){
+						var y=data.rows[val].year;
+						if(!arr_.includes(y)) arr_.push(y);
+					}		
+					var filter_=this.state.filter;
+					var year_=arr_.map(function(val,index){
+						return {id:val, text:val};
+					});
+					filter_.year=year_;				
+					console.log("finish load work....");
+					// console.log(data.rows);
+
+					this.setState({data:data.rows,filter:filter_});
+
+					cachedFilter=filter_;
+					cachedWorkData=data.rows;
+
+					this.loadWorkTypeJunction();
+
+				}.bind(this),
+				error: function(xhr, status, err){
+					console.error(this.url, status, err.toString());
+				}.bind(this)
+			});
+		}
 	}
 	loadWorkTypeJunction(){
 
@@ -122,8 +154,11 @@ export default class Work extends React.Component{
 				}
 				
 				this.setState({data:load_work});
+				cachedWorkData=load_work;
+
+
 				console.log("finish load work type junction....");
-				console.log(load_work);
+				// console.log(load_work);
 
 			}.bind(this),
 			error: function(xhr, status, err){

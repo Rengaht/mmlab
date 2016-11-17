@@ -5,7 +5,7 @@ function FloatSlice(p_,a_,i_){
 	this._tex_index=i_;
 
 	this.distort_vel=random(10,70);
-	let _tex=new THREE.TextureLoader().load('image/logo_slice/slice-'+(i_<10?'0'+String(i_):String(i_))+'.png');
+	var _tex=new THREE.TextureLoader().load('image/logo_slice/slice-'+(i_<10?'0'+String(i_):String(i_))+'.png');
 	
 	this._shader_uniform={
 		amount:{value:2.0},

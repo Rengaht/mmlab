@@ -1,11 +1,12 @@
 import React from 'react'
-import {Link} from 'react-router'
+import {Link, browserHistory} from 'react-router'
 
 import WorkThumb from '../components/work_thumb'
 import ImageSlide from '../components/image_slide'
 import RelateWork from '../components/related_work'
 
 import * as DConst from '../request_constants'
+
 
 
 export default class AWork extends React.Component{
@@ -18,6 +19,8 @@ export default class AWork extends React.Component{
 		};
 		//this.loadData=this.loadData.bind(this);
 		this.loadData(this.props.params.id);
+		this.goBack=this.goBack.bind(this);
+
 		//console.log(this.props.location.query);
 	}
 	loadData(id_){
@@ -92,14 +95,15 @@ export default class AWork extends React.Component{
 
 						<RelateWork id={this.state.work.id}/>
 					</div>
-					<Link to={"/work"} className="AWorkClose">						
+					<div className="AWorkClose" onClick={this.goBack}>						
 						<img src="image/x.png"/>
-					</Link>
+					</div>
 
 				</div>
 			</div>
 
 		);
+
 		//<Link to={"/work"} className="AWorkClose">						
 		//				<GlitchText 
      	//					img_src="image/x.png"
@@ -114,13 +118,28 @@ export default class AWork extends React.Component{
 		this.loadData(props_.params.id);
 		this.forceUpdate();
 	}
+	goBack(){
+		// console.log("goback "+window._global_page_count);
+
+		if(!window._global_page_count) this.props.router.push("/work");
+		else this.props.router.go(-window._global_page_count);		
+		// this.props.router.push(window._from_home_or_work);
+	}
 }
 class WorkVideo extends React.Component{
 	render(){
-		return(
-			<div className="AWorkVideo" dangerouslySetInnerHTML={{__html:this.props.src.html}}>			
-			</div>
-		);
+		if(this.props.src.type.includes("embed"))
+			return(
+				<div className="AWorkVideo" dangerouslySetInnerHTML={{__html:this.props.src.html}}>			
+				</div>
+			);
+		else if(this.props.src.type.includes("image"))
+			return(
+				<div className="AWorkVideo">			
+					<img src={this.props.src.url}/>
+				</div>
+			);
+
 	}
 }
 

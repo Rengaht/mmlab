@@ -1,11 +1,19 @@
 
 .contactHello{
-	margin-top:10%; 
+	margin-top:@page_top; 
+	font-style: italic;
 	.fontHello;	
 }
 .contactEmail{
 	margin-top: @vert_margin*2;	
 	.fontEmail;	
+	img{
+		vertical-align: middle;
+		margin-right:@horiz_margin;
+	}
+	span{
+		margin-right:@horiz_margin;
+	}
 }
 .contactInfo{	
 	margin-top: @vert_margin*2;
@@ -27,11 +35,19 @@
 }
 
 .contactMap{
+	position: relative;
+	padding-bottom: 40%; /* 16:9 */	
+	height: 0;
 	width:100%;	
-	height:40%;
-	// height:60vh;
+	
 	background-color: black;
 	margin-top: @vert_margin;
+
+	&>div{
+		position: absolute;
+		width:100%;
+		height:100%;
+	}
 }
 
 .mapMarker{

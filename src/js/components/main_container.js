@@ -58,17 +58,23 @@ export default class MainContainer extends React.Component{
 	}
 	render(){
 		//console.log(this.getStlyes());
+		// return(
+		// 	<RouteTransition
+		// 		pathname={this.props.path}
+		// 		atEnter={{opacity:0,scale:0}}
+		// 		atLeave={{opacity:0,scale:0}}
+		// 		atActive={{opacity:1,scale:0}}
+		// 		mapStyles={styles=>({opacity:styles.opacity})}	
+		// 		className="mainContainer"
+		// 	>
+		// 	{this.props.children}
+		// 	</RouteTransition>
+		// );
 		return(
-			<RouteTransition
-				pathname={this.props.path}
-				atEnter={{opacity:0,scale:0}}
-				atLeave={{opacity:0,scale:0}}
-				atActive={{opacity:1,scale:0}}
-				mapStyles={styles=>({opacity:styles.opacity})}	
-				className="mainContainer"
-			>
+			<div className="mainContainer">
 			{this.props.children}
-			</RouteTransition>
+			</div>
+
 		);
 		
 	}

@@ -10,17 +10,13 @@ export default class GlitchImage extends React.Component{
 		this.onMouseEnter=this.onMouseEnter.bind(this);
 		this.onMouseLeave=this.onMouseLeave.bind(this);
 
-		this._options={
-	        color:{
-	            red:1,
-	            green:0.8,
-	            blue:0.58
-	        },
+		this._options={	       
 	        lineOffset:{
-	            value:8.0,
-	            lineHeight:25
+	            value:5.0,
+	            lineHeight:40
 	        },
-	        frame_rate: 30.0
+	        frame_rate: 60.0,
+	        vel:0.2
     	};
     	this.state={
     		glitch:false
@@ -36,12 +32,12 @@ export default class GlitchImage extends React.Component{
 		};
 		this.img.src=this.props.src;
 
-		this.intervalId=setInterval(this.draw,this._options.frame_rate);
+		// this.intervalId=setInterval(this.draw,this._options.frame_rate);
 	}
 	draw(){
 
 		if(!this.refs._canvas) return;
-		
+		// console.log("draw!");
 		this.refs._canvas.width=this.img.width;
 		this.refs._canvas.height=this.img.height;
 
@@ -59,7 +55,7 @@ export default class GlitchImage extends React.Component{
 		ctx.drawImage(this.img,0,0,w_,h_);
 
 		if(!this.state.glitch) return;
-		if(this.density<0 && this.props.last>0) return;
+		// if(this.density<0 && this.props.last>0) return;
 
 		// this._options.stereoscopic={
 	 //            red: 10*this.randomRange(1,3),
@@ -79,10 +75,13 @@ export default class GlitchImage extends React.Component{
     	// offset=this._options.lineOffset.value*(1.0-this.density);
     	//console.log(offset+'  '+this.density);
 
-    	var p_=(1.0-this.density);
+    	var p_=Math.abs(Math.sin(this.density));//(1.0-this.density);
     	//offset=this._options.lineOffset.value*Math.sin(p_*Math.PI*.5);
-    	offset=(Math.sin(Math.PI*p_)+(Math.random()*2-1)*.3)*this._options.lineOffset.value+(Math.random()*2-1);
+    	//offset=(Math.sin(Math.PI*.5*p_)+(Math.random()*2-1)*.3)*this._options.lineOffset.value+(Math.random()*2-1);
+    	offset=(Math.sin(Math.PI*p_)+(Math.random()*2-1)*.05)*this._options.lineOffset.value;
     	//console.log(this.density+'  '+offset);
+
+
     	var turb=0;
     	var turby=0;
 
@@ -91,10 +90,10 @@ export default class GlitchImage extends React.Component{
 
     	for(y=0;y<h_;++y){
     		if(y%this._options.lineOffset.lineHeight==0){
-    			if(this.randomRange(1,20)<2*this.density) turb=this._options.lineOffset.value*5.0*(Math.random()*2-1)*p_;
+    			if(this.randomRange(1,20)<2*p_) turb=this._options.lineOffset.value*5.0*(Math.random()*2-1)*p_;
     			else turb=0;
 
-    			if(this.randomRange(1,50)<2){
+    			if(this.randomRange(1,80)<2){
     				turby=this._options.lineOffset.value*(Math.random()*2-1);    				
     				turby_start=w_*.5*Math.random();
     				turby_end=w_*(.5+.5*Math.random());
@@ -108,7 +107,7 @@ export default class GlitchImage extends React.Component{
     			//if(turb!=0) if(this.randomRange(1,50)<2) turb=0;
     			
     			var off=Math.round(offset+turb);
-    			if(this.randomRange(0,100)<1) off+=this._options.lineOffset.value*Math.random()*.3;
+    			// if(this.randomRange(0,100)<1) off+=this._options.lineOffset.value*Math.random()*.3;
 
     			var offy=0;
     			if(x>turby_start && x<turby_end){
@@ -116,8 +115,9 @@ export default class GlitchImage extends React.Component{
     			}
 
 				let val=pixels[(x+y*w_)*4];
-				var cr=(x+off>=w_)?val*.33:pixels[Math.round((x+off+(y+offy)*w_)*4)]*.33;
-				var cg=(x-off<0)?val*.33:pixels[Math.round((x-off+(y+offy)*w_)*4)]*.33;
+				let wei=.33;
+				var cr=(x+off>=w_)?val*wei:pixels[Math.round((x+off+(y+offy)*w_)*4)]*wei;
+				var cg=(x-off<0)?val*wei:pixels[Math.round((x-off+(y+offy)*w_)*4)]*wei;
 
 				// var cr=pixels[Math.round(((x+off)%w_+(y+offy)*w_)*4)]*.33;
 				// var cg=pixels[Math.round(((x-off+w_)%w_+(y+offy)*w_)*4)]*.33;
@@ -130,8 +130,8 @@ export default class GlitchImage extends React.Component{
     		}
     	}
 
-    	if(this.props.last>0)
-			this.density-=1.0/(this.props.last/this._options.frame_rate);
+    	//if(this.props.last>0)
+			this.density+=this._options.vel;
 		//if(this.density<w_) this.density++;
 		//console.log(offset+' '+this.density);
 		
@@ -144,12 +144,12 @@ export default class GlitchImage extends React.Component{
 	onMouseEnter(){
 		//console.log("enter");
 		this.setState({'glitch':true});
-		this.density=1.0;
+		this.density=0.0;
 
 		//this.vel=1.0;
 
 		var clear=this.onMouseLeave;
-
+		this.intervalId=setInterval(this.draw,this._options.frame_rate);
 		// setTimeout(function(){
 		// 	//console.log("stop!");
 		// 	clear();
@@ -158,7 +158,8 @@ export default class GlitchImage extends React.Component{
 	onMouseLeave(){
 		//console.log("clear glitch!");
 		this.setState({'glitch':false});
-		//clearInterval(this.intervalId);
+		clearInterval(this.intervalId);
+		draw();
 	}
 
 

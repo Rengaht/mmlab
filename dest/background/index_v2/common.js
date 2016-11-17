@@ -3,14 +3,13 @@
 function Constants(){
 	this.StartPoint=1;
 	this.EndPoint=4200;
-	this.MouseMoveThres=20;
 }
 
 // common variable
 var _Background_Type;
 
-var Const=new Constants();
-var _canvas;
+let Const=new Constants();
+let _canvas;
 
 
 var _scene,_camera,_renderer;
@@ -22,9 +21,6 @@ var frameCount;
 var _raycaster;
 var _mouse=new THREE.Vector2(),_intersected;
 
-var _move_src=new THREE.Vector2(); 
-var _move_vel=0;
-var deltaX=0,deltaY=0;
 
 //for controlling framerate
 var _now;
@@ -33,25 +29,20 @@ var _frame_interval=1000.0/60.0;
 var _delta;
 
 
-var _dotScreenEffect;
-
-
 function init(){
 
 
 	_scene=new THREE.Scene();
+	var end_point=(Const.EndPoint-Const.StartPoint)+Const.StartPoint;
 	_camera=new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight,Const.StartPoint,Const.EndPoint);
-	_camera.position.z=Const.EndPoint;
+	_camera.position.z=end_point;
 	// _camera=new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
 	// _camera.position.z=5;
 
 	_renderer=new THREE.WebGLRenderer();
 	_renderer.setSize(window.innerWidth,window.innerHeight);
 	// document.body.appendChild(_renderer.domElement);
-	var effectContainer=document.getElementById('_BackEffect');
-	if(effectContainer.childNodes.length>0)
-		effectContainer.removeChild(effectContainer.childNodes[0]);
-	effectContainer.appendChild(_renderer.domElement);
+	
 
 	_raycaster=new THREE.Raycaster();
 	
@@ -65,33 +56,26 @@ function init(){
     _scene.add(light1);
 	_scene.add(new THREE.AmbientLight(0x222222));
 
-	
 	//postprocessing
 	_composer=new THREE.EffectComposer(_renderer);
 	_composer.addPass(new THREE.RenderPass(_scene,_camera));
 	_composer.passes[0].renderToScreen=true;
 
-	
-	_dotScreenEffect = new THREE.ShaderPass( THREE.DotScreenShader );
-	_dotScreenEffect.uniforms[ 'scale' ].value=4;
-	// dotScreenEffect.renderToScreen=true;
-	_composer.addPass(_dotScreenEffect);
 
-	// var rgbEffect = new THREE.ShaderPass( THREE.RGBShiftShader );
-	// rgbEffect.uniforms[ 'amount' ].value = 0.0015;
-	// rgbEffect.renderToScreen = true;
-	// _composer.addPass( rgbEffect );
-		
+	var effectContainer=document.getElementById('_BackEffect');
+	if(effectContainer.childNodes.length>0)
+		effectContainer.removeChild(effectContainer.childNodes[0]);
+	effectContainer.appendChild(_renderer.domElement);
 	
 
 	stats = new Stats();
-	// document.body.appendChild(stats.dom);
+	document.body.appendChild(stats.dom);
 
 	window.addEventListener( 'resize', onWindowResize, false );
 	document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-	document.addEventListener( 'click', onDocumentMouseClick, false );
 
-	//initBackgroundType(0);
+
+	initBackgroundType(0);
 	
 
 
@@ -110,85 +94,25 @@ function onDocumentMouseMove(event){
 
 	var mouseX=event.clientX-window.innerWidth/2;
 	var mouseY=event.clientY-window.innerHeight/2;
+	mouseX/=window.innerWidth;
+	mouseY/=window.innerHeight;
+	_camera.position.x=mouseX.toFixed(2)*250.0;
+	_camera.position.y=mouseY.toFixed(2)*250.0;
+	// _camera.rotateY(0);
+	// _camera.rotateY(mouseX*Math.PI/200);
 	
-
-	
-
 	_mouse.x=(event.clientX/window.innerWidth)*2-1;
-	_mouse.y=-(event.clientY/window.innerHeight)*2+1;		
-
-	if(_camera.position.x!==NaN){
-		deltaX=mouseX.toFixed(2)/2.0-_camera.position.x;
-		deltaY=mouseY.toFixed(2)/2.0-_camera.position.y;
-		_move_vel=0.0;
-
-		_move_src.x=_camera.position.x;
-		_move_src.y=_camera.position.y;
-	}
-	
-}
-function updateCamera(){
-	// var deltaX=_move_dest.x-_camera.position.x;
-	// var deltaY=_move_dest.y-_camera.position.y;
-
-	// var thres=Const.MouseMoveThres*_move_vel;
-
-	// if(Math.abs(deltaX)>thres){
-	// 	if(deltaX>0) deltaX=Const.MouseMoveThres;
-	// 	if(deltaX<0) deltaX=-Const.MouseMoveThres;
-	// }
-	// if(Math.abs(deltaY)>thres){
-	// 	if(deltaY>0) deltaY=Const.MouseMoveThres;
-	// 	if(deltaY<0) deltaY=-Const.MouseMoveThres;
-	// }
-
-	// if(_move_vel>.5) _move_vel*=.98;
-	if(_move_vel<1){
-		 _move_vel+=.01;
-
-		_camera.position.x=_move_src.x+deltaX*easeFunction(_move_vel);
-		_camera.position.y=_move_src.y+deltaY*easeFunction(_move_vel);
-	}else{
-		_camera.position.x=_move_src.x+deltaX;
-		_camera.position.y=_move_src.y+deltaY;
-	}
-	
-}
-function easeFunction(k){
-	// if(k===0) return 0;
-	// if(k===1) return 1;
-	// return Math.pow(2,-10*k)*Math.sin((k-0.1)*5*Math.PI)+1;
-	return k===1?1:1-Math.pow(2,-10*k);
-
+	_mouse.y=-(event.clientY/window.innerHeight)*2+1;
 }
 
-function onDocumentMouseClick(event){
-	if(_Background_Type==0) onClickLogo();
-}
 function update(){
 	
-	updateCamera();
+	updateLogo();
 
-	switch(_Background_Type){
-		case 0:
-			updateLogo();
-			break;
-		case 1:
-			updateFloat();
-			break;
-		case 2:
-			updateStack();
-			break;
-		case 3:
-			updateRotate();
-			break;		
-	}
-
-	
 
 	frameCount++;	
 	stats.update();
-
+	
 	// _camera.updateMatrixWorld();
 	//check intersected
 	// _raycaster.setFromCamera(_mouse,_camera);
@@ -226,11 +150,9 @@ function draw(){
 		_then=_now-(_delta%_frame_interval);
 		update();
 	}
-	// update();
-	
-	// _renderer.render(_scene, _camera);
+	_renderer.render(_scene, _camera);
 
-	_composer.render();
+	// _composer.render();
 
 }
 
@@ -240,27 +162,9 @@ function initBackgroundType(type_){
 	console.log('Init Background Type: '+type_);
 
 	clearLogo();
-	clearFloat();
-	clearStack();
-	clearRotate();	
 
-	_composer.passes[0].renderToScreen=true;
-	_composer.passes[1].renderToScreen=false;
-
-	switch(type_){
-		case 0: //logo
-			initLogo();
-			break;
-		case 1: //float
-			initFloat();
-			break;
-		case 2:
-			initStack();
-			break;
-		case 3:
-			initRotate();
-			break;
-	}
+	initLogo();
+	
 
 	_Background_Type=type_;
 	

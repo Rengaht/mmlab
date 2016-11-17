@@ -5,7 +5,7 @@ function RotateSlice(p_,a_,i_){
 	this._tex_index=i_;
 
 	this.distort_vel=random(10,70);
-	let _tex=new THREE.TextureLoader().load('image/logo_slice/slice-01.png');
+	var _tex=new THREE.TextureLoader().load('image/logo_slice/slice-01.png');
 	
 	this._shader_uniform={
 		amount:{value:2.0},

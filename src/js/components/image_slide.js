@@ -21,7 +21,7 @@ export default class ImageSlide extends React.Component{
 			imageNodes=this.props.image.map(function(image,index){
 						return(
 							<div key={index} className={index==show_?"image show":"image"}>
-							<img src={DConst.FilePath+image.data.name} style={{'width':'100%'}}/>				
+							<img src={image.data.url} style={{'width':'100%'}}/>				
 							</div>
 						);
 					});

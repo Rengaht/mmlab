@@ -16,6 +16,22 @@
 
 
 
+@pad_text_size:12px;
+@pad_title_size:16px;
+
+@pad_small_text_size:9px;
+
+@pad_menu_text_size:28px;
+
+@pad_work_title_size:22px;
+
+@pad_awork_en_size:33px;
+@pad_awork_ch_size:18px;
+
+@pad_copyright_size:8px;
+
+
+
 
 @font-face{
 	font-family:mtextFont;	
@@ -25,7 +41,7 @@
 @font-face{
 	font-family:mtextFont;
 	font-style: normal;
-  src: local('Futura LT Book'), local('Futura-LT-Book'), url(../../font/Futura-LT-Book.woff);
+  src: url(../../font/Futura-LT-Book.woff);
   unicode-range: U+000-5FF, U+1e00-1fff, U+2000-2300;
 }
 
@@ -38,33 +54,48 @@
 @font-face{
   font-family:mtitleFont;
   font-weight: bold;
-  src: local('Futura LT Book'), url(../../font/Futura-LT-Book.woff);
+  src: url(../../font/Futura-LT-Bold.woff);
   unicode-range: U+000-5FF, U+1e00-1fff, U+2000-2300;
 }
 
 
 @font-face{
   font-family:mmenuFont;
-  src: local('Futura Koyu'),url(../../font/Futura-koyu.woff);  
+  src:url(../../font/Futura-Koyu.woff);  
 }
 
 //global
-.fontMenu{
+.fontMenu{  
   font-family: mmenuFont;
   font-size:@menu_text_size;
   letter-spacing:@menu_text_size*.15;
+
+  @media @pad{
+    font-size: @pad_menu_text_size;
+    letter-spacing:@pad_menu_text_size*.15;
+  }
 }
 
 .fontCopyright{
   font-family: mtextFont;
   font-size:@copyright_size;
   letter-spacing:@copyright_size*.2; 
+
+  @media @pad{
+    font-size:@pad_copyright_size;
+    letter-spacing:@pad_copyright_size*.2; 
+  }
 }
 
 .fontCornerTitle{
   font-family: mtextFont;
   font-size:@small_text_size;
   letter-spacing:@small_text_size*.3; 
+
+  @media @pad{
+    font-size:@pad_small_text_size;
+    letter-spacing:@pad_small_text_size*.3; 
+  }
 }
 
 .fontText{
@@ -72,12 +103,23 @@
   font-size:@text_size;
   letter-spacing:@text_size*.1;  
   line-height:180%;
+  text-align: justify;
+
+  @media @pad{
+    font-size:@pad_text_size;
+    letter-spacing:@pad_text_size*.1;  
+  }
 }
 .fontTitle{
   font-family: mtitleFont;
+  font-weight: bold;
   font-size:@title_size;
   letter-spacing:@title_size*.1;   
   // line-height: 98%;
+  @media @pad{
+    font-size:@pad_title_size;
+    letter-spacing:@pad_title_size*.1;   
+  }
 }
 
 //work
@@ -86,13 +128,22 @@
   font-size:@text_size;
   letter-spacing:@text_size*.1; 
   text-transform: uppercase; 
+  @media @pad{
+    font-size:@pad_text_size;
+    letter-spacing:@pad_text_size*.1; 
+  }
 }
 .fontFilterText{
   font-family: mtextFont;
   font-size:@small_text_size;
   letter-spacing:@small_text_size*.1;  
   text-transform: uppercase;
+  @media @pad{
+    font-size:@pad_small_text_size;
+    letter-spacing:@pad_small_text_size*.1;  
+  }
 }
+
 
 //awork
 .fontAWorkTitleEn{
@@ -100,22 +151,42 @@
   font-size:@awork_en_size;
   letter-spacing:@awork_en_size*.1;   
   text-transform: uppercase;
+
+  font-weight: bold;
+  @media @pad{
+    font-size:@pad_awork_en_size;
+    letter-spacing:@pad_awork_en_size*.1;   
+  }
   // line-height: 98%;
 }
 .fontAWorkTitleCh{
   font-family: mtitleFont;
+  font-weight: bold;
   font-size:@awork_ch_size;
   letter-spacing:@awork_ch_size*.1;   
+  @media @pad{
+    font-size:@pad_awork_ch_size;
+    letter-spacing:@pad_awork_ch_size*.1;   
+  }
 }
 
 //contact
 .fontHello{
   font-family: mtitleFont;
+  font-weight: bold;
   font-size:@title_size*3;
   letter-spacing:@title_size*3*.1;  
+  @media @pad{
+    font-size:@pad_title_size*3;
+    letter-spacing:@pad_title_size*3*.1;  
+  }
 }
 .fontEmail{
   font-family: mtextFont;
-  font-size:@title_size;
-  letter-spacing:@title_size*.1;   
+  font-size:@title_size*1.5;
+  letter-spacing:@title_size*1.5*.1;   
+  @media @pad{
+    font-size:@pad_title_size*1.5;
+    letter-spacing:@pad_title_size*1.5*.1;   
+  }
 }

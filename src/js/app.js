@@ -15,10 +15,35 @@ import AWork from './pages/awork'
 
 //import createBrowserHistory from 'history/lib/createBrowserHistory';
 
+window._from_home_or_work=undefined;
+window._global_page_count=undefined;
+window._last_page=undefined;
+
+function routerUpdate(){
+	console.log(this.router.location);
+
+	let loc=this.router.location.pathname;
+	if(loc.match(/(^\/work\/)(.*[0-9]$)/gm)){
+		if(loc!=window._last_page){			
+			if(!window._global_page_count) window._global_page_count=0;
+			window._global_page_count++;
+			console.log("awork page: "+ window._global_page_count);
+
+			window._last_page=loc;
+		}
+	}else{
+		window._global_page_count=undefined;		
+	}
+	// if(!loc.match(/(^\/work\/)(.*[0-9]$)/gm)){
+	// 	window._from_home_or_work=loc;
+	// }
+
+}
+
 const appHistory = useRouterHistory(createHashHistory)({ queryKey: false })
 
 ReactDOM.render((
-	<Router history={hashHistory}>
+	<Router history={hashHistory} onUpdate={routerUpdate}>
 		<Route path="/" component={Main}>    
 			
 			<IndexRoute component={Home}/>

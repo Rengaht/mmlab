@@ -31,7 +31,7 @@ export class MainMenu extends React.Component{
 			</div>
 				<div className="logo" onClick={this.closeShow}>
 				    <Link to="/">
-			     		<img src="image/map_logo.png"/>
+			     		<img src="image/logo_no_name.png"/>
 			     	</Link>
 		     	</div>		
 		    </div>

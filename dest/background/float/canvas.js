@@ -5,10 +5,10 @@ function FloatConstants(){
 	this.DestRad;
 }
 
-let FloatConst=new FloatConstants();
+var FloatConst=new FloatConstants();
 
 var _mslice;
-let _slice_float=[];
+var _slice_float=[];
 
 
 
@@ -19,10 +19,10 @@ function initFloat(){
 }		
 function clearFloat(){
 
-	let mslice=_slice_float.length;
+	var mslice=_slice_float.length;
 	if(mslice<1) return;
 
-	for(let i=mslice-1;i>=0;i--){		
+	for(var i=mslice-1;i>=0;i--){		
 		_scene.remove(_scene.getObjectById(_slice_float[i].id,true));
 		_slice_float.splice(i,1);
 		
@@ -54,13 +54,13 @@ function initSliceFloat(){
 	shuffleArray(random_arr);
 	//console.log(random_arr);
 	
-	let ww_=window.innerWidth.toFixed(2);
-	let wh_=window.innerHeight.toFixed(2);
+	var ww_=window.innerWidth.toFixed(2);
+	var wh_=window.innerHeight.toFixed(2);
 
 	for(i=0;i<_mslice;i++){
 
 		//var pos_=[random(0,ww_*.1),random(0,wh_*.1),100];
-		var pos_=[random(0,ww_)*(random(0,2)<1?1.0:-1.0),random(-1.0,1.0)*wh_,random(50,550)];
+		var pos_=[random(0,ww_)*(random(0,2)<1?1.0:-1.0),random(-1.0,1.0)*wh_,(Const.EndPoint*.8+Const.StartPoint*.2)+random(-50,50)];
 		var amp_=[random(20,80),random(20,80),random(-10,10)];
 
 		var slice_=new FloatSlice(pos_,amp_,random_arr[i]);
@@ -102,7 +102,7 @@ function createMaterialFloat(uniforms_,tex_index_){
 }
 function updatePosFloat(mesh_,slice_){
 	
-	let pos=slice_.getPos();
+	var pos=slice_.getPos();
 
 	mesh_.position.x=pos[0];
 	mesh_.position.y=pos[1];

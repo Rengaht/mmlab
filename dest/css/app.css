@@ -6,7 +6,7 @@
 @font-face {
   font-family: mtextFont;
   font-style: normal;
-  src: local('Futura LT Book'), local('Futura-LT-Book'), url(../../font/Futura-LT-Book.woff);
+  src: url(../../font/Futura-LT-Book.woff);
   unicode-range: U+000-5FF, U+1e00-1fff, U+2000-2300;
 }
 @font-face {
@@ -17,38 +17,70 @@
 @font-face {
   font-family: mtitleFont;
   font-weight: bold;
-  src: local('Futura LT Book'), url(../../font/Futura-LT-Book.woff);
+  src: url(../../font/Futura-LT-Bold.woff);
   unicode-range: U+000-5FF, U+1e00-1fff, U+2000-2300;
 }
 @font-face {
   font-family: mmenuFont;
-  src: local('Futura Koyu'), url(../../font/Futura-koyu.woff);
+  src: url(../../font/Futura-Koyu.woff);
 }
 .fontMenu {
   font-family: mmenuFont;
   font-size: 37.5px;
   letter-spacing: 5.625px;
 }
+@media only screen and (max-width:1363px) {
+  .fontMenu {
+    font-size: 28px;
+    letter-spacing: 4.2px;
+  }
+}
 .fontCopyright {
   font-family: mtextFont;
   font-size: 11px;
   letter-spacing: 2.2px;
+}
+@media only screen and (max-width:1363px) {
+  .fontCopyright {
+    font-size: 8px;
+    letter-spacing: 1.6px;
+  }
 }
 .fontCornerTitle {
   font-family: mtextFont;
   font-size: 12px;
   letter-spacing: 3.6px;
 }
+@media only screen and (max-width:1363px) {
+  .fontCornerTitle {
+    font-size: 9px;
+    letter-spacing: 2.7px;
+  }
+}
 .fontText {
   font-family: mtextFont;
   font-size: 16px;
   letter-spacing: 1.6px;
   line-height: 180%;
+  text-align: justify;
+}
+@media only screen and (max-width:1363px) {
+  .fontText {
+    font-size: 12px;
+    letter-spacing: 1.2px;
+  }
 }
 .fontTitle {
   font-family: mtitleFont;
+  font-weight: bold;
   font-size: 22px;
   letter-spacing: 2.2px;
+}
+@media only screen and (max-width:1363px) {
+  .fontTitle {
+    font-size: 16px;
+    letter-spacing: 1.6px;
+  }
 }
 .fontFilterTitle {
   font-family: mtextFont;
@@ -56,32 +88,71 @@
   letter-spacing: 1.6px;
   text-transform: uppercase;
 }
+@media only screen and (max-width:1363px) {
+  .fontFilterTitle {
+    font-size: 12px;
+    letter-spacing: 1.2px;
+  }
+}
 .fontFilterText {
   font-family: mtextFont;
   font-size: 12px;
   letter-spacing: 1.2px;
   text-transform: uppercase;
 }
+@media only screen and (max-width:1363px) {
+  .fontFilterText {
+    font-size: 9px;
+    letter-spacing: 0.9px;
+  }
+}
 .fontAWorkTitleEn {
   font-family: mtitleFont;
   font-size: 45px;
   letter-spacing: 4.5px;
   text-transform: uppercase;
+  font-weight: bold;
+}
+@media only screen and (max-width:1363px) {
+  .fontAWorkTitleEn {
+    font-size: 33px;
+    letter-spacing: 3.3px;
+  }
 }
 .fontAWorkTitleCh {
   font-family: mtitleFont;
+  font-weight: bold;
   font-size: 25px;
   letter-spacing: 2.5px;
 }
+@media only screen and (max-width:1363px) {
+  .fontAWorkTitleCh {
+    font-size: 18px;
+    letter-spacing: 1.8px;
+  }
+}
 .fontHello {
   font-family: mtitleFont;
+  font-weight: bold;
   font-size: 66px;
   letter-spacing: 6.6px;
 }
+@media only screen and (max-width:1363px) {
+  .fontHello {
+    font-size: 48px;
+    letter-spacing: 4.8px;
+  }
+}
 .fontEmail {
   font-family: mtextFont;
-  font-size: 22px;
-  letter-spacing: 2.2px;
+  font-size: 33px;
+  letter-spacing: 3.3px;
+}
+@media only screen and (max-width:1363px) {
+  .fontEmail {
+    font-size: 24px;
+    letter-spacing: 2.4px;
+  }
 }
 ::-webkit-scrollbar {
   width: 12px;
@@ -103,7 +174,7 @@
   position: fixed;
   top: 30px;
   right: 30px;
-  width: 25px;
+  width: 27px;
   height: 25px;
   margin: 0px auto;
   -webkit-transform: rotate(0deg);
@@ -135,11 +206,11 @@
   transition: 0.15s ease-in-out;
 }
 #ham_menu span:nth-child(1) {
-  top: 9px;
+  top: 5.7px;
 }
 #ham_menu span:nth-child(2),
 #ham_menu span:nth-child(3) {
-  top: 16px;
+  top: 14.35px;
 }
 #ham_menu span:nth-child(4) {
   top: 23px;
@@ -168,132 +239,42 @@
 }
 @keyframes glitch-anim-left {
   0% {
-    clip: rect(42px, 9999px, 44px, 0);
-  }
-  5% {
-    clip: rect(12px, 9999px, 59px, 0);
-  }
-  10% {
-    clip: rect(48px, 9999px, 29px, 0);
-  }
-  15.0% {
-    clip: rect(42px, 9999px, 73px, 0);
+    transform: translate(0);
   }
   20% {
-    clip: rect(63px, 9999px, 27px, 0);
-  }
-  25% {
-    clip: rect(34px, 9999px, 55px, 0);
-  }
-  30.0% {
-    clip: rect(86px, 9999px, 73px, 0);
-  }
-  35% {
-    clip: rect(20px, 9999px, 20px, 0);
+    transform: translate(-1px, 1px);
   }
   40% {
-    clip: rect(26px, 9999px, 60px, 0);
+    transform: translate(-1px, -1px);
   }
-  45% {
-    clip: rect(25px, 9999px, 66px, 0);
-  }
-  50% {
-    clip: rect(57px, 9999px, 98px, 0);
-  }
-  55.0% {
-    clip: rect(5px, 9999px, 46px, 0);
-  }
-  60.0% {
-    clip: rect(82px, 9999px, 31px, 0);
-  }
-  65% {
-    clip: rect(54px, 9999px, 27px, 0);
-  }
-  70% {
-    clip: rect(28px, 9999px, 99px, 0);
-  }
-  75% {
-    clip: rect(45px, 9999px, 69px, 0);
+  60% {
+    transform: translate(1px, 1px);
   }
   80% {
-    clip: rect(23px, 9999px, 85px, 0);
-  }
-  85.0% {
-    clip: rect(54px, 9999px, 84px, 0);
-  }
-  90% {
-    clip: rect(45px, 9999px, 47px, 0);
-  }
-  95% {
-    clip: rect(37px, 9999px, 20px, 0);
+    transform: translate(1px, -1px);
   }
   100% {
-    clip: rect(4px, 9999px, 91px, 0);
+    transform: translate(0);
   }
 }
 @keyframes glitch-anim-right {
   0% {
-    clip: rect(65px, 9999px, 100px, 0);
-  }
-  5% {
-    clip: rect(52px, 9999px, 74px, 0);
-  }
-  10% {
-    clip: rect(79px, 9999px, 85px, 0);
-  }
-  15.0% {
-    clip: rect(75px, 9999px, 5px, 0);
+    transform: translate(0);
   }
   20% {
-    clip: rect(67px, 9999px, 61px, 0);
-  }
-  25% {
-    clip: rect(14px, 9999px, 79px, 0);
-  }
-  30.0% {
-    clip: rect(1px, 9999px, 66px, 0);
-  }
-  35% {
-    clip: rect(86px, 9999px, 30px, 0);
+    transform: translate(1px, -1px);
   }
   40% {
-    clip: rect(23px, 9999px, 98px, 0);
+    transform: translate(1px, 1px);
   }
-  45% {
-    clip: rect(85px, 9999px, 72px, 0);
-  }
-  50% {
-    clip: rect(71px, 9999px, 75px, 0);
-  }
-  55.0% {
-    clip: rect(2px, 9999px, 48px, 0);
-  }
-  60.0% {
-    clip: rect(30px, 9999px, 16px, 0);
-  }
-  65% {
-    clip: rect(59px, 9999px, 50px, 0);
-  }
-  70% {
-    clip: rect(41px, 9999px, 62px, 0);
-  }
-  75% {
-    clip: rect(2px, 9999px, 82px, 0);
+  60% {
+    transform: translate(-1px, -1px);
   }
   80% {
-    clip: rect(47px, 9999px, 73px, 0);
-  }
-  85.0% {
-    clip: rect(3px, 9999px, 27px, 0);
-  }
-  90% {
-    clip: rect(26px, 9999px, 55px, 0);
-  }
-  95% {
-    clip: rect(42px, 9999px, 97px, 0);
+    transform: translate(-1px, 1px);
   }
   100% {
-    clip: rect(38px, 9999px, 49px, 0);
+    transform: translate(0);
   }
 }
 .glitch {
@@ -309,19 +290,16 @@
   left: 0;
   width: 100%;
   height: 100%;
-  clip: rect(0, 900px, 0, 0);
   overflow: hidden;
 }
 .glitch:hover::before {
-  animation: glitch-anim-left 2s infinite linear alternate-reverse;
-  left: 2px;
+  animation: glitch-anim-left 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
   color: red;
   text-shadow: -1px 0 red;
   z-index: -2;
 }
 .glitch:hover::after {
-  animation: glitch-anim-right 2s infinite linear alternate-reverse;
-  left: -2px;
+  animation: glitch-anim-right 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
   color: cyan;
   text-shadow: 1px 0 cyan;
   z-index: -1;
@@ -339,22 +317,40 @@
   left: 0;
   width: 100%;
   height: 100%;
-  clip: rect(0, 900px, 0, 0);
   overflow: hidden;
 }
 .glitch_always::before {
-  animation: glitch-anim-left 2s infinite linear alternate-reverse;
-  left: 2px;
+  animation: glitch-anim-left 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
   color: red;
   text-shadow: -1px 0 red;
   z-index: -2;
 }
 .glitch_always::after {
-  animation: glitch-anim-right 2s infinite linear alternate-reverse;
-  left: -2px;
+  animation: glitch-anim-right 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
   color: cyan;
   text-shadow: 1px 0 cyan;
   z-index: -1;
+}
+.mainRWD {
+  width: 75%;
+  min-width: 1200px;
+}
+@media only screen and (max-width:1363px) {
+  .mainRWD {
+    width: 88%;
+    min-width: 900px;
+  }
+}
+@media only screen and (max-width:948px) {
+  .mainRWD {
+    width: 95%;
+    min-width: 400px;
+  }
+}
+@media (max-width:420px), (max-height:320px) {
+  .mainRWD {
+    display: none;
+  }
 }
 body {
   background-color: black;
@@ -389,13 +385,30 @@ a {
 }
 .mainContainer {
   width: 100%;
-  min-width: 900px;
   height: 100%;
 }
 .mainContainer .content {
   position: relative;
   top: 0;
   width: 75%;
+  min-width: 1200px;
+}
+@media only screen and (max-width:1363px) {
+  .mainContainer .content {
+    width: 88%;
+    min-width: 900px;
+  }
+}
+@media only screen and (max-width:948px) {
+  .mainContainer .content {
+    width: 95%;
+    min-width: 400px;
+  }
+}
+@media (max-width:420px), (max-height:320px) {
+  .mainContainer .content {
+    display: none;
+  }
 }
 .mainContainer > div {
   width: 100%;
@@ -442,6 +455,11 @@ a {
   background-image: none;
   background-size: cover;
 }
+@media (max-width:420px), (max-height:320px) {
+  .mainMenu {
+    display: none;
+  }
+}
 .mainMenu .wrap {
   position: fixed;
   top: 0px;
@@ -474,6 +492,12 @@ a {
   font-size: 37.5px;
   letter-spacing: 5.625px;
 }
+@media only screen and (max-width:1363px) {
+  .mainMenuItem {
+    font-size: 28px;
+    letter-spacing: 4.2px;
+  }
+}
 .cornertitle {
   position: fixed;
   left: 30px;
@@ -484,8 +508,19 @@ a {
   font-size: 12px;
   letter-spacing: 3.6px;
 }
+@media only screen and (max-width:1363px) {
+  .cornertitle {
+    font-size: 9px;
+    letter-spacing: 2.7px;
+  }
+}
 .cornertitle span {
   margin-right: 5px;
+}
+@media only screen and (max-width:1363px) {
+  .cornertitle {
+    display: none;
+  }
 }
 .copyright {
   text-align: center;
@@ -494,6 +529,12 @@ a {
   letter-spacing: 2.2px;
   margin-top: 40px;
   margin-bottom: 40px;
+}
+@media only screen and (max-width:1363px) {
+  .copyright {
+    font-size: 8px;
+    letter-spacing: 1.6px;
+  }
 }
 .home {
   position: fixed;
@@ -510,6 +551,16 @@ a {
   margin-top: 20px;
   font-size: 22px;
 }
+.hello .hello_logo {
+  opacity: 1;
+  transition: .2s;
+  display: block;
+}
+.hello .hello_special {
+  opacity: 0;
+  transition: .2s;
+  display: none;
+}
 .hello .descript {
   display: none;
 }
@@ -518,6 +569,7 @@ a {
   font-size: 16px;
   letter-spacing: 1.6px;
   line-height: 180%;
+  text-align: justify;
   position: relative;
   border: 1px white solid;
   text-align: center;
@@ -526,8 +578,22 @@ a {
   cursor: pointer;
   opacity: 1;
 }
+@media only screen and (max-width:1363px) {
+  .hello .seeProject {
+    font-size: 12px;
+    letter-spacing: 1.2px;
+  }
+}
+.hello.special .hello_logo {
+  opacity: 0;
+  display: none;
+}
+.hello.special .hello_special {
+  opacity: 1;
+  display: block;
+}
 .about {
-  padding-top: 5%;
+  padding-top: 85px;
 }
 .about .part {
   width: 50%;
@@ -537,16 +603,30 @@ a {
 }
 .about .part .title {
   font-family: mtitleFont;
+  font-weight: bold;
   font-size: 22px;
   letter-spacing: 2.2px;
   margin-top: 40px;
+}
+@media only screen and (max-width:1363px) {
+  .about .part .title {
+    font-size: 16px;
+    letter-spacing: 1.6px;
+  }
 }
 .about .part .text {
   font-family: mtextFont;
   font-size: 16px;
   letter-spacing: 1.6px;
   line-height: 180%;
+  text-align: justify;
   margin-top: 20px;
+}
+@media only screen and (max-width:1363px) {
+  .about .part .text {
+    font-size: 12px;
+    letter-spacing: 1.2px;
+  }
 }
 .about img {
   width: 100%;
@@ -563,7 +643,7 @@ a {
   filter: blur(5px);
 }
 .workList {
-  padding-top: 10%;
+  padding-top: 85px;
   width: 100%;
   min-height: 100%;
 }
@@ -600,107 +680,11 @@ a {
   height: 100%;
   overflow: hidden;
 }
-.workThumbDescript {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 101%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  background-color: rgba(0, 0, 0, 0.7);
-  opacity: 0;
-  transition: .3s;
-}
-.workThumbDescript .wrap {
-  margin: 0 20px;
-}
-.workThumbDescript .wrap .tag {
-  font-family: mtextFont;
-  letter-spacing: 1.6px;
-  line-height: 180%;
-  font-size: 16px;
-}
-.workThumbDescript .wrap .english {
-  font-family: mtitleFont;
-  font-size: 22px;
-  letter-spacing: 2.2px;
-  font-size: 32px;
-  text-transform: uppercase;
-}
-.workThumbDescript .wrap .chinese {
-  font-family: mtitleFont;
-  font-size: 22px;
-  letter-spacing: 2.2px;
-}
-.workThumbDescript:hover {
-  opacity: 1;
-  transition: 0.1s ease-in-out 0.1s;
-}
-/* filter */
-.filter {
-  position: fixed;
-  right: 30px;
-  bottom: 20%;
-  text-align: right;
-}
-.workFilter {
-  display: block;
-}
-.workFilter div {
-  margin-top: 10px;
-}
-.workFilter .filterTitle {
-  cursor: pointer;
-  font-family: mtextFont;
-  font-size: 16px;
-  letter-spacing: 1.6px;
-  text-transform: uppercase;
-}
-.filterContent {
-  display: none;
-}
-.filterContent.show {
-  display: block;
-}
-.filterName {
-  cursor: pointer;
-  margin-left: 10px;
-  color: white;
-  font-family: mtextFont;
-  font-size: 12px;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-}
-.filterName.active {
-  color: red;
-}
-.filterGap {
-  margin: 0 20px;
-}
-/* thumb */
-.workThumbContainer {
-  position: relative;
-  padding-bottom: 66.66%;
-  /* 3:2 */
-  height: 0;
-  opacity: 0;
-  transition: 0.2s ease-in-out;
-}
-.workThumbContainer.show {
-  opacity: 1;
-  transition-duration: .2s;
-  transition-timing-function: ease-in-out;
-}
-.workThumbContainer > canvas,
 .workThumbContainer > img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+  display: block;
+}
+.workThumbContainer > canvas {
+  display: none;
 }
 .workThumbDescript {
   position: absolute;
@@ -711,7 +695,7 @@ a {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.3);
   opacity: 0;
   transition: .3s;
 }
@@ -722,23 +706,65 @@ a {
   font-family: mtextFont;
   letter-spacing: 1.6px;
   line-height: 180%;
+  text-align: justify;
   font-size: 16px;
+}
+@media only screen and (max-width:1363px) {
+  .workThumbDescript .wrap .tag {
+    font-size: 12px;
+    letter-spacing: 1.2px;
+  }
+}
+@media only screen and (max-width:1363px) {
+  .workThumbDescript .wrap .tag {
+    font-size: 12px;
+  }
 }
 .workThumbDescript .wrap .english {
   font-family: mtitleFont;
+  font-weight: bold;
   font-size: 22px;
   letter-spacing: 2.2px;
   font-size: 32px;
   text-transform: uppercase;
 }
+@media only screen and (max-width:1363px) {
+  .workThumbDescript .wrap .english {
+    font-size: 16px;
+    letter-spacing: 1.6px;
+  }
+}
+@media only screen and (max-width:1363px) {
+  .workThumbDescript .wrap .english {
+    font-size: 22px;
+  }
+}
 .workThumbDescript .wrap .chinese {
   font-family: mtitleFont;
+  font-weight: bold;
   font-size: 22px;
   letter-spacing: 2.2px;
 }
-.workThumbDescript:hover {
+@media only screen and (max-width:1363px) {
+  .workThumbDescript .wrap .chinese {
+    font-size: 16px;
+    letter-spacing: 1.6px;
+  }
+}
+@media only screen and (max-width:1363px) {
+  .workThumbDescript .wrap .chinese {
+    font-size: 16px;
+  }
+}
+.workThumbLink:hover .workThumbDescript {
   opacity: 1;
   transition: 0.1s ease-in-out 0.1s;
+}
+.workThumbLink:hover .workThumbContainer > img {
+  display: none;
+}
+.workThumbLink:hover .workThumbContainer > canvas {
+  display: block;
 }
 /* filter */
 .filter {
@@ -747,10 +773,13 @@ a {
   bottom: 20%;
   text-align: right;
 }
+@media only screen and (max-width:1363px) {
+  .filter {
+    display: none;
+  }
+}
 .workFilter {
   display: block;
-}
-.workFilter div {
   margin-top: 10px;
 }
 .workFilter .filterTitle {
@@ -760,20 +789,38 @@ a {
   letter-spacing: 1.6px;
   text-transform: uppercase;
 }
+@media only screen and (max-width:1363px) {
+  .workFilter .filterTitle {
+    font-size: 12px;
+    letter-spacing: 1.2px;
+  }
+}
 .filterContent {
-  display: none;
+  margin-top: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: 0.3s ease-in-out;
 }
 .filterContent.show {
-  display: block;
+  max-height: 220px;
+  transition: 0.5s 0.3s ease-in-out;
 }
 .filterName {
   cursor: pointer;
   margin-left: 10px;
   color: white;
+  margin-top: 10px;
+  transition: 0.3s ease-in;
   font-family: mtextFont;
   font-size: 12px;
   letter-spacing: 1.2px;
   text-transform: uppercase;
+}
+@media only screen and (max-width:1363px) {
+  .filterName {
+    font-size: 9px;
+    letter-spacing: 0.9px;
+  }
 }
 .filterName.active {
   color: red;
@@ -792,8 +839,26 @@ a {
 }
 .AWorkContent {
   position: relative;
-  width: 75%;
   z-index: 20;
+  width: 75%;
+  min-width: 1200px;
+}
+@media only screen and (max-width:1363px) {
+  .AWorkContent {
+    width: 88%;
+    min-width: 900px;
+  }
+}
+@media only screen and (max-width:948px) {
+  .AWorkContent {
+    width: 95%;
+    min-width: 400px;
+  }
+}
+@media (max-width:420px), (max-height:320px) {
+  .AWorkContent {
+    display: none;
+  }
 }
 .AWorkLeft {
   position: fixed;
@@ -812,12 +877,26 @@ a {
   font-size: 45px;
   letter-spacing: 4.5px;
   text-transform: uppercase;
+  font-weight: bold;
   width: 100%;
+}
+@media only screen and (max-width:1363px) {
+  .AWorkLeft .AWorkLeftTop .English {
+    font-size: 33px;
+    letter-spacing: 3.3px;
+  }
 }
 .AWorkLeft .AWorkLeftTop .Chinese {
   font-family: mtitleFont;
+  font-weight: bold;
   font-size: 25px;
   letter-spacing: 2.5px;
+}
+@media only screen and (max-width:1363px) {
+  .AWorkLeft .AWorkLeftTop .Chinese {
+    font-size: 18px;
+    letter-spacing: 1.8px;
+  }
 }
 .AWorkLeft .AWorkLeftTop div {
   margin-bottom: 10px;
@@ -827,6 +906,13 @@ a {
   font-size: 16px;
   letter-spacing: 1.6px;
   line-height: 180%;
+  text-align: justify;
+}
+@media only screen and (max-width:1363px) {
+  .AWorkLeft .AWorkLeftBottom {
+    font-size: 12px;
+    letter-spacing: 1.2px;
+  }
 }
 .AWorkRight {
   position: relative;
@@ -839,27 +925,49 @@ a {
 }
 .AWorkRight .AWorkText {
   width: 100%;
+  text-align: justify;
   white-space: pre-wrap;
 }
 .AWorkRight .AWorkText .title {
   font-family: mtitleFont;
+  font-weight: bold;
   font-size: 22px;
   letter-spacing: 2.2px;
   padding-bottom: 20px;
   text-transform: uppercase;
+}
+@media only screen and (max-width:1363px) {
+  .AWorkRight .AWorkText .title {
+    font-size: 16px;
+    letter-spacing: 1.6px;
+  }
 }
 .AWorkRight .AWorkText .text {
   font-family: mtextFont;
   font-size: 16px;
   letter-spacing: 1.6px;
   line-height: 180%;
+  text-align: justify;
   padding-bottom: 20px;
+}
+@media only screen and (max-width:1363px) {
+  .AWorkRight .AWorkText .text {
+    font-size: 12px;
+    letter-spacing: 1.2px;
+  }
 }
 .AWorkRight .AWorkText .text table {
   font-family: mtextFont;
   font-size: 16px;
   letter-spacing: 1.6px;
   line-height: 180%;
+  text-align: justify;
+}
+@media only screen and (max-width:1363px) {
+  .AWorkRight .AWorkText .text table {
+    font-size: 12px;
+    letter-spacing: 1.2px;
+  }
 }
 .AWorkVideo {
   position: relative;
@@ -868,7 +976,8 @@ a {
   padding-top: 25px;
   height: 0;
 }
-.AWorkVideo iframe {
+.AWorkVideo iframe,
+.AWorkVideo img {
   position: absolute;
   top: 0;
   left: 0;
@@ -970,13 +1079,21 @@ a {
   position: fixed;
   top: 30px;
   right: 30px;
+  cursor: pointer;
 }
 .AWorkRelated .more {
   font-family: mtitleFont;
+  font-weight: bold;
   font-size: 22px;
   letter-spacing: 2.2px;
   margin-bottom: 20px;
   text-transform: uppercase;
+}
+@media only screen and (max-width:1363px) {
+  .AWorkRelated .more {
+    font-size: 16px;
+    letter-spacing: 1.6px;
+  }
 }
 .AWorkRelated .relatedContainer {
   position: relative;
@@ -992,43 +1109,63 @@ a {
 .AWorkRelated .relatedContainer:last-child {
   margin-right: 0;
 }
-.AWorkRelated .relatedContainer .relatedTag {
+.AWorkRelated .relatedContainer .english {
+  font-family: mtitleFont;
+  font-weight: bold;
+  font-size: 22px;
+  letter-spacing: 2.2px;
+}
+@media only screen and (max-width:1363px) {
+  .AWorkRelated .relatedContainer .english {
+    font-size: 16px;
+    letter-spacing: 1.6px;
+  }
+}
+.AWorkRelated .relatedContainer .chinese {
   font-family: mtextFont;
   font-size: 16px;
   letter-spacing: 1.6px;
   line-height: 180%;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 33.33%;
-  background-color: rgba(0, 0, 0, 0.5);
-  opacity: 0;
-  transition: .3s;
-  padding-left: 20px;
-  padding-right: 20px;
+  text-align: justify;
 }
-.AWorkRelated .relatedContainer .relatedTag div:first-child {
-  text-transform: uppercase;
-  font-family: 'Assistant';
-}
-.AWorkRelated .relatedContainer .relatedTag div:last-child {
-  text-transform: uppercase;
-  font-family: 'mmlabWebTitle';
-}
-.AWorkRelated .relatedContainer:hover .relatedTag {
-  opacity: 1;
+@media only screen and (max-width:1363px) {
+  .AWorkRelated .relatedContainer .chinese {
+    font-size: 12px;
+    letter-spacing: 1.2px;
+  }
 }
 .contactHello {
-  margin-top: 10%;
+  margin-top: 85px;
+  font-style: italic;
   font-family: mtitleFont;
+  font-weight: bold;
   font-size: 66px;
   letter-spacing: 6.6px;
+}
+@media only screen and (max-width:1363px) {
+  .contactHello {
+    font-size: 48px;
+    letter-spacing: 4.8px;
+  }
 }
 .contactEmail {
   margin-top: 40px;
   font-family: mtextFont;
-  font-size: 22px;
-  letter-spacing: 2.2px;
+  font-size: 33px;
+  letter-spacing: 3.3px;
+}
+@media only screen and (max-width:1363px) {
+  .contactEmail {
+    font-size: 24px;
+    letter-spacing: 2.4px;
+  }
+}
+.contactEmail img {
+  vertical-align: middle;
+  margin-right: 20px;
+}
+.contactEmail span {
+  margin-right: 20px;
 }
 .contactInfo {
   margin-top: 40px;
@@ -1039,6 +1176,13 @@ a {
   font-size: 16px;
   letter-spacing: 1.6px;
   line-height: 180%;
+  text-align: justify;
+}
+@media only screen and (max-width:1363px) {
+  .contactInfo {
+    font-size: 12px;
+    letter-spacing: 1.2px;
+  }
 }
 .contactInfo div {
   margin-top: 10px;
@@ -1050,10 +1194,18 @@ a {
   margin-right: 20px;
 }
 .contactMap {
+  position: relative;
+  padding-bottom: 40%;
+  /* 16:9 */
+  height: 0;
   width: 100%;
-  height: 40%;
   background-color: black;
   margin-top: 20px;
+}
+.contactMap > div {
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 .mapMarker {
   position: relative;
