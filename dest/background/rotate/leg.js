@@ -31,7 +31,9 @@ FloatLeg.prototype.update=function(){
 	//this._shader_uniform.angle.value=(Math.random()-0.5)*2.0*Math.PI*.4;
 	//this._shader_uniform.seed_x.value=(Math.random()-0.5)*2.0*0.02;
 	//this._shader_uniform.seed_y.value=(Math.random()-0.5)*2.0*0.03;
-
+	if(_fade_in && _dest_type==3){
+		this._shader_uniform.alpha.value=_fade_scale;
+	}
 }
 FloatLeg.prototype.getPos=function(){
 	return [this._center[0]+this._pos[0]*Math.sin(this._pos[1]),this._center[1]+this._pos[0]*Math.cos(this._pos[1]),this._pos[2]];

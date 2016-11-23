@@ -1,5 +1,6 @@
 var _float_fragshader=[
 	"uniform float amount;",
+	"uniform float alpha;",
 	"uniform float angle;",
 	"uniform float seed_x;",
 	"uniform float seed_y;",
@@ -37,7 +38,7 @@ var _float_fragshader=[
 	"	vec4 cb = texture2D(texture, p - offset);",
 	"",
 	"",
-	"	gl_FragColor = vec4(cga.r+cr.r, cga.g+cb.b, cga.b+cr.r+cb.b,(cga.a+cr.a+cb.a)*.63);",
+	"	gl_FragColor = vec4(cga.r+cr.r, cga.g+cb.b, cga.b+cr.r+cb.b,(cga.a+cr.a+cb.a)*.63*alpha);",
 	"",
 	"}"
 	].join("\n");

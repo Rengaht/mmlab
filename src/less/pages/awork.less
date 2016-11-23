@@ -7,6 +7,9 @@
 	visibility: hidden;
 	background: transparent;
 	z-index: 20;
+
+	animation-delay: @delay_interval;
+
 }
 .AWorkContent{
 	position: relative;	
@@ -135,11 +138,14 @@
 		height:100%;
 		opacity: 0;
 		transition: .3s;
+		background-color: black;
 		&.show{
 			opacity: 1;
 		}
 	}
-
+	img{
+		height: 100%;
+	}
 	.control{
 		position: absolute;
 		left:0;
@@ -251,6 +257,9 @@
 		}
 		.chinese{
 			.fontText;
+		}
+		>.workItem{
+			width:100%;
 		}
 	}
 	

@@ -1,5 +1,6 @@
-import React from 'react'
-import {Link} from 'react-router'
+import React from 'react';
+import {Link} from 'react-router';
+import FadeAppear from '../components/fade_appear';
 
 export default class Home extends React.Component{
 	constructor(props){
@@ -11,7 +12,7 @@ export default class Home extends React.Component{
 		this.mouseMove=this.mouseMove.bind(this);
 	}
 	componentWillMount(){		
-		initBackgroundType(0);			
+		// initBackgroundType(0);			
 	}
 	mouseMove(event){
 		//console.log('move');
@@ -22,21 +23,17 @@ export default class Home extends React.Component{
 	render(){
 		return (
 			<div className="home" onMouseMove={this.mouseMove}>
-				<div className="center">
-					<div className="hello" style={{marginLeft:this.state.mouseX,marginTop:this.state.mouseY}}>	
-							<div className="hello_logo">
-								<img src="image/logo.png"/>								
-								<div className="descript">We believe digital  <br/> technology is the magic <br/>of  modern real world.</div>
-								<div>
-									<Link to="/work">
-										<img src="image/see_our_project.png"/>
-									</Link>
-								</div>				
-							</div>
-							<div className="hello_special">
-								<img src="image/special.png"/>
-							</div>
-					</div>
+				<div className="hello_logo center">
+					<img src="image/logo.png"/>								
+					<div className="descript">We believe digital  <br/> technology is the magic <br/>of  modern real world.</div>
+					<div>
+						<Link to="/work">
+							<img src="image/see_our_project.png"/>
+						</Link>
+					</div>				
+				</div>
+				<div className="hello_special center">
+					<img src="image/special-project.png"/>
 				</div>
 			</div>		
 		);

@@ -1,6 +1,6 @@
 import React from 'react'
 import * as DConst from '../request_constants'
-
+import FadeReveal from './fade_reveal';
 
 export default class ImageSlide extends React.Component{
 	constructor(props){
@@ -21,7 +21,7 @@ export default class ImageSlide extends React.Component{
 			imageNodes=this.props.image.map(function(image,index){
 						return(
 							<div key={index} className={index==show_?"image show":"image"}>
-							<img src={image.data.url} style={{'width':'100%'}}/>				
+							<img src={image.data.url} className="center"/>				
 							</div>
 						);
 					});
@@ -34,7 +34,7 @@ export default class ImageSlide extends React.Component{
 			});
 		}	
 		return(
-			<div>
+			<FadeReveal>
 				<div className="AWorkImageContainer">
 					<div className="AWorkImageView">
 						<div ref="_slider" className="slider">
@@ -49,7 +49,7 @@ export default class ImageSlide extends React.Component{
 				<div className="dotContainer">
 						<div className="center">{dotNodes}</div>
 				</div>
-			</div>
+			</FadeReveal>
 		);		
 	}
 	goLeft(){

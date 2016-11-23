@@ -11,6 +11,7 @@ function FloatSlice(p_,a_,i_){
 	this.glitch_angle=Math.random()*Math.PI*2;
 	this._shader_uniform={
 		amount:{value:2.0},
+		alpha:{value:1.0},
 		angle:{value:this.glitch_angle},
 		seed_x:{value:0.01},
 		seed_y:{value:0.01},
@@ -51,6 +52,8 @@ FloatSlice.prototype.update=function(){
 
 	this._rot_ang+=this._rot_vel;
 
+	if(_fade_out && _Background_Type==2) this._shader_uniform.alpha.value-=Const.FadeOutVel;
+	else this._shader_uniform.alpha.value=1.0;
 }
 FloatSlice.prototype.getPos=function(){
 	return [this._pos[0]+this._amp[0]*Math.sin(frameCount/this._vel[0]+this.phi),

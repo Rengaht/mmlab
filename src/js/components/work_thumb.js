@@ -1,8 +1,12 @@
-import React from 'react'
-import {Link} from 'react-router'
-import GlitchImage from './glitch_image'
-import * as DConst from '../request_constants'
-import WebglGlitch from './glitch_webgl'
+import React from 'react';
+import {Link} from 'react-router';
+
+import FadeReveal from './fade_reveal';
+import FadeAppear from './fade_appear';
+import GlitchImage from './glitch_image';
+import * as DConst from '../request_constants';
+import WebglGlitch from './glitch_webgl';
+
 
 
 export default class WorkThumb extends React.Component{
@@ -17,19 +21,14 @@ export default class WorkThumb extends React.Component{
 	}
 	onMouseEnter(){
 		// console.log("enter!");		
-		this.refs._canvas.onMouseEnter();
+		this.refs._webgl_glitch.onMouseEnter();
 	}
 	onMouseLeave(){
 		// console.log("leave!");
-		this.refs._canvas.onMouseLeave();
+		this.refs._webgl_glitch.onMouseLeave();
 	}
-	componentDidMount(){
-		this.setState({show:true,delay:(this.props.index+1)*.1});
-	}
-	componentWillUnmount(){
-		// console.log("thumb will unmount");
-		// this.setState({show:false});	
-	}
+
+
 	hide(){
 		this.setState({show:false,delay:0});		
 	}
@@ -61,22 +60,27 @@ export default class WorkThumb extends React.Component{
 		}
 		return(
 			//<div className={this.props.index%3==2?"workItem last-in-row":"workItem"}>				
-			<Link to={"/work/"+this.props.work.id} className="workThumbLink">
-				<div className={this.state.show?"workThumbContainer show":"workThumbContainer"}
-					 onMouseEnter={this.onMouseEnter}
-					 onMouseLeave={this.onMouseLeave}
-					 style={{transitionDelay:this.state.delay+'s'}}>
-						<WebglGlitch ref="_canvas" 
-							last={0.0}
-							src={this.props.work.thumb_image.url}/>						
-						<img src={this.props.work.thumb_image.url} ref="_img"/>
-					 <div ref="_descript" className="workThumbDescript">												
-						{wrap_}					
-					</div>									
+			<div className="workItem">
+				<div>				
+					<Link to={"/work/"+this.props.work.id} className="workThumbLink"
+							key={this.props.work.id}>
+						<FadeReveal className="workThumbContainer"
+								 onMouseEnter={this.onMouseEnter}
+								 onMouseLeave={this.onMouseLeave}>
+								<WebglGlitch ref="_webgl_glitch" 
+									last={0.0}
+									src={this.props.work.thumb_image.url}/>						
+								<img src={this.props.work.thumb_image.url} ref="_img"/>
+								<div ref="_descript" className="workThumbDescript">												
+									{wrap_}					
+								</div>																
+						</FadeReveal>
+					</Link>
 				</div>
-			</Link>
-			);
+			</div>
+		);
 
+		// style={{transitionDelay:this.state.delay+'s'}}
 		// <GlitchImage ref="_canvas" 
 		// 					last={0.0}
 		// 					src={this.props.work.thumb_image.url}/>	

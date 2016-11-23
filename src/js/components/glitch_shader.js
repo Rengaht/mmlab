@@ -1,0 +1,62 @@
+
+export const _gl_vertex_shader=[
+	"attribute vec2 a_position;",
+	"attribute vec2 a_texCoord;",
+	"varying vec2 v_texCoord;",
+	"",
+	"void main() {",
+	"v_texCoord = a_texCoord;",
+  	"gl_Position = vec4(a_position, 0, 1);",  	
+	"}"
+].join("\n");
+
+export const _gl_frag_shader=[
+	"precision mediump float;",
+	"uniform sampler2D u_image;",
+	"uniform float amount;",
+	"uniform float angle;",
+	"uniform float alpha;",
+	"uniform float seed;",
+	"uniform float seed_x;",
+	"uniform float seed_y;",
+	"",	
+	"varying vec2 v_texCoord;",
+	"float rand(vec2 co){",
+	"	return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);",
+	"}",
+	"void main() {",
+	"",
+	"",	
+	"	float distortion_x=0.2;",
+	"	float distortion_y=0.2;",
+	"",
+	"",
+	"	vec2 p=v_texCoord;",
+	"",
+	"	float xs=floor(gl_FragCoord.x/0.5);",
+	"	float ys=floor(gl_FragCoord.y/0.5);",
+	"",
+	"",
+	"	vec4 normal=texture2D (u_image, p*seed*seed);",
+	// "	p.x+=0.01*amount*distortion_x;//*rand(vec2(xs * seed,ys * seed*50.));",
+	// "	p.y+=0.01*amount*distortion_y;//*rand(vec2(xs * seed,ys * seed*50.));",
+	
+	"	p.x+=normal.x*seed_x*(seed/5.);",
+	"	p.y+=normal.y*seed_y*(seed/5.);",
+		//base from RGB shift shader
+	"	vec2 offset = amount*0.045 * vec2( cos(angle), sin(angle));",
+	"	vec4 cr = texture2D(u_image, p + offset);",
+	"	vec4 cga = texture2D(u_image, p);",
+	"	vec4 cb = texture2D(u_image, p - offset);",
+	"",		
+	"	//cr*=amount;",
+	"	//cb*=amount;",
+	"",		
+	"",
+	"	gl_FragColor = vec4(cga.r+cr.r, cga.g+cb.b, cga.b+cb.b,1.0);",
+	"",		
+	"",		
+	
+	  //"gl_FragColor = texture2D(u_image, v_texCoord);",
+	"}"
+].join("\n");

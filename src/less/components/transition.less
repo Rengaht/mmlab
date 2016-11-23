@@ -1,0 +1,130 @@
+@appear_interval:.8s;
+@delay_interval:.8s;
+
+@work_thumb_appear_interval:.5s;
+@work_thumb_delay_interval:0.1s;
+
+
+
+
+.work_thumb{
+  &-appear, &-enter{
+ 	  opacity: 0.01;
+    &-active{
+      opacity: 1;
+      transition-duration:@work_thumb_appear_interval;
+      .generate-delays(40,@work_thumb_delay_interval);  
+    }
+  }
+  &-leave{
+    opacity: 1;
+    &-active{
+      opacity: 0.01;
+      transition-duration:@work_thumb_appear_interval;
+      transition-delay: 0s !important;
+    }
+  }
+}
+
+.main_container{
+  &-appear, &-enter{
+    opacity: 0.01;
+    &-active{
+      opacity: 1;
+      transition-duration:@appear_interval;      
+      transition-delay:@delay_interval*3;
+    }
+  }
+  &-leave{
+    opacity: 1;
+    &-active{
+      opacity: 0.01;
+      transition-duration:@appear_interval;
+      transition-delay: @delay_interval;
+    }
+  }
+}
+
+.corner_title{
+
+  &-appear, &-enter{
+    opacity: 0.01;
+    transform: translate3d(0, 200%, 0) rotate(-90deg) !important;
+
+    &-active{
+      opacity: 1;
+      transform:rotate(-90deg) !important;
+
+      transition-duration:@appear_interval;            
+      transition-delay:@delay_interval*2;            
+    }
+  }
+  &-leave{
+    opacity: 1;
+    transform:rotate(-90deg) !important;
+
+    &-active{
+      opacity: 0.01;
+      transform: rotate(-90deg) !important;
+
+      transition-duration:@appear_interval;
+      transition-delay: @delay_interval*2;
+    }
+  }
+}
+
+.menu_icon{
+  &-appear, &-enter{
+    opacity: 0.01;
+
+    &-active{
+      opacity: 1;
+
+      transition-duration:@appear_interval;            
+      transition-delay:0s;            
+    }
+  }
+  &-leave{
+    opacity: 1;
+
+    &-active{
+      opacity: 0.01;
+      transition-duration:@appear_interval;
+      transition-delay:@delay_interval*4;             
+    }
+  } 
+}
+
+
+
+.generate-delays(@n, @t, @i: 1) when (@i =< @n){
+	&:nth-child(@{i}){			
+		transition-delay: @i*@t;    
+	}
+	.generate-delays(@n, @t, (@i+1));
+}
+
+
+.awork_left{
+
+  &-appear, &-enter{
+    opacity: 0.01;
+    transform: translate3d(0, 200%, 0) !important;
+
+    &-active{
+      opacity: 1;
+      
+      transition-duration:@appear_interval;            
+      transition-delay:@delay_interval*2;            
+    }
+  }
+  &-leave{
+    opacity: 1;
+    
+    &-active{
+      opacity: 0.01;
+      transition-duration:@appear_interval;
+      transition-delay: @delay_interval*2;
+    }
+  }
+}

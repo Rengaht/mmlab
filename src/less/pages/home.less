@@ -11,21 +11,25 @@
 	}
 }
 
-.hello{
-	position: relative;
+.home{
+	//position: relative;
 	div{
 		margin-top: @vert_margin;
 		font-size: @title_size;				
 	}
 	.hello_logo{
+		position: absolute;
 		opacity: 1;
+		visibility: visible;
 		transition:.2s;
-		display: block;
+		
 	}
 	.hello_special{
+		position: absolute;
 		opacity: 0;
+		visibility: hidden;
 		transition:.2s;
-		display: none;
+		
 	}
 	
 
@@ -50,11 +54,11 @@
 	&.special{
 		.hello_logo{
 			opacity: 0;		
-			display: none;	
+			visibility: hidden;
 		}
 		.hello_special{
 			opacity: 1;			
-			display: block;
+			visibility: visible;
 		}
 	
 	}

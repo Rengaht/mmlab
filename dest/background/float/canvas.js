@@ -24,9 +24,8 @@ function clearFloat(){
 
 	for(var i=mslice-1;i>=0;i--){		
 		_scene.remove(_scene.getObjectById(_slice_float[i].id,true));
-		_slice_float.splice(i,1);
-		
 	}
+	_slice_float=[];
 }
 
 function updateFloat(){
@@ -37,7 +36,7 @@ function updateFloat(){
 		_slice_float[i].update();
 		updatePosFloat(_scene.children[i],_slice_float[i]);
 	}	
-	
+
 }
 
 
@@ -113,4 +112,9 @@ function updatePosFloat(mesh_,slice_){
 	// mesh_.rotation.y+=Math.random()*.001;
 
 	//mesh_.rotation.z=leg_.getRot();
+
+	if(_fade_in && _dest_type==1){
+		mesh_.scale.x=mesh_.scale.y=mesh_.scale.z=_fade_scale;		
+	}
+
 }

@@ -33,8 +33,8 @@
 		background: rgba(0,0,0,0.75);
 		visibility: hidden;
 		opacity: 0;
-		transition:@ham_time*2;
-		
+		transition-duration:@appear_interval;	
+
 		display: table;
 		padding:10% 0;
 		
@@ -48,7 +48,16 @@
 			width: 100%;
 			height: 100%;
 		}
+
+		.itemwrap{
+			opacity: 0;
+			transition-duration:@appear_interval;	
+			&.show{
+				opacity: 1;
+			}
+		}
 	}
+
 	
 
 
@@ -62,6 +71,26 @@
 
 	.fontMenu;
 	
+	//transition-delay:@appear_interval;
+	// .generate-delays(4);
+}
+
+.menuCopyright{
+	animation-delay:@appear_interval + @delay_interval;
 }
 
 
+.logo{
+	position: fixed;
+	left:@in_margin;
+	top:@in_margin;
+	height:@ham_size;
+	z-index: 100;
+	img{
+		height:100%;
+	}
+	.hide{
+		//display: none;
+		visibility: none;
+	}
+}

@@ -1,9 +1,27 @@
+// function LogoConstants(){
+// 	this.ShapeScale;
+// 	//this.AddInterval=240;
+// 	this.AddInterval=18;
+// 	// this.StartVel=[20,3.14159/180.0,1.0];
+// 	this.StartVel=[20,3.14159/240.0,12.0];
+// 	this.PreVelDiff=[0.01,1,0.00];
+// 	this.VelDiff=[1.01,1,1];
+// 	this.GoldInterval=150;
+// 	this.MBranch=12;
+// 	this.LegSize=500;
+// 	this.LegRatio=1.0;
+// 	this.LogoSize=800;
+// 	this.StartNum=50;
+// 	this.StartRad;
+// 	this.DestRad;
+// 	this.IntersectDelay=.05;
+// 	this.SpecialSize=150;
+// 	this.InitInterval=50;
+// }
 
 function LogoConstants(){
 	this.ShapeScale;
-	//this.AddInterval=240;
 	this.AddInterval=18;
-	// this.StartVel=[20,3.14159/180.0,1.0];
 	this.StartVel=[20,3.14159/240.0,12.0];
 	this.PreVelDiff=[0.01,1,0.00];
 	this.VelDiff=[1.01,1,1];
@@ -17,6 +35,7 @@ function LogoConstants(){
 	this.DestRad;
 	this.IntersectDelay=.05;
 	this.SpecialSize=150;
+	this.InitInterval=50;
 }
 
 
@@ -24,6 +43,8 @@ var LogoConst=new LogoConstants();
 var _logo_leg=[];
 var _leg_texture,_gold_texture,_special_texture;
 var _leg_shape,_leg_gemoetry,_leg_material;
+
+var _fill_texture;
 
 var _special_material,_special_geometry;
 var _special_mesh;
@@ -34,15 +55,22 @@ var _logo_geometry,_logo_material;
 var _logo_id;
 
 
+
 var _intersect;
 var _catched_gold;
 
 var _logo_add_loop;
 
+var _special;
 
+var _logo_init_interval;
 
 function initLogo(){
-
+	
+	loadSpecialList();
+	var ratio_=(window.innerWidth.toFixed(2)/1920.0);
+	LogoConst.LogoSize=800.0*ratio_;
+	LogoConst.LegSize=500*ratio_;
 	LogoConst.StartRad=LogoConst.LogoSize;//window.innerWidth.toFixed(2)*0.5;
 	LogoConst.DestRad=window.innerWidth.toFixed(2)*1.2;
 	LogoConst.ShapeScale=1.0;//LogoConst.DestRad*.2/LogoConst.LegSize;
@@ -56,9 +84,11 @@ function initLogo(){
 
 	_leg_texture=new THREE.TextureLoader().load('image/leg-01.png',function(texture){		
 		_gold_texture=new THREE.TextureLoader().load('image/golden.png',function(texture){
-			_special_texture=new THREE.TextureLoader().load('image/special.png',function(texture){
+			_special_texture=new THREE.TextureLoader().load('image/special-project.png',function(texture){
 				_logo_texture=new THREE.TextureLoader().load('image/index_logo.png',function(texture){
-					initLogoLeg();			
+					_fill_texture=new THREE.TextureLoader().load('image/leg-fill-01.png',function(texture){
+						initLogoLeg();			
+					});	
 				});		
 			});
 		});		
@@ -80,20 +110,30 @@ function clearLogo(){
 }
 
 function updateLogo(){
+
 	var mleg=_logo_leg.length;
 	for(var i=mleg-1;i>=0;i--){		
 		if(_logo_leg[i]._dead){
 			_scene.remove(_scene.getObjectById(_logo_leg[i].id,true));
 			_logo_leg.splice(i,1);			
 		}else{
+			
 			_logo_leg[i].update();
+
+
 			updatePosLogo(_scene.getObjectById(_logo_leg[i].id,true),_logo_leg[i]);
 		}
 	}	
 
-	var add_=_intersect?LogoConst.AddInterval/LogoConst.IntersectDelay:LogoConst.AddInterval;
-	if(frameCount%add_==LogoConst.AddInterval-1) addLogo();
 	
+	if(_logo_init_interval<LogoConst.InitInterval){
+		addLogo(_logo_init_interval);
+		_logo_init_interval++;
+	}
+	var add_=_intersect?LogoConst.AddInterval/LogoConst.IntersectDelay:LogoConst.AddInterval;
+	if(frameCount%add_==LogoConst.AddInterval-1) addLogo();	
+	
+
 	checkIntersect();
 
 }
@@ -150,9 +190,11 @@ function initLogoLeg(){
 	// _logo_mesh.position.z=(Const.EndPoint-Const.StartPoint)*.6+Const.StartPoint;
 	// _scene.add(_logo_mesh);
 	// _logo_id=_logo_mesh.id;
-	for(var j=0;j<LogoConst.StartNum;j+=1){
-		addLogo(j);	
-	}
+	// for(var j=0;j<LogoConst.StartNum;j+=1){
+	// 	addLogo(j);	
+	// }
+	_logo_init_interval=0;
+	_intersect=false;
 
 }
 function rotateToSurface(mesh_,leg_){
@@ -192,9 +234,9 @@ function createMaterialLogo(uniforms_){
 }
 function updatePosLogo(mesh_,leg_){
 
-	if(!mesh_){
-		return;	
-	} 
+	// if(!mesh_){
+	// 	return;	
+	// } 
 
 	var pos=leg_.getPos();
 
@@ -222,6 +264,9 @@ function checkIntersect(){
 
 	if(_mouse.x>1 || _mouse.x<-1 ||
 		_mouse.y>1 || _mouse.y<-1) return;
+
+	if(_fade_in || _fade_out) return;
+	if(_logo_init_interval<LogoConst.InitInterval) return;
 
 	//check intersected
 	_scene.updateMatrixWorld(); // required, since you haven't rendered yet
@@ -257,7 +302,7 @@ function checkIntersect(){
 			}
 		}else{
 			// updateSpecialPosition();
-			_dotScreenEffect.uniforms['scale'].value=Math.random()*5+5;
+			// _dotScreenEffect.uniforms['scale'].value=Math.random()*5+5;
 		}		
 	}else{
 		if(_catched_gold){
@@ -280,24 +325,45 @@ function updateSpecialPosition(){
 	_special_mesh.position.z=_catched_gold.position.z+20;
 }
 function toggleComposerPass(on_){
+	
+	if(!document.getElementsByClassName("home")[0]) return;
 
 	if(on_){
-		_composer.passes[1].renderToScreen=true;
-		_composer.passes[0].renderToScreen=false;
+		// _composer.passes[1].renderToScreen=true;
+		// _composer.passes[0].renderToScreen=false;
 
-		document.getElementsByClassName("hello")[0].classList.add("special");
+		document.getElementsByClassName("home")[0].classList.add("special");
 	}else{
-		_composer.passes[0].renderToScreen=true;
-		_composer.passes[1].renderToScreen=false;
+		// _composer.passes[0].renderToScreen=true;
+		// _composer.passes[1].renderToScreen=false;
 		_dotScreenEffect.uniforms['scale'].value=0;
-		document.getElementsByClassName("hello")[0].classList.remove("special");		
+		document.getElementsByClassName("home")[0].classList.remove("special");		
 	}
 }
 
 
+function loadSpecialList(){
+
+	var url_='http://mmlab.com.tw/directus/api/1/tables/work/rows?'
+			+'access_token=Fk0skpVJtoExbKBJ'
+			+'&status=1&sort_order=DESC&columns_show=title_en,title_ch&in[special_project]=1';
+	
+	$.ajax({
+		url:url_,
+		success: function(data){								
+			_special=data.rows;	
+			console.log(_special);
+		},
+		error: function(xhr, status, err){
+			console.error(this.url, status, err.toString());
+		}
+	});
+}
+
 function onClickLogo(){
-	if(_intersect){
-		window.location.href="./#/work/26";
+	if(_intersect && _special.length>0){
+		var index_=parseInt(Math.random()*_special.length);
+		window.location.href="./#/work/"+_special[index_].id;
 	}
 }
 

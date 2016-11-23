@@ -132,5 +132,9 @@ function updatePosStack(stack_,mesh_,slice_){
 	// mesh_.rotation.x+=random(-1,1)*.001;
 	// mesh_.rotation.y+=random(-1,1)*.001;
 
+	if(_fade_in && _dest_type==2){
+		mesh_.scale.x=mesh_.scale.y=mesh_.scale.z=_fade_scale;		
+	}
+
 }
 

@@ -3,7 +3,7 @@
 	position: relative;
 	padding-bottom: 66.66%; /* 3:2 */	
 	height: 0;
-	opacity: 0;
+	opacity: 1;
 	transition:.2s ease-in-out;	
 
 	&.show{
@@ -73,6 +73,13 @@
 		div{
 			// margin-top: @vert_margin*.2;
 		}
+		canvas{
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top:0;
+			left:0;
+		}
 	}
 	
 }
@@ -91,3 +98,5 @@
 		}
 	}
 }
+
+

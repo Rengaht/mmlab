@@ -1,11 +1,11 @@
 import React from 'react'
 import {withRouter} from 'react-router'
-
-import {Title,CopyRight} from '../components/title'
+import MainContainer from '../components/main_container'
 
 class About extends React.Component{
   componentWillMount(){
-        initBackgroundType(2);
+        //initBackgroundType(2);
+        
   }
   componentDidMount(){
         // let main=this.refs._main;
@@ -18,13 +18,13 @@ class About extends React.Component{
   } 
   render(){
     return(
-    	<div>
+    	<MainContainer title="about">    
            
             <div className="blurBack">
                 <img src="./image/about.jpg"/>
             </div>
          	<div className="content center about">    	 
-                <img src="./image/about.jpg"/>   
+                <img src="./image/about_.jpg"/>   
                 <div className="part">
                     <div className="title">梅林鬍子實驗室</div>                
         	     	<div className="text">
@@ -42,11 +42,9 @@ class About extends React.Component{
             Follow us to scream "Merlin's Mustache".
         	     	</div>
                 </div>
-
-                <CopyRight/>
          	</div>
 
-     	</div>
+     	</MainContainer>
      )
   }
 }

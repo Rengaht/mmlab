@@ -30,7 +30,7 @@ LLeg.prototype.update=function(){
 
 	// this._pos[0]+=this._vel[0];
 
-	var decre_vel=_intersect?LogoConst.IntersectDelay:1;
+	var decre_vel=(_intersect && !_fade_in)?LogoConst.IntersectDelay:1;
 
 
 	this._pos[1]+=this._vel[1]*decre_vel;
@@ -38,15 +38,15 @@ LLeg.prototype.update=function(){
 
 	//var t=(this._pos[0]-LogoConst.StartRad)/(LogoConst.DestRad-LogoConst.StartRad);
 	var p_=(this._pos[2]-Const.StartPoint)/(Const.EndPoint-Const.StartPoint);	
-	if(p_<0.22){
-		// this._vel[0]+=LogoConst.PreVelDiff[0];
-		this._vel[1]*=LogoConst.PreVelDiff[1];
-		this._vel[2]+=LogoConst.PreVelDiff[2];
-	}else{
-		// this._vel[0]*=LogoConst.VelDiff[0];
-		this._vel[1]*=LogoConst.VelDiff[1];
-		this._vel[2]*=LogoConst.VelDiff[2];
-	}
+	// if(p_<0.22){
+	// 	// this._vel[0]+=LogoConst.PreVelDiff[0];
+	// 	this._vel[1]*=LogoConst.PreVelDiff[1];
+	// 	this._vel[2]+=LogoConst.PreVelDiff[2];
+	// }else{
+	// 	// this._vel[0]*=LogoConst.VelDiff[0];
+	// 	this._vel[1]*=LogoConst.VelDiff[1];
+	// 	this._vel[2]*=LogoConst.VelDiff[2];
+	// }
 
 	var p_=(this._pos[2]-Const.StartPoint)/(Const.EndPoint-Const.StartPoint);	
 	if(p_>1){
@@ -59,14 +59,26 @@ LLeg.prototype.update=function(){
 	// else if(t>gend) t=gend;
 	//t=(t-gstart)/(gend-gstart);
 	//console.log(t);
-	if(!this._gold){
-		this._shader_uniform.amount.value=p_*.8;
+	//if(!this._gold){
+	if(_intersect){
+		this._shader_uniform.amount.value=p_*1.2;
 		this._shader_uniform.angle.value=p_*(Math.random()-0.5)*2.0*Math.PI;
 		this._shader_uniform.seed_x.value=p_*(Math.random()-0.5)*2.0*0.02;
 		this._shader_uniform.seed_y.value=p_*(Math.random()-0.5)*2.0*0.03;
+		// if(!this._gold) this._shader_uniform.texture.value=_fill_texture;
+	}else{
+		this._shader_uniform.amount.value=0.0;
+		// if(!this._gold) this._shader_uniform.texture.value=_leg_texture;
 	}
-	this._shader_uniform.alpha.value=(p_<.5)?p_/.5:1.0;
-	
+
+	if(_fade_out && _Background_Type==0){
+		this._shader_uniform.alpha.value=Math.min(this._shader_uniform.alpha.value,_fade_scale);	
+		this._pos[1]+=this._vel[1]*(1.0+(1.0-_fade_scale)*2.0);
+		this._pos[2]+=this._vel[2]*(1.0+(1.0-_fade_scale)*2.0);
+
+	}else{
+		this._shader_uniform.alpha.value=(p_<.8)?p_/.8:1.0;	
+	}
 	//console.log(this._pos[2]+" - "+t+" - "+this._shader_uniform.amount.value);
 
 }

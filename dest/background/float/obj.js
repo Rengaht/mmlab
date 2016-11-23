@@ -9,6 +9,7 @@ function FloatSlice(p_,a_,i_){
 	
 	this._shader_uniform={
 		amount:{value:2.0},
+		alpha:{value:1.0},
 		angle:{value:Math.random()*Math.PI},
 		seed_x:{value:0.0},
 		seed_y:{value:0.0},
@@ -40,6 +41,10 @@ FloatSlice.prototype.update=function(){
 	// else this._shader_uniform.damp.value=0;
 
 	this._shader_uniform.dvel.value=this.distort_vel*(Math.sin(frameCount/this._vel[2]+this.phi));
+
+
+	if(_fade_out && _Background_Type==1) this._shader_uniform.alpha.value-=Const.FadeOutVel;
+	else this._shader_uniform.alpha.value=1.0;
 }
 FloatSlice.prototype.getPos=function(){
 	return [this._pos[0]+this._amp[0]*Math.sin(frameCount/this._vel[0]+this.phi),

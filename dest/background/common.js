@@ -5,10 +5,20 @@ function Constants(){
 	this.EndPoint=4200;
 	this.MouseMoveThres=20;
 	this.EndPoint=4200;
+	this.FadeInVel=.05;
+	this.FadeOutVel=.05;
+	
+	this.AppearInterval=800;
+	this.DelayInterval=800;
+
+	this.FadeInInterval=this.AppearInterval;
+	this.FadeInDelay=this.DelayInterval;
+	this.FadeOutInterval=this.AppearInterval;
+	this.FadeOutDelay=(this.AppearInterval+this.DelayInterval)*0;
 }
 
 // common variable
-var _Background_Type;
+var _Background_Type=-1;
 
 var Const=new Constants();
 var _canvas;
@@ -42,6 +52,15 @@ var _now;
 var _then=Date.now();
 var _frame_interval=1000.0/60.0;
 var _delta;
+
+
+// for transition
+var _fade_out=false;
+var _fade_in=false;
+var _dest_type;
+var _fade_scale=0.0;
+
+
 
 function init(){
 
@@ -80,7 +99,7 @@ function init(){
 
 	
 	_dotScreenEffect = new THREE.ShaderPass( THREE.DotScreenShader );
-	_dotScreenEffect.uniforms[ 'scale' ].value=4;
+	_dotScreenEffect.uniforms[ 'scale' ].value=0;
 	// dotScreenEffect.renderToScreen=true;
 	_composer.addPass(_dotScreenEffect);
 
@@ -191,7 +210,20 @@ function update(){
 			break;		
 	}
 
-	
+	if(_fade_in){
+		_fade_scale+=Const.FadeInVel;		
+		if(_fade_scale>1){
+			_fade_scale=1;
+			_fade_in=false;
+		}
+	}
+	if(_fade_out){
+		_fade_scale-=Const.FadeOutVel;		
+		if(_fade_scale<0){
+			_fade_scale=0;
+			// _fade_out=false;			
+		}	
+	}
 
 	frameCount++;	
 	stats.update();
@@ -242,9 +274,20 @@ function draw(){
 	
 }
 
-function initBackgroundType(type_){
+function initBackground(type_){
+	
+	_dest_type=type_;	
+	setTimeout(function(){
+		initType(type_);	
+	},Const.FadeInDelay);
 
-	if(_Background_Type==type_) return;
+		
+
+
+}
+function initType(type_){
+
+	// if(_Background_Type==type_) return;
 	console.log('Init Background Type: '+type_);
 
 	clearLogo();
@@ -271,7 +314,19 @@ function initBackgroundType(type_){
 	}
 
 	_Background_Type=type_;
-	
+	_fade_in=true;
+	_fade_out=false;
+	_fade_scale=0.0;
+
+
+}
+function endBackground(){
+	setTimeout(function(){
+		console.log("background fade out!");
+		_fade_out=true;			
+		_fade_in=false;			
+		_fade_scale=1.0;
+	},Const.FadeOutDelay);
 }
 
 //util

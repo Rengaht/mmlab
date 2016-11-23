@@ -1,12 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {Link} from 'react-router'
-import {RouteTransition} from 'react-router-transition'
-import {TransitionMotion,spring} from 'react-motion'
+import ReactCSSTransitionGroup from 'react/lib/ReactCSSTransitionGroup';
 
-import {Title,CopyRight} from '../components/title'
+import MainContainer from '../components/main_container'
 import WorkThumb from '../components/work_thumb'
 import WorkFilter from '../components/work_filter'
+import FadeAppear from '../components/fade_appear'
 
 import * as DConst from '../request_constants'
 
@@ -18,13 +18,13 @@ export default class Work extends React.Component{
 		super(props);
 
 		
-		// this.work_url=DConst.URL+DConst.WorkPath+'?'+DConst.Token+'&status=1&sort_order=DESC&columns_show=title_en,title_ch,year,thumb_image';
-		// this.filter_url=DConst.URL+DConst.TypePath+'?'+DConst.Token;
-		// this.work_type_url=DConst.URL+DConst.WorkTypePath+'?'+DConst.Token;
+		this.work_url=DConst.URL+DConst.WorkPath+'?'+DConst.Token+'&status=1&sort_order=DESC&columns_show=title_en,title_ch,year,thumb_image';
+		this.filter_url=DConst.URL+DConst.TypePath+'?'+DConst.Token;
+		this.work_type_url=DConst.URL+DConst.WorkTypePath+'?'+DConst.Token;
 
-		this.work_url='data/work.json';
-		this.filter_url='data/type.json';
-		this.work_type_url='data/work_type.json';
+		// this.work_url='data/work.json';
+		// this.filter_url='data/type.json';
+		// this.work_type_url='data/work_type.json';
 
 
 		this.state={
@@ -168,36 +168,26 @@ export default class Work extends React.Component{
 	}
 
 	componentWillMount(){
-        initBackgroundType(1);
+        // initBackgroundType(1);
   	}
 	render(){
 		return(
-			<div>	     	
+			<div>
+			<MainContainer title="work">	     	
 		     	<div className="content center">
 					<WorkList ref="_list" data={this.state.data} type={this.state.filter.type}
 							  filter_type={this.state.filter} filter_val={this.state.filter_value}/>			
-			 	</div>
-			 	<div className="filter">
+			 	</div>			 			     	
+		     	<div className="AWorkContainer">
+		     	{this.props.children}
+		     	</div>
+     		</MainContainer>
+     		<FadeAppear effect="fadeInUpFilter" className="filter">
 			 		<WorkFilter ref="_all" name="ALL" filterHandler={this.applyFilter} showFilter={this.toggleFilter}/>
 			 		<WorkFilter ref="_year" name="YEAR" val={this.state.filter.year} filterHandler={this.applyFilter} showFilter={this.toggleFilter}/>
 		     		<WorkFilter ref="_type" name="TYPE" val={this.state.filter.type} filterHandler={this.applyFilter} showFilter={this.toggleFilter}/>
-		     	</div>
-		     	<CopyRight/>		     	
-		     	
-		     	<RouteTransition
-		     		pathname={this.props.location.pathname}
-					atEnter={{opacity:0,scale:0}}
-					atLeave={{opacity:0,scale:0}}
-					atActive={{opacity:1,scale:1}}
-					mapStyles={styles=>({opacity:styles.opacity,
-									visibility:'visible',
-									background:'black'})}	
-					className="AWorkContainer"
-					>
-		     	{this.props.children}
-		     	</RouteTransition>
-     		</div>
-			
+		    </FadeAppear>     	
+			</div>
 		);
 	}
 	toggleFilter(name){
@@ -250,8 +240,10 @@ class WorkList extends React.Component{
 							});
 		 }
 
-		return (<WorkThumb key={work_.id} ref={work_.id}
-							work={work_} index={index_} type_text={t_.join(' , ')}/>);
+		return (
+      				<WorkThumb key={work_.id} ref={work_.id}
+					work={work_} index={index_} type_text={t_.join(' , ')}/>
+				);
 	}
 	getStlyes(work_,index_){
 		return[{
@@ -300,17 +292,23 @@ class WorkList extends React.Component{
 			this.showNodes=showNodes;		
 
 			workNodes=showNodes.map(function(work,index){
-						return (<div className="workItem" key={index}>
-									<div>
-									{createThumb(work,index)}
-									</div>
-								</div>);			
+						return createThumb(work,index);			
 			});
 			
 		}
+		var timeout_=(workNodes.length*.1+.5)*1000;
+		console.log("transition timeout= "+timeout_);
 		return(
-			<div className="workList">
+			<div className="workList">		
+			<ReactCSSTransitionGroup transitionName="work_thumb"
+					transitionAppear={true}
+					transitionEnter={true}
+					transitionLeave={true}
+					transitionAppearTimeout={timeout_}
+					transitionEnterTimeout={timeout_}
+					transitionLeaveTimeout={timeout_}>	
 				{workNodes}
+			</ReactCSSTransitionGroup>
 			</div>
 		);
 	}
@@ -319,17 +317,17 @@ class WorkList extends React.Component{
 		if(name==this.state.name && val==this.state.val) return;
 
 		//hide all
-		for(var work in this.showNodes){
-			this.refs[this.showNodes[work].id].hide();
-			// ReactDOM.findDOMNode(this.refs[this.showNodes[work].id]).classList.remove('show');
-		}
-
-
+		// for(var work in this.showNodes){
+		// 	this.refs[this.showNodes[work].id].hide();
+		// 	// ReactDOM.findDOMNode(this.refs[this.showNodes[work].id]).classList.remove('show');
+		// }
+		this.setState({'name':'null','val':'null'});	
+		// this.setState({'name':name,'val':val});
 		let this_=this;
 		setTimeout(function(){
 			//console.log(name+' '+val);
 			this_.setState({'name':name,'val':val});	
-		},350);		
+		},500);		
 	}
 }
 

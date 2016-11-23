@@ -1,6 +1,6 @@
 import React from 'react'
 import WorkThumb from './work_thumb'
-
+import FadeReveal from './fade_reveal'
 import * as DConst from '../request_constants'
 
 var cachedRelatedData;
@@ -79,10 +79,10 @@ export default class RelateWork extends React.Component{
 		//</Link>
 
 		return(
-			<div className="AWorkRelated">
+			<FadeReveal className="AWorkRelated">
 				<div className="more">More Projects</div>
 				{relateNodes}
-			</div>
+			</FadeReveal>
 		);
 	}
 }

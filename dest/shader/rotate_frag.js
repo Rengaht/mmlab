@@ -2,6 +2,7 @@
 
 var _rotate_fragshader=[
 	"uniform float amount;",
+	"uniform float alpha;",
 	"uniform float angle;",
 	"uniform float seed_x;",
 	"uniform float seed_y;",
@@ -10,7 +11,6 @@ var _rotate_fragshader=[
 	"uniform float dvel;",
 	"uniform float damp;",
 	"",
-	"uniform float alpha;",
 	"",
 	"varying vec2 vUv;",
 	"float rand(vec2 co){",

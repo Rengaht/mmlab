@@ -2,7 +2,8 @@ import React from 'react'
 import {withRouter} from 'react-router'
 
 import {Title,CopyRight} from '../components/title'
-// import MainContainer from './main_container'
+import FadeReveal from '../components/fade_reveal'
+import MainContainer from '../components/main_container'
 
 //import GoogleMap from 'google-map-react';
 
@@ -13,8 +14,8 @@ class Contact extends React.Component{
 		super(props);
 	  	this.state={
   			position:{
-	              lat: 25.047692,
-	              lng: 121.566613
+	              lat: 25.052037, 
+	              lng: 121.545506
 	        }
 		};
 		this.map_options={
@@ -54,49 +55,49 @@ class Contact extends React.Component{
   componentDidMount(){
 	//this.setState({position:{lat: 25.047692,lng: 121.566613}});		
     let map=new google.maps.Map(document.getElementById('_map'),{
-    	center:{lat:25.047651,lng:121.565632},
+    	center:this.state.position,
     	scrollwheel:true,
     	zoom:18
     });
     map.setOptions({styles:this.map_options.styles});
     let marker=new google.maps.Marker({
-    	position:this.state.position    	
+    	position:this.state.position,
+    	icon:"image/map_logo.png"
     });
     marker.setMap(map);
 
   }
     
   componentWillMount(){
-	initBackgroundType(2);	
+	// initBackgroundType(2);	
   }
   render() {
     return(
-    	<div>    	            
-	     
-	    
-	     	<div className="content center">
-	     		<div className="contactHello">
-	     		 	<div className="glitch_always" data-text="We">We</div>
-	     			<div className="glitch_always" data-text="should">should</div>
-	     			<div className="glitch_always" data-text="talk">talk</div>
-	     		</div>
+    	<MainContainer title="contact">    	            
+	     	    
+	     	<div className="content center contact">
+	     		<FadeReveal className="contactHello">
+	     		 	<div className="glitch_always" data-text="Let's">Let's</div>
+	     			<div className="glitch_always" data-text="wow">wow</div>
+	     		</FadeReveal>
 
-	     		<div className="contactEmail">
+	     		<FadeReveal className="contactEmail">
 		     		<img src="image/arrow_contact.png"/>
 		     		<span>[</span>
 		     		<span><a href="mailto:merlin.mustache.mmlab.tw">merlin.mustache@mmlab.tw</a></span>
 		     		<span>]</span>
-	     		</div>
+	     		</FadeReveal>
+	     		<FadeReveal>
 	     	    <div className="contactInfo">
 	     	    	<div className="title">梅林斯行銷有限公司</div>
 	     	    	<div>
 			     		<div>
 				     		<span>T</span>
-				     		<span>02 8768-1100 #135</span>
+				     		<span>02 2718-1133</span>
 			     		</div>
 						<div>
 				     		<span>A</span>
-				     		<span>11070 台北市信義區東興路45號9F</span>
+				     		<span>10550 台北市松山區南京東路三段275號12樓</span>
 			     		</div>
 			     		<div>
 				     		<span>統一編號</span>
@@ -105,26 +106,27 @@ class Contact extends React.Component{
 			     	</div>				     	
 			    </div>
 			    <div className="contactInfo">
-	     	    	<div className="title">MERLINS'S MUSTACHE LAB</div>
+	     	    	<div className="title">MERLIN'S MUSTACHE LAB</div>
 	     	    	<div>
 			     		<div>
 				     		<span>T</span>
-				     		<span>02 8768-1100 #135</span>
+				     		<span>02 2718-1133</span>
 			     		</div>
 						<div>
 				     		<span>A</span>
-				     		<span>9F., No.45, Dongxing Rd., Xinyi Dist., Taipei City 110, Taiwan (R.O.C)</span>
+				     		<span>12F., No.275, Sec. 3, Nanjing E. Rd., Songshan Dist., Taipei City 105, Taiwan (R.O.C.)</span>
 			     		</div>
 			     	</div>				     	
 			    </div>
+			    </FadeReveal>
 
-			   	<div className="contactMap">
+			   	<FadeReveal className="contactMap">
 			   		<div id="_map">
 			      		
 			        </div>
-		    	</div>
+		    	</FadeReveal>
 
-		     	<div className="socialLink">
+		     	<FadeReveal className="socialLink">
 		     		<div>
 			     	<a href="https://vimeo.com/merlinsmustache" target="_blank">
 		     			<img src="image/vimeo1.png"/>
@@ -136,11 +138,11 @@ class Contact extends React.Component{
 		     			<img src="image/youtube1.png"/>
 		     		</a>
 		     		</div>
-	     		</div>
+	     		</FadeReveal>
 		     	
-		     	 <CopyRight/>
+		     	
 	     	</div>
-     	</div>
+     	</MainContainer>
 
     );
 

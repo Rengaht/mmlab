@@ -9,6 +9,7 @@ function RotateSlice(p_,a_,i_){
 	
 	this._shader_uniform={
 		amount:{value:2.0},
+		alpha:{value:1.0},
 		angle:{value:Math.random()*Math.PI},
 		seed_x:{value:0.2},
 		seed_y:{value:0.4},
@@ -37,6 +38,10 @@ RotateSlice.prototype.update=function(){
 	//this._shader_uniform.damp.value=0.3;//*Math.sin(frameCount/this._vel[1]+this.phi)+0.1*random(-1,1);
 	
 	this._shader_uniform.dvel.value=this.distort_vel*(.8+.5*Math.sin(frameCount/this._vel[2]+this.phi));
+
+	if(_fade_out && _Background_Type==3) this._shader_uniform.alpha.value-=Const.FadeOutVel;
+	else if(_fade_in && _dest_type==3) this._shader_uniform.alpha.value=_fade_scale;
+	else this._shader_uniform.alpha.value=1.0;
 }
 RotateSlice.prototype.getPos=function(){
 	return [this._pos[0]+this._amp[0]*Math.sin(frameCount/this._vel[0]+this.phi),

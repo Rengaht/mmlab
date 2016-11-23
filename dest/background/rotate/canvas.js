@@ -169,6 +169,11 @@ function updatePosRotate(mesh_,slice_){
 	// mesh_.rotation.y+=Math.random()*.001;
 
 	if(slice_.getRot) mesh_.rotation.z=slice_.getRot();
+
+	// if(_fade_in && _dest_type==3){
+	// 	mesh_.scale.x=mesh_.scale.y=mesh_.scale.z=_fade_scale;		
+	// }
+
 }
 
 

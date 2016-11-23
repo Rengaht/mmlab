@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import {Link} from 'react-router'
 
 import * as DConst from '../request_constants'
@@ -85,10 +86,12 @@ class WorkFilterNode extends React.Component{
 	setActive(){
 		// console.log("click!");
 		this.props.onClick(this.props.id);
+		ReactDOM.findDOMNode(this.refs._text).classList.add('glitch_always');
 		// this.refs._text.setActive(true);
 	}
 	resetActive(){
-		// this.refs._text.setActive(false);
+
+		ReactDOM.findDOMNode(this.refs._text).classList.remove('glitch_always');
 	}
 
 }

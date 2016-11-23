@@ -1,12 +1,14 @@
 import React from 'react'
 import {Link, browserHistory} from 'react-router'
+import ReactCSSTransitionGroup from 'react/lib/ReactCSSTransitionGroup';
 
 import WorkThumb from '../components/work_thumb'
 import ImageSlide from '../components/image_slide'
 import RelateWork from '../components/related_work'
+import FadeReveal from '../components/fade_reveal'
 
 import * as DConst from '../request_constants'
-
+import MainContainer from '../components/main_container'
 
 
 export default class AWork extends React.Component{
@@ -19,7 +21,7 @@ export default class AWork extends React.Component{
 		};
 		//this.loadData=this.loadData.bind(this);
 		this.loadData(this.props.params.id);
-		this.goBack=this.goBack.bind(this);
+		// this.goBack=this.goBack.bind(this);
 
 		//console.log(this.props.location.query);
 	}
@@ -49,19 +51,20 @@ export default class AWork extends React.Component{
 
 	}
 	componentWillMount(){
-        initBackgroundType(3);
+        // initBackgroundType(3);
   	}
 	render() {
-		if(!this.state.work) return(
-			<div></div>
-		);
-
-		
-		//for(var t  in this.state.work.type.rows[0].) tag_list_+='  #'+this.state.work.type[t];
-
-		return (
-			<div>
+		var content_;
+		if(this.state.work){
+			content_=(
 				<div key={this.state.key} className="AWorkContent center">
+				<ReactCSSTransitionGroup transitionName="awork_left"
+						transitionAppear={true}
+						transitionEnter={true}
+						transitionLeave={true}
+						transitionAppearTimeout={Const.AppearInterval+Const.DelayInterval*2}
+						transitionEnterTimeout={Const.AppearInterval+Const.DelayInterval*2}
+						transitionLeaveTimeout={Const.AppearInterval+Const.DelayInterval*2}>
 					<div className="AWorkLeft">
 						<div className="AWorkLeftTop">
 							<div className="English glitch_always" data-text={this.state.work.title_en}>
@@ -77,6 +80,14 @@ export default class AWork extends React.Component{
 						</div>
 						
 					</div>
+				</ReactCSSTransitionGroup>
+				<ReactCSSTransitionGroup transitionName="main_container"
+						transitionAppear={true}
+						transitionEnter={true}
+						transitionLeave={true}
+						transitionAppearTimeout={Const.AppearInterval+Const.DelayInterval*3}
+						transitionEnterTimeout={Const.AppearInterval+Const.DelayInterval*3}
+						transitionLeaveTimeout={Const.AppearInterval+Const.DelayInterval*3}>
 					<div className="AWorkRight">
 						<div>
 							<WorkVideo src={this.state.work.video}/>
@@ -86,31 +97,29 @@ export default class AWork extends React.Component{
 							<div className="text" dangerouslySetInnerHTML={{__html:this.state.work.text_ch}}></div>
 						</div>
 
-						<div className="AWorkText">
+						<FadeReveal className="AWorkText">
 							<div className="title en">Introduction</div>
 							<div className="text" dangerouslySetInnerHTML={{__html:this.state.work.text_en}}></div>
-						</div>
+						</FadeReveal>
 
 						<ImageSlide image={this.state.work.image.rows}/>
 
 						<RelateWork id={this.state.work.id}/>
-					</div>
-					<div className="AWorkClose" onClick={this.goBack}>						
-						<img src="image/x.png"/>
-					</div>
-
+					</div>				
+				</ReactCSSTransitionGroup>
 				</div>
-			</div>
+			);
+
+
+		} 
+
+		return(
+			<MainContainer noCopyright={true}>
+			{content_}
+			</MainContainer>
 
 		);
 
-		//<Link to={"/work"} className="AWorkClose">						
-		//				<GlitchText 
-     	//					img_src="image/x.png"
-     	//					hover={true}
-     	//					amp={1.0}
-		//					line_height={3.0}/>
-		//			</Link>
 	}	
 	componentWillReceiveProps(props_){
 		//console.log(props_);
@@ -118,13 +127,13 @@ export default class AWork extends React.Component{
 		this.loadData(props_.params.id);
 		this.forceUpdate();
 	}
-	goBack(){
-		// console.log("goback "+window._global_page_count);
+	// goBack(){
+	// 	// console.log("goback "+window._global_page_count);
 
-		if(!window._global_page_count) this.props.router.push("/work");
-		else this.props.router.go(-window._global_page_count);		
-		// this.props.router.push(window._from_home_or_work);
-	}
+	// 	if(!window._global_page_count) this.props.router.push("/work");
+	// 	else this.props.router.go(-window._global_page_count);		
+	// 	// this.props.router.push(window._from_home_or_work);
+	// }
 }
 class WorkVideo extends React.Component{
 	render(){
