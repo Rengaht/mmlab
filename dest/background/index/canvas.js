@@ -26,6 +26,8 @@ var _logo_texture;
 var _logo_geometry,_logo_material;
 var _logo_id;
 
+var _fill_texture=[];
+
 
 
 function initLogo(){
@@ -46,6 +48,10 @@ function initLogo(){
 			});		
 		});		
 	});
+
+	for(var i=1;i<=3;++i){
+		_fill_texture[i]=new THREE.TextureLoader().load('image/fill/fill-'+'0'+String(i_))+'.png');
+	}
 
 }		
 function clearLogo(){

@@ -7,7 +7,6 @@ function FloatConstants(){
 
 var FloatConst=new FloatConstants();
 
-var _mslice;
 var _slice_float=[];
 
 
@@ -30,11 +29,12 @@ function clearFloat(){
 
 function updateFloat(){
 	
-
+	var mslice=_slice_float.length;
+	
 	var i;
-	for(i=_mslice-1;i>=0;--i){		
+	for(var i=mslice-1;i>=0;i--){		
 		_slice_float[i].update();
-		updatePosFloat(_scene.children[i],_slice_float[i]);
+		updatePosFloat(_scene.getObjectById(_slice_float[i].id,true),_slice_float[i]);
 	}	
 
 }
@@ -45,18 +45,19 @@ function initSliceFloat(){
 	var i;
 
 
-	_mslice=12;
+	var mslice=12;
+	
 	
 	// create random index to slice
 	var random_arr=[];
-	for(i=1;i<=_mslice;++i) random_arr.push(i%FloatConst.MSlice);
+	for(i=1;i<=mslice;++i) random_arr.push(1+i%FloatConst.MSlice);
 	shuffleArray(random_arr);
 	//console.log(random_arr);
 	
 	var ww_=window.innerWidth.toFixed(2);
 	var wh_=window.innerHeight.toFixed(2);
 
-	for(i=0;i<_mslice;i++){
+	for(i=0;i<mslice;i++){
 
 		//var pos_=[random(0,ww_*.1),random(0,wh_*.1),100];
 		var pos_=[random(0,ww_)*(random(0,2)<1?1.0:-1.0),random(-1.0,1.0)*wh_,(Const.EndPoint*.8+Const.StartPoint*.2)+random(-50,50)];
@@ -79,6 +80,7 @@ function initSliceFloat(){
 		
 
 	}
+	//_mslice=_slice_float.length;
 	
 
 }

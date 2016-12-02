@@ -20,7 +20,7 @@ export default class ImageSlide extends React.Component{
 			var show_=this.state.show_index;
 			imageNodes=this.props.image.map(function(image,index){
 						return(
-							<div key={index} className={index==show_?"image show":"image"}>
+							<div key={index} className={index==show_?"image _show":"image"}>
 							<img src={image.data.url} className="center"/>				
 							</div>
 						);

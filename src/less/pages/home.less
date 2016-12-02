@@ -2,30 +2,38 @@
 	position: fixed;	
 	width:100%;
 	height:100%;
-	display: flex;
-	align-items: center;
-	justify-content:center;
-	>div{
-		// position: relative;
-		// text-align: center;
-	}
-}
 
-.home{
-	//position: relative;
-	div{
-		margin-top: @vert_margin;
-		font-size: @title_size;				
+	&.main_container-leave.main_container-leave-active{
+		transition-delay: 0s !important;
 	}
-	.hello_logo{
+	>div{
 		position: absolute;
+		width:100%;
+		height:100%;
+		
+		display: flex;
+		align-items: center;
+		justify-content:center;
+		flex-direction:column;
+		
+		// position: relative;
+		>div,>img{
+			text-align: center;
+			margin-top: @vert_margin;
+		}
+	}
+
+	//position: relative;
+	
+	.hello_logo{
+		// position: absolute;
 		opacity: 1;
 		visibility: visible;
 		transition:.2s;
 		
 	}
 	.hello_special{
-		position: absolute;
+		// position: absolute;
 		opacity: 0;
 		visibility: hidden;
 		transition:.2s;

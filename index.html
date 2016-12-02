@@ -1,10 +1,21 @@
 <html>
 <head>
 	<meta charset="UTF-8" />
-
+    <meta property="og:title" content="Merlin's Mustache Lab 梅林鬍子實驗室"/>
+    <meta property="og:type" content="Website"/>
+    <meta property="og:url" content="http://mmlab.com.tw/"/>
+    <meta property="og:image" content="http://mmlab.com.tw/image/about2.jpg"/>
+    <meta property="og:site_name" content="Merlin's Mustache Lab"/>
+    <meta property="og:description" content="“梅林的鬍子啊！”我們時常讚嘆：想像力沒有極限。我們想要透過科技，放大廣告世界的想像力，翻新說故事的方法，開發人類感官尚未觸及的領域！現在就跟著我們一起「梅林的鬍子」吧！"/>
     <title>Merlin's Mustache Lab</title>
+   
     <link rel="icon" href="oh.ico" type="image/x-icon"/>
-
+    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/mobile-detect/1.3.5/mobile-detect.min.js"></script>
+     <script>
+        var _md=new MobileDetect(window.navigator.userAgent);
+        if(_md.mobile()) window.location.href="http://mmlab.com.tw/m"
+    </script>
 
 	<script src="https://unpkg.com/jquery@3.1.0/dist/jquery.min.js"></script>
    
@@ -12,8 +23,8 @@
     <!-- map -->
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBdx4XMOQoHMIzUT35wyNaShCo4NMeq8cw&v=3.exp&libraries=geometry,drawing"></script>
     
-    <!--font-->
     <!-- <link href="https://fonts.googleapis.com/css?family=Assistant:800|Hind+Vadodara" rel="stylesheet"> -->
+    <link rel="stylesheet" href="include/normalize/normalize.css" />
     <link rel="stylesheet" href="include/animate/animate.css" />
     <link rel="stylesheet" href="dest/css/app.css" />
     
@@ -54,6 +65,8 @@
 
 </head>
 <body>
+
+
     <div id="_BackEffect"></div>
     <script src="dest/background/common.js"></script>
 
@@ -61,6 +74,38 @@
 	<div id="app"></div>    
     <script src="dest/main.js"></script>
 	<!-- <script type="text/babel" src="js/work.js"></script> -->
-</body>
 
+    
+    <!--ga-->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-88344465-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+
+</body>
 </html>
+
+<!--
+  __  __   ______   _____    _        _____   _   _   _    _____             
+ |  \/  | |  ____| |  __ \  | |      |_   _| | \ | | ( )  / ____|            
+ | \  / | | |__    | |__) | | |        | |   |  \| | |/  | (___              
+ | |\/| | |  __|   |  _  /  | |        | |   | . ` |      \___ \             
+ | |  | | | |____  | | \ \  | |____   _| |_  | |\  |      ____) |            
+ |_|  |_| |______| |_|__\_\ |______| |_____| |_| \_|____ |_____/_   ______   
+ |  \/  | | |  | |  / ____| |__   __|     /\      / ____| | |  | | |  ____|  
+ | \  / | | |  | | | (___      | |       /  \    | |      | |__| | | |__     
+ | |\/| | | |  | |  \___ \     | |      / /\ \   | |      |  __  | |  __|    
+ | |  | | | |__| |  ____) |    | |     / ____ \  | |____  | |  | | | |____   
+ |_|  |_|  \____/  |_____/     |_|    /_/    \_\  \_____| |_|  |_| |______|  
+ | |          /\     |  _ \                                                  
+ | |         /  \    | |_) |                                                 
+ | |        / /\ \   |  _ <                                                  
+ | |____   / ____ \  | |_) |                                                 
+ |______| /_/    \_\ |____/       
+
+-->

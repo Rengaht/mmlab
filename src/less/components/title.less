@@ -1,13 +1,20 @@
 
 
 .corner_title{
-	position:fixed;	
-	transform: rotate(-90deg);
-	left:@in_margin;
-	bottom:@in_margin*5;	
 	
-	text-transform: uppercase;
-	.fontCornerTitle;
+	position:fixed;	
+	left:@out_margin + @in_margin;
+	bottom:@in_margin*5;
+	width:@in_margin*2;
+	>div{
+		text-align: center;
+		transform:rotate(-90deg);
+		white-space: pre;
+		text-transform: uppercase;
+		.fontCornerTitle;
+	}
+
+	
 	
 	
 	span{
@@ -19,9 +26,19 @@
 	}
 }
 .copyright{
-	text-align: center;
+	
+	//position: absolute;
+	bottom: 0;
+	width:100%;
+
+	text-align: center;	
+
 	.fontCopyright;
 
-	margin-top: @vert_margin*2;
+	margin-top: @out_margin + @vert_margin*10;
 	margin-bottom: @vert_margin*2;
+
+	// >div{
+				
+	// }
 }

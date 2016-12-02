@@ -8,12 +8,12 @@ function Constants(){
 	this.FadeInVel=.05;
 	this.FadeOutVel=.05;
 	
-	this.AppearInterval=800;
-	this.DelayInterval=800;
+	this.AppearInterval=1000;
+	this.DelayInterval=600;
 
 	this.FadeInInterval=this.AppearInterval;
 	this.FadeInDelay=this.DelayInterval;
-	this.FadeOutInterval=this.AppearInterval;
+	this.FadeOutInterval=this.AppearInterval*.5;
 	this.FadeOutDelay=(this.AppearInterval+this.DelayInterval)*0;
 }
 
@@ -59,7 +59,8 @@ var _fade_out=false;
 var _fade_in=false;
 var _dest_type;
 var _fade_scale=0.0;
-
+var _fade_delta;
+var _fade_start_time;
 
 
 function init(){
@@ -210,46 +211,20 @@ function update(){
 			break;		
 	}
 
-	if(_fade_in){
-		_fade_scale+=Const.FadeInVel;		
-		if(_fade_scale>1){
-			_fade_scale=1;
+	if(_fade_in){		
+		_fade_scale=easeFunction(_fade_delta);		
+		if(_fade_scale>=1){
+			_fade_scale=1.0;
 			_fade_in=false;
 		}
 	}
 	if(_fade_out){
-		_fade_scale-=Const.FadeOutVel;		
-		if(_fade_scale<0){
-			_fade_scale=0;
-			// _fade_out=false;			
-		}	
+		_fade_scale=easeFunction(1-_fade_delta);				
 	}
 
 	frameCount++;	
 	stats.update();
 
-	// _camera.updateMatrixWorld();
-	//check intersected
-	// _raycaster.setFromCamera(_mouse,_camera);
-	// var inter=_raycaster.intersectObjects(_scene.children);
-
-	// if(inter.length>0){
-		
-	// 	if(_intersected!=inter[0].object){
-
-	// 		if(_intersected) _intersected.material=_intersected._current_material;
-
-	// 		var uni=inter[0].object.material.uniforms;
-	// 		if(uni && uni.gold && uni.gold.value==true){
-	// 			_intersected=inter[0].object;
-	// 			_intersected._current_material=_intersected.material;
-	// 			_intersected.material=_selected_material;
-	// 		}
-	// 	}		
-	// }else{
-	// 	if(_intersected) _intersected.material=_intersected._current_material;
-	// 	_intersected=null;
-	// }
 	
 }
 
@@ -260,8 +235,12 @@ function draw(){
 	
 	_now=Date.now();
 	_delta=_now-_then;
-	if(_delta>_frame_interval){
+	
+	if(_fade_in) _fade_delta=(_now-_fade_start_time)/Const.FadeInInterval.toFixed(2);
+	if(_fade_out) _fade_delta=(_now-_fade_start_time)/Const.FadeOutInterval.toFixed(2);		
+	
 
+	if(_delta>_frame_interval){		
 		_then=_now-(_delta%_frame_interval);
 		update();
 	}
@@ -277,6 +256,7 @@ function draw(){
 function initBackground(type_){
 	
 	_dest_type=type_;	
+
 	setTimeout(function(){
 		initType(type_);	
 	},Const.FadeInDelay);
@@ -317,16 +297,23 @@ function initType(type_){
 	_fade_in=true;
 	_fade_out=false;
 	_fade_scale=0.0;
-
+	_fade_start_time=Date.now();
 
 }
 function endBackground(){
+
+	var delay_=0;
+	// if(_Background_Type==0) delay_=Const.DelayInterval*3+Const.AppearInterval;
+	
+
+
 	setTimeout(function(){
 		console.log("background fade out!");
 		_fade_out=true;			
 		_fade_in=false;			
 		_fade_scale=1.0;
-	},Const.FadeOutDelay);
+		_fade_start_time=Date.now();
+	},delay_);
 }
 
 //util

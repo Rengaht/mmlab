@@ -5,6 +5,10 @@ function LLeg(p_,v_,g_){
 	this._gold=g_;
 	this._dead=false;
 	this._ang=Math.random()*Math.PI;
+
+	
+	//console.log(this._fill_index);
+
 	this._shader_uniform={
 		amount:{value:0.0},
 		angle:{value:Math.random()*Math.PI},
@@ -12,14 +16,17 @@ function LLeg(p_,v_,g_){
 		seed_y:{value:0.0},
 		texture:{value:_leg_texture},
 		gold:{value:g_},
-		alpha:{value:0.0}
-
+		alpha:{value:0.0},
+		fill_texture:{value:_fill_texture[parseInt(Math.random()*3)+1]},
+		fill_texture_2:{value:_fill_texture[parseInt(Math.random()*3)+1]}
 	};
 	if(g_){
 		this._shader_uniform.texture.value=_gold_texture;
+		this._shader_uniform.fill_texture.value=_gold_texture;
+		this._shader_uniform.fill_texture_2.value=_gold_texture;
 	}
-
 	this._shader_uniform.texture.value.wrapS=this._shader_uniform.texture.value.wrapT=THREE.RepeatWrapping;
+	this._shader_uniform.fill_texture.value.wrapS=this._shader_uniform.fill_texture.value.wrapT=THREE.RepeatWrapping;
 	this.id;
 
 }
@@ -64,8 +71,12 @@ LLeg.prototype.update=function(){
 		this._shader_uniform.amount.value=p_*1.2;
 		this._shader_uniform.angle.value=p_*(Math.random()-0.5)*2.0*Math.PI;
 		this._shader_uniform.seed_x.value=p_*(Math.random()-0.5)*2.0*0.02;
-		this._shader_uniform.seed_y.value=p_*(Math.random()-0.5)*2.0*0.03;
-		// if(!this._gold) this._shader_uniform.texture.value=_fill_texture;
+		this._shader_uniform.seed_y.value=p_*(Math.random()-0.5)*2.0*0.03;		
+		// if(!this._gold){
+		// 	this._shader_uniform.fill_texture.value=_fill_texture[parseInt(Math.random()*3)+1];
+		// 	this._shader_uniform.fill_texture_2.value=_fill_texture[parseInt(Math.random()*3)+1];
+		// } 
+
 	}else{
 		this._shader_uniform.amount.value=0.0;
 		// if(!this._gold) this._shader_uniform.texture.value=_leg_texture;
@@ -73,8 +84,8 @@ LLeg.prototype.update=function(){
 
 	if(_fade_out && _Background_Type==0){
 		this._shader_uniform.alpha.value=Math.min(this._shader_uniform.alpha.value,_fade_scale);	
-		this._pos[1]+=this._vel[1]*(1.0+(1.0-_fade_scale)*2.0);
-		this._pos[2]+=this._vel[2]*(1.0+(1.0-_fade_scale)*2.0);
+		this._pos[1]+=this._vel[1]*(1.0+(1.0-_fade_scale)*8.0);
+		this._pos[2]+=this._vel[2]*(1.0+(1.0-_fade_scale)*8.0);
 
 	}else{
 		this._shader_uniform.alpha.value=(p_<.8)?p_/.8:1.0;	

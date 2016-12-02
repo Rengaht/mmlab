@@ -182,11 +182,11 @@ export default class Work extends React.Component{
 		     	{this.props.children}
 		     	</div>
      		</MainContainer>
-     		<FadeAppear effect="fadeInUpFilter" className="filter">
-			 		<WorkFilter ref="_all" name="ALL" filterHandler={this.applyFilter} showFilter={this.toggleFilter}/>
-			 		<WorkFilter ref="_year" name="YEAR" val={this.state.filter.year} filterHandler={this.applyFilter} showFilter={this.toggleFilter}/>
-		     		<WorkFilter ref="_type" name="TYPE" val={this.state.filter.type} filterHandler={this.applyFilter} showFilter={this.toggleFilter}/>
-		    </FadeAppear>     	
+     		<div className="filter">
+				 		<WorkFilter ref="_all" name="ALL" filterHandler={this.applyFilter} showFilter={this.toggleFilter}/>
+				 		<WorkFilter ref="_year" name="YEAR" val={this.state.filter.year} filterHandler={this.applyFilter} showFilter={this.toggleFilter}/>
+			     		<WorkFilter ref="_type" name="TYPE" val={this.state.filter.type} filterHandler={this.applyFilter} showFilter={this.toggleFilter}/>
+			    </div>     	
 			</div>
 		);
 	}
@@ -327,6 +327,7 @@ class WorkList extends React.Component{
 		setTimeout(function(){
 			//console.log(name+' '+val);
 			this_.setState({'name':name,'val':val});	
+			document.body.scrollTop=0;
 		},500);		
 	}
 }

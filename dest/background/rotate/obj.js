@@ -4,7 +4,7 @@ function RotateSlice(p_,a_,i_){
 	this._vel=[Math.random()*50+200,Math.random()*50+200,Math.random()*50+200];
 	this._tex_index=i_;
 
-	this.distort_vel=random(10,70);
+	this.distort_vel=random(5,20);
 	var _tex=new THREE.TextureLoader().load('image/logo_slice/slice-01.png');
 	
 	this._shader_uniform={
@@ -16,7 +16,7 @@ function RotateSlice(p_,a_,i_){
 		texture:{value:_tex},
 		damp:{value:Math.random()*.3+.1},
 		dvel:{value:this.distort_vel},
-		alpha:{value:3.2}
+		alpha:{value:0.0}
 	};
 
 	this._shader_uniform.texture.value.wrapS=this._shader_uniform.texture.value.wrapT=THREE.RepeatWrapping;
@@ -38,10 +38,13 @@ RotateSlice.prototype.update=function(){
 	//this._shader_uniform.damp.value=0.3;//*Math.sin(frameCount/this._vel[1]+this.phi)+0.1*random(-1,1);
 	
 	this._shader_uniform.dvel.value=this.distort_vel*(.8+.5*Math.sin(frameCount/this._vel[2]+this.phi));
+	
+	
 
-	if(_fade_out && _Background_Type==3) this._shader_uniform.alpha.value-=Const.FadeOutVel;
-	else if(_fade_in && _dest_type==3) this._shader_uniform.alpha.value=_fade_scale;
-	else this._shader_uniform.alpha.value=1.0;
+	if(_fade_out && _Background_Type==3) this._shader_uniform.alpha.value=Math.min(this._shader_uniform.alpha.value,_fade_scale)*3.0;
+	else if(_fade_in) this._shader_uniform.alpha.value=_fade_scale*3.0;
+	else this._shader_uniform.alpha.value=1.0*3.0;
+
 }
 RotateSlice.prototype.getPos=function(){
 	return [this._pos[0]+this._amp[0]*Math.sin(frameCount/this._vel[0]+this.phi),

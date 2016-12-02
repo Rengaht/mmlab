@@ -5,27 +5,23 @@
 	height: 0;
 	opacity: 1;
 	transition:.2s ease-in-out;	
+	overflow: hidden;
 
 	&.show{
 		opacity: 1;
-		transition-duration:.2s;
+		transition-duration:@appear_interval;
 		transition-timing-function:ease-in-out;
 	}
-	>canvas,>img{
+	>img{
 		position: absolute;
 		top: 0;
 		left: 0;
 		width: 100%;
 		height: 100%;
 		overflow: hidden;
-	}
-	>img{
 		display: block;
 	}
-	>canvas{
-		display: none;
-	}
-
+	
 	
 }
 
@@ -73,12 +69,17 @@
 		div{
 			// margin-top: @vert_margin*.2;
 		}
-		canvas{
-			position: absolute;
-			width: 100%;
-			height: 100%;
-			top:0;
-			left:0;
+	}
+	.workThumbContainer{
+		
+		.thumbWrap{
+			>canvas{
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top:0;
+				left:0;
+			}
 		}
 	}
 	
@@ -87,14 +88,17 @@
 .workThumbLink:hover{
 	.workThumbDescript{
 		opacity: 1;
-		transition:.1s ease-in-out .1s;	
+		transition:appear_interval ease-in-out;			
 	}
+
 	.workThumbContainer{
 		>img{
 			display: none;
 		}
-		>canvas{
-			display: block;
+		.thumbWrap{			
+			>canvas{
+				display: block;				
+			}
 		}
 	}
 }

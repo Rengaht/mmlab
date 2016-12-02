@@ -27,7 +27,7 @@ a{
 }
 
 #_main{
-	position: absolute;
+	//position: absolute;
 	width:100%;
 	// padding:@out_margin;
 	transition:.01s;
@@ -42,9 +42,15 @@ a{
 .mainContainer{
 	position: absolute;
 	width:100%;
+	min-height: 100vh;
 	//height:100%;
 	margin-bottom: @out_margin*5;
-
+		
+	display: flex;
+	align-items: center;
+	justify-content:center;
+	flex-direction:column;
+	
 	// overflow: hidden;
 	// opacity: 0;
 	// transition:5s;
@@ -62,7 +68,7 @@ a{
 		// overflow: scroll;
 		// overflow-x:hidden;
 		// overflow-y:auto;
-		
+		flex:1;
 			
 
 		// .part{

@@ -5,6 +5,7 @@ function LLeg(p_,v_,g_){
 	this._gold=g_;
 	this._dead=false;
 	this._ang=Math.random()*Math.PI;
+	this._fill_index=parseInt(Math.random()*3);
 	this._shader_uniform={
 		amount:{value:0.0},
 		angle:{value:Math.random()*Math.PI},
@@ -12,8 +13,8 @@ function LLeg(p_,v_,g_){
 		seed_y:{value:0.0},
 		texture:{value:_leg_texture},
 		gold:{value:g_},
-		alpha:{value:0.0}
-
+		alpha:{value:0.0},
+		fill_texture:{value:_fill_texture[this._fill_index]}
 	};
 	if(g_){
 		this._shader_uniform.texture.value=_special_texture;

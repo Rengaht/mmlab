@@ -34,7 +34,7 @@ export default class Main extends React.Component{
 						transitionLeave={true}
 						transitionAppearTimeout={Const.AppearInterval+Const.DelayInterval*2}
 						transitionEnterTimeout={Const.AppearInterval+Const.DelayInterval*2}
-						transitionLeaveTimeout={Const.AppearInterval+Const.DelayInterval*2}>	
+						transitionLeaveTimeout={Const.AppearInterval}>	
 			    		<Title text={this.props.location.pathname} key={this.props.location.pathname} noTitle={!show_menu || is_awork}/>
 			    	</ReactCSSTransitionGroup>
 

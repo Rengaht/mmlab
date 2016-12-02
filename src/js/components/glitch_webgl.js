@@ -52,7 +52,8 @@ export default class WebglGlitch extends React.Component{
 
     	this.glitch={
     		p:0.0,
-    		seed:0.0
+    		seed:0.0,
+    		scale:1.0
     	}
     	this.image;
 
@@ -157,6 +158,7 @@ export default class WebglGlitch extends React.Component{
 			this.uniform.amount=_gl.getUniformLocation(program,"amount");
 			this.uniform.angle=_gl.getUniformLocation(program,"angle");
 			this.uniform.alpha=_gl.getUniformLocation(program,"alpha");
+			this.uniform.scale=_gl.getUniformLocation(program,"scale");
 
 			this.uniform.seed=_gl.getUniformLocation(program,"seed");
 			this.uniform.seed_x=_gl.getUniformLocation(program,"seed_x");
@@ -175,10 +177,18 @@ export default class WebglGlitch extends React.Component{
 
 		// draw		
 		if(this.glitch.p<=1) this.glitch.p+=0.18;
+		
+		if(this.glitch.scale<=1) this.glitch.scale+=.1;
+
+
 		let p_=easeFunction(Math.abs(Math.sin(Math.PI*this.glitch.p)));
 
 		if(this.uniform.amount) _gl.uniform1f(this.uniform.amount,p_*.5);		
 		if(this.uniform.alpha) _gl.uniform1f(this.uniform.alpha,p_);
+		if(this.uniform.scale){
+			_gl.uniform1f(this.uniform.scale,1.0+.5*easeFunction(this.glitch.scale));
+			//console.log(this.glitch.scale);
+		} 
 
 		
 		
@@ -218,6 +228,7 @@ export default class WebglGlitch extends React.Component{
 		this.setupCanvas();
 
 		this.glitch.p=0.0;		
+		this.glitch.scale=0.0;
 		this.intervalId=setInterval(this.draw,this._options.frame_rate);
 		
 	}

@@ -5,6 +5,7 @@ import {Title,CopyRight} from '../components/title'
 import FadeReveal from '../components/fade_reveal'
 import MainContainer from '../components/main_container'
 
+import * as Params from '../components/map_param'
 //import GoogleMap from 'google-map-react';
 
 
@@ -18,38 +19,14 @@ class Contact extends React.Component{
 	              lng: 121.545506
 	        }
 		};
+
+		console.log(Params.MapParams);
+
 		this.map_options={
 			panControl: false,
       		mapTypeControl: false,
       		scrollwheel: true,
-      		styles:[{
-      			stylers:[{'saturation':-100}, 
-      					 {'gamma':0.2},
-      					 {'lightness':-100},
-      					 {'visibility':'on'}]},
-      			{featureType: "road",
-				 elementType: "geometry",
-				 stylers:[
-				    {lightness: 50},
-				    {visibility:"simplified"}
-				 ]},
-				{featureType: "road",
-				 elementType: "labels.text.fill",
-				 stylers:[
-				    {lightness: 50}
-				]},
-				{featureType: "poi",
-				 elementType: "all",
-				 stylers:[
-				    {visibility:'off'}
-				]},
-				{featureType: "landscape",
-				 elementType: "geometry.stroke",
-				 stylers:[
-				    {lightness:100},
-				    {visibility:'on'}
-				]}
-      		]
+      		styles:Params.MapParams
 		};
   }
   componentDidMount(){
@@ -76,24 +53,25 @@ class Contact extends React.Component{
     	<MainContainer title="contact">    	            
 	     	    
 	     	<div className="content center contact">
-	     		<FadeReveal className="contactHello">
-	     		 	<div className="glitch_always" data-text="Let's">Let's</div>
-	     			<div className="glitch_always" data-text="wow">wow</div>
+	     		<FadeReveal className="contactHead">
+	     			<div className="contactHello">
+		     		 	<div className="glitch_always" data-text="Let's">Let's</div>
+		     			<div className="glitch_always wow" data-text="WOW">WOW</div>
+	     			</div>
+	     			<div className="contactEmail">
+			     		<a href="mailto:merlin.mustache.mmlab.tw" data-text="[ merlin.mustache@mmlab.tw ]">
+			     		[ merlin.mustache@mmlab.tw ]</a>			     		
+	     			</div>
 	     		</FadeReveal>
 
-	     		<FadeReveal className="contactEmail">
-		     		<img src="image/arrow_contact.png"/>
-		     		<span>[</span>
-		     		<span><a href="mailto:merlin.mustache.mmlab.tw">merlin.mustache@mmlab.tw</a></span>
-		     		<span>]</span>
-	     		</FadeReveal>
+	     		
 	     		<FadeReveal>
 	     	    <div className="contactInfo">
 	     	    	<div className="title">梅林斯行銷有限公司</div>
 	     	    	<div>
 			     		<div>
 				     		<span>T</span>
-				     		<span>02 2718-1133</span>
+				     		<span>02 2718-1133 #135</span>
 			     		</div>
 						<div>
 				     		<span>A</span>
@@ -110,7 +88,7 @@ class Contact extends React.Component{
 	     	    	<div>
 			     		<div>
 				     		<span>T</span>
-				     		<span>02 2718-1133</span>
+				     		<span>02 2718-1133 #135</span>
 			     		</div>
 						<div>
 				     		<span>A</span>

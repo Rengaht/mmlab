@@ -43,7 +43,7 @@ FloatSlice.prototype.update=function(){
 	this._shader_uniform.dvel.value=this.distort_vel*(Math.sin(frameCount/this._vel[2]+this.phi));
 
 
-	if(_fade_out && _Background_Type==1) this._shader_uniform.alpha.value-=Const.FadeOutVel;
+	if(_fade_out && _Background_Type==1) this._shader_uniform.alpha.value=Math.min(this._shader_uniform.alpha.value,_fade_scale);
 	else this._shader_uniform.alpha.value=1.0;
 }
 FloatSlice.prototype.getPos=function(){

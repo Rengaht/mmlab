@@ -13,7 +13,11 @@
 
 @copyright_size:11px;
 
+@hello_size:80px;
+@wow_size:120px;
 
+
+@related_title_size:16px;
 
 
 @pad_text_size:12px;
@@ -30,8 +34,10 @@
 
 @pad_copyright_size:8px;
 
+@pad_hello_size:60px;
+@pad_wow_size:90px;
 
-
+@pad_related_title_size:12px;
 
 @font-face{
 	font-family:mtextFont;	
@@ -143,6 +149,17 @@
     letter-spacing:@pad_small_text_size*.1;  
   }
 }
+.fontRelatedTitle{
+  font-family: mtitleFont;
+  font-weight: bold;
+  font-size:@related_title_size;
+  letter-spacing:@related_title_size*.1;   
+  // line-height: 98%;
+  @media @pad{
+    font-size:@pad_related_title_size;
+    letter-spacing:@pad_related_title_size*.1;   
+  }
+}
 
 
 //awork
@@ -172,15 +189,34 @@
 
 //contact
 .fontHello{
-  font-family: mtitleFont;
+  font-family: mmenuFont;
   font-weight: bold;
-  font-size:@title_size*3;
-  letter-spacing:@title_size*3*.1;  
+  font-style: italic;
+  font-size:@hello_size;
+  letter-spacing:@hello_size*.1;  
+  line-height: @hello_size;
   @media @pad{
-    font-size:@pad_title_size*3;
-    letter-spacing:@pad_title_size*3*.1;  
+    font-size:@pad_hello_size;
+    letter-spacing:@pad_hello_size*.1;  
+    line-height: @pad_hello_size;
   }
 }
+
+.fontWow{
+  font-family: mmenuFont;
+  font-weight: bold;
+  font-style: italic;
+  font-size:@wow_size;
+  // letter-spacing:@wow_size*.1;  
+  line-height: @wow_size*0.833;
+  @media @pad{
+    font-size:@pad_wow_size;
+    // letter-spacing:@pad_wow_size*.1;  
+    line-height: @pad_wow_size*0.833;
+  }
+}
+
+
 .fontEmail{
   font-family: mtextFont;
   font-size:@title_size*1.5;

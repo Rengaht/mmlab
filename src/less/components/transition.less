@@ -1,5 +1,5 @@
-@appear_interval:.8s;
-@delay_interval:.8s;
+@appear_interval:1s;
+@delay_interval:.6s;
 
 @work_thumb_appear_interval:.5s;
 @work_thumb_delay_interval:0.1s;
@@ -13,6 +13,7 @@
     &-active{
       opacity: 1;
       transition-duration:@work_thumb_appear_interval;
+      transition-timing-function:ease-in-out;
       .generate-delays(40,@work_thumb_delay_interval);  
     }
   }
@@ -21,6 +22,7 @@
     &-active{
       opacity: 0.01;
       transition-duration:@work_thumb_appear_interval;
+      transition-timing-function:ease-in-out;
       transition-delay: 0s !important;
     }
   }
@@ -32,6 +34,7 @@
     &-active{
       opacity: 1;
       transition-duration:@appear_interval;      
+      transition-timing-function:ease-in-out;
       transition-delay:@delay_interval*3;
     }
   }
@@ -40,7 +43,8 @@
     &-active{
       opacity: 0.01;
       transition-duration:@appear_interval;
-      transition-delay: @delay_interval;
+      transition-timing-function:ease-in-out;
+      transition-delay: 0;//@delay_interval;
     }
   }
 }
@@ -49,26 +53,20 @@
 
   &-appear, &-enter{
     opacity: 0.01;
-    transform: translate3d(0, 200%, 0) rotate(-90deg) !important;
-
     &-active{
       opacity: 1;
-      transform:rotate(-90deg) !important;
-
-      transition-duration:@appear_interval;            
+      transition-duration:@appear_interval;       
+      transition-timing-function:ease-in-out;     
       transition-delay:@delay_interval*2;            
     }
   }
   &-leave{
     opacity: 1;
-    transform:rotate(-90deg) !important;
-
     &-active{
       opacity: 0.01;
-      transform: rotate(-90deg) !important;
-
       transition-duration:@appear_interval;
-      transition-delay: @delay_interval*2;
+      transition-timing-function:ease-in-out;
+      transition-delay: 0;
     }
   }
 }
@@ -80,8 +78,9 @@
     &-active{
       opacity: 1;
 
-      transition-duration:@appear_interval;            
-      transition-delay:0s;            
+      transition-duration:@appear_interval !important;
+      transition-timing-function:ease-in-out;          
+      transition-delay:0s !important;;            
     }
   }
   &-leave{
@@ -89,8 +88,9 @@
 
     &-active{
       opacity: 0.01;
-      transition-duration:@appear_interval;
-      transition-delay:@delay_interval*4;             
+      transition-duration:@appear_interval !important;
+      transition-timing-function:ease-in-out;
+      transition-delay:@delay_interval*3 !important;            
     }
   } 
 }
@@ -109,12 +109,13 @@
 
   &-appear, &-enter{
     opacity: 0.01;
-    transform: translate3d(0, 200%, 0) !important;
+    //transform: translate3d(0, 200%, 0) !important;
 
     &-active{
       opacity: 1;
       
-      transition-duration:@appear_interval;            
+      transition-duration:@appear_interval;  
+      transition-timing-function:ease-in-out;          
       transition-delay:@delay_interval*2;            
     }
   }
@@ -124,6 +125,7 @@
     &-active{
       opacity: 0.01;
       transition-duration:@appear_interval;
+      transition-timing-function:ease-in-out;
       transition-delay: @delay_interval*2;
     }
   }

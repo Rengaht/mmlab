@@ -20,15 +20,14 @@ export class MainMenu extends React.Component{
 	render(){	
 
 		
-		if(this.props.hideMenu) return <div/>;
+		//if(this.props.hideMenu) return <div/>;
+		
 		let menu_open=this.state.show || this.props.isAWork;
 		console.log("menu_open= "+menu_open);
 
-		var wrap_;
-		if(this.state.show)
-			wrap_=(
-				<div className="wrap show">
-					<div>					
+		var wrap_=(
+				<div className="wrap" ref="_wrap">
+					<div className="itemwrap" ref="_item_wrap">					
 						<MainMenuItem to="/about" key="_about">ABOUT</MainMenuItem>
 			     		<MainMenuItem to="/work" key="_work">WORK</MainMenuItem>
 			     		<MainMenuItem href="http://mmlab.com.tw/blog/" key="_blog">BLOG</MainMenuItem>		     		
@@ -37,32 +36,34 @@ export class MainMenu extends React.Component{
 			     	<div className="menuCopyright">
 			     		<CopyRight/>
 			     	</div>
-				</div>		
+				</div>								
 			);
+		var ham_;
+		if(!this.props.hideMenu)
+			ham_=(<HamMenu open={menu_open} 
+								 onClick={this.toggleShow}/>);
+		
+		var logo_;
+		if(!this.props.isAWork && !this.props.hideMenu)
+			logo_=(
+			<div className="logo" onClick={this.closeShow}>
+				<Link to="/">
+		     		<img src="image/logo_no_name.png"/>
+		     	</Link>
+	     	</div>);
 
 		return(
 				<div>
 				<div className="mainMenu" onClick={this.toggleShow}>
-					<div className="wrap" ref="_wrap">
-						<div className="itemwrap" ref="_item_wrap">					
-							<MainMenuItem to="/about" key="_about">ABOUT</MainMenuItem>
-				     		<MainMenuItem to="/work" key="_work">WORK</MainMenuItem>
-				     		<MainMenuItem href="http://mmlab.com.tw/blog/" key="_blog">BLOG</MainMenuItem>		     		
-					     	<MainMenuItem to="/contact" key="_contact">CONTACT</MainMenuItem>
-						</div>
-				     	<div className="menuCopyright">
-				     		<CopyRight/>
-				     	</div>
-					</div>
+					{wrap_}
 					<ReactCSSTransitionGroup transitionName="menu_icon"
 						transitionAppear={true}
 						transitionEnter={true}
 						transitionLeave={true}
 						transitionAppearTimeout={Const.AppearInterval+Const.DelayInterval*4}
 						transitionEnterTimeout={Const.AppearInterval+Const.DelayInterval*4}
-						transitionLeaveTimeout={Const.AppearInterval+Const.DelayInterval*4}>	
-						<HamMenu open={menu_open} 
-								 onClick={this.toggleShow}/>		
+						transitionLeaveTimeout={Const.AppearInterval+Const.DelayInterval*4}>							
+						{ham_}
 					</ReactCSSTransitionGroup>				
 				</div>
 					<ReactCSSTransitionGroup transitionName="menu_icon"
@@ -72,11 +73,7 @@ export class MainMenu extends React.Component{
 						transitionAppearTimeout={Const.AppearInterval+Const.DelayInterval*4}
 						transitionEnterTimeout={Const.AppearInterval+Const.DelayInterval*4}
 						transitionLeaveTimeout={Const.AppearInterval+Const.DelayInterval*4}>	
-						<div className={this.props.isAWork?"logo hide":"logo"} onClick={this.closeShow}>
-						    <Link to="/">
-					     		<img src="image/logo_no_name.png"/>
-					     	</Link>
-				     	</div>		
+						{logo_}	
 				     </ReactCSSTransitionGroup>
 			    </div>
 			);		
@@ -110,7 +107,7 @@ export class MainMenu extends React.Component{
 			this.props.backBlur(!this.state.show);
 			this.setState({show:!this.state.show});
 
-			this.refs._wrap.cla ssList.toggle("show");
+			this.refs._wrap.classList.toggle("show");
 			this.refs._item_wrap.classList.toggle("show");
 		}
 	}

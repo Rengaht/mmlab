@@ -62,9 +62,9 @@ export default class AWork extends React.Component{
 						transitionAppear={true}
 						transitionEnter={true}
 						transitionLeave={true}
-						transitionAppearTimeout={Const.AppearInterval+Const.DelayInterval*2}
-						transitionEnterTimeout={Const.AppearInterval+Const.DelayInterval*2}
-						transitionLeaveTimeout={Const.AppearInterval+Const.DelayInterval*2}>
+						transitionAppearTimeout={Const.AppearInterval+Const.DelayInterval*3}
+						transitionEnterTimeout={Const.AppearInterval+Const.DelayInterval*3}
+						transitionLeaveTimeout={Const.AppearInterval+Const.DelayInterval*3}>
 					<div className="AWorkLeft">
 						<div className="AWorkLeftTop">
 							<div className="English glitch_always" data-text={this.state.work.title_en}>
@@ -114,7 +114,7 @@ export default class AWork extends React.Component{
 		} 
 
 		return(
-			<MainContainer noCopyright={true}>
+			<MainContainer noCopyright={false}>
 			{content_}
 			</MainContainer>
 
@@ -127,6 +127,11 @@ export default class AWork extends React.Component{
 		this.loadData(props_.params.id);
 		this.forceUpdate();
 	}
+	closeVideo(){
+		
+		
+	}
+
 	// goBack(){
 	// 	// console.log("goback "+window._global_page_count);
 

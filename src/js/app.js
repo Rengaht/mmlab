@@ -1,7 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {Router,Route,hashHistory,IndexRoute,useRouterHistory} from 'react-router'
+import {Router,Route,hashHistory,IndexRoute,useRouterHistory,applyRouterMiddleware} from 'react-router'
 import { createHashHistory } from 'history'
+import { useScroll } from 'react-router-scroll';
 
 import Main from './pages/main'
 import Home from './pages/home'
@@ -21,7 +22,7 @@ window._last_page=[];
 window._last_page_scroll=0;
 
 function routerUpdate(){
-	console.log(this.router.location);
+	//console.log(this.router.location);
 
 	let loc_=this.router.location.pathname;
 	let last_=window._last_page[window._last_page.length-1];
@@ -52,19 +53,36 @@ function routerUpdate(){
 
 	if(loc_==="/work") dest_=1;
 	if(loc_==="/about" || loc_==="/contact") dest_=2;
-	if(loc_.match(/(^\/work\/)(.*[0-9]$)/gm)) dest_=3;
+	if(loc_.match(/(^\/work\/)(.*[0-9]$)/gm)){
+		dest_=3;		
+	} 
+
 
 	
 	if(last_){
+		if(_Background_Type==3){
+			//stop video
+			let video_=document.getElementById('_YoutubeIframe');
+			if(video_){
+				let src_=video_.src;
+				video_.src=src_;
+			}
+		}
+		if(_Background_Type==3 && dest_==3){
+			// setTimeout(function(){
+				// document.body.scrollTop=0;
+			// },Const.FadeOutDelay+Const.FadeOutInterval);	
+			return;
+		}
 		endBackground();		
 
 		setTimeout(function(){
 			initBackground(dest_);
-			document.body.scrollTop=0;
+			// document.body.scrollTop=0;
 		},Const.FadeOutDelay+Const.FadeOutInterval);
 	}else{
 		initBackground(dest_);
-		document.body.scrollTop=0;
+		// document.body.scrollTop=0;
 	}
 	
 
@@ -75,7 +93,8 @@ function routerUpdate(){
 const appHistory = useRouterHistory(createHashHistory)({ queryKey: false })
 
 ReactDOM.render((
-	<Router history={hashHistory} onUpdate={routerUpdate}>
+	<Router history={hashHistory} onUpdate={routerUpdate}
+			render={applyRouterMiddleware(useScroll())}>
 		<Route path="/" component={Main}>    
 			
 			<IndexRoute component={Home}/>

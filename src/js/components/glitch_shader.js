@@ -19,6 +19,7 @@ export const _gl_frag_shader=[
 	"uniform float seed;",
 	"uniform float seed_x;",
 	"uniform float seed_y;",
+	"uniform float scale;",
 	"",	
 	"varying vec2 v_texCoord;",
 	"float rand(vec2 co){",
@@ -32,6 +33,8 @@ export const _gl_frag_shader=[
 	"",
 	"",
 	"	vec2 p=v_texCoord;",
+	"	vec2 q=vec2((p.x-0.5)/scale+0.5,(p.y-0.5)/scale+0.5);",
+	"	p=q;",
 	"",
 	"	float xs=floor(gl_FragCoord.x/0.5);",
 	"	float ys=floor(gl_FragCoord.y/0.5);",
@@ -41,8 +44,8 @@ export const _gl_frag_shader=[
 	// "	p.x+=0.01*amount*distortion_x;//*rand(vec2(xs * seed,ys * seed*50.));",
 	// "	p.y+=0.01*amount*distortion_y;//*rand(vec2(xs * seed,ys * seed*50.));",
 	
-	"	p.x+=normal.x*seed_x*(seed/5.);",
-	"	p.y+=normal.y*seed_y*(seed/5.);",
+	"	//p.x+=normal.x*seed_x*(seed/5.);",
+	"	//p.y+=normal.y*seed_y*(seed/5.);",
 		//base from RGB shift shader
 	"	vec2 offset = amount*0.045 * vec2( cos(angle), sin(angle));",
 	"	vec4 cr = texture2D(u_image, p + offset);",
@@ -53,8 +56,8 @@ export const _gl_frag_shader=[
 	"	//cb*=amount;",
 	"",		
 	"",
-	"	gl_FragColor = vec4(cga.r+cr.r, cga.g+cb.b, cga.b+cb.b,1.0);",
-	"",		
+	"	gl_FragColor = vec4(cga.r+cr.r, cga.g+cb.b, cga.b+cb.b,1.0*alpha);",
+	"	//gl_FragColor = vec4(cga.r, cga.g, cga.b,1.0*alpha);",		
 	"",		
 	
 	  //"gl_FragColor = texture2D(u_image, v_texCoord);",

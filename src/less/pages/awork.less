@@ -139,7 +139,8 @@
 		opacity: 0;
 		transition: .3s;
 		background-color: black;
-		&.show{
+		transition:@appear_interval ease-in-out;
+		&._show{
 			opacity: 1;
 		}
 	}
@@ -253,7 +254,7 @@
 			margin-right: 0;
 		}
 		.english{
-			.fontTitle;
+			.fontRelatedTitle;
 		}
 		.chinese{
 			.fontText;

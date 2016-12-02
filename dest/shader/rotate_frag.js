@@ -39,8 +39,11 @@ var _rotate_fragshader=[
 	"	vec4 cr = texture2D(texture, p + offset);",
 	"	vec4 cga = texture2D(texture, p);",
 	"	vec4 cb = texture2D(texture, p - offset);",
+	"	//cga*=.5;",
+	"	//cr*=.5;",
+	"	//cb*=.5;",
 	"",
-	"	gl_FragColor = vec4(cga.r+cr.r, cga.g+cb.b, cga.b+cr.r+cb.b,(cga.a+cr.a+cb.a)*alpha);",
+	"	gl_FragColor = vec4(cga.r+cr.r, cga.g+cb.b, cga.b+cb.b,(cga.a+cr.a+cb.a)*alpha);",
 	"",	
 	"",	// gl_FragColor=texture2D(texture,vUv);
 	"}"

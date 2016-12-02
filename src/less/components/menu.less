@@ -4,8 +4,8 @@
 
 .mainMenu{
 	position:fixed;
-  	top:20px;
-  	right:20px;
+  	top:@out_margin;
+  	right:@out_margin;
 
   	@media @tiny{
   		display: none;
@@ -82,8 +82,9 @@
 
 .logo{
 	position: fixed;
-	left:@in_margin;
-	top:@in_margin;
+	top:@out_margin + @in_margin;
+  	left:@out_margin + @in_margin;
+
 	height:@ham_size;
 	z-index: 100;
 	img{

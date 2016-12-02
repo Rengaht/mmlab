@@ -1,26 +1,33 @@
 
 .contact{
 	>div{
-		margin-left:@horiz_margin;
-		margin-right:@horiz_margin;
+		margin-bottom: @vert_margin*5;
+	// 	margin-left:@horiz_margin;
+	// 	margin-right:@horiz_margin;
 	}
 }
 
-.contactHello{
+.contactHead{
 	margin-top:@page_top; 
-	font-style: italic;
+	>div{
+		display: inline-block;
+		vertical-align: bottom;
+		width: 50%;
+	}
+}
+.contactHello{
+	
 	.fontHello;	
+	.wow{
+		transform:translateX(-2%);
+		.fontWow;	
+	}
 }
 .contactEmail{
 	margin-top: @vert_margin*2;	
 	.fontEmail;	
-	img{
-		vertical-align: middle;
-		margin-right:@horiz_margin;
-	}
-	span{
-		margin-right:@horiz_margin;
-	}
+	white-space: pre;
+	// text-align: right;
 }
 .contactInfo{	
 	margin-top: @vert_margin*2;

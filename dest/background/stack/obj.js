@@ -52,7 +52,7 @@ FloatSlice.prototype.update=function(){
 
 	this._rot_ang+=this._rot_vel;
 
-	if(_fade_out && _Background_Type==2) this._shader_uniform.alpha.value-=Const.FadeOutVel;
+	if(_fade_out && _Background_Type==2) this._shader_uniform.alpha.value=Math.min(this._shader_uniform.alpha.value,_fade_scale);
 	else this._shader_uniform.alpha.value=1.0;
 }
 FloatSlice.prototype.getPos=function(){

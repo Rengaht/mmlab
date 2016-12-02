@@ -7,6 +7,8 @@ var _index_fragshader=[
 	"uniform float seed_y;",
 	"uniform sampler2D texture;",
 	"uniform bool gold;",
+	"uniform sampler2D fill_texture;",
+	"uniform bool fill;",
 	"",
 	"",
 	"varying vec2 vUv;",
@@ -35,7 +37,7 @@ var _index_fragshader=[
 	"",		
 	"",
 	"",
-	"	vec4 normal=texture2D (texture, p*seed*seed);",
+	"	vec4 normal=texture2D (fill_texture, p*seed*seed);",
 	"	//p.x+=0.01*amount*distortion_x*rand(vec2(xs * seed,ys * seed*50.));",
 	"	//p.y+=0.01*amount*distortion_y*rand(vec2(xs * seed,ys * seed*50.));",
 	

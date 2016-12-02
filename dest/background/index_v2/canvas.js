@@ -44,7 +44,7 @@ var _logo_leg=[];
 var _leg_texture,_gold_texture,_special_texture;
 var _leg_shape,_leg_gemoetry,_leg_material;
 
-var _fill_texture;
+var _fill_texture=[];
 
 var _special_material,_special_geometry;
 var _special_mesh;
@@ -81,18 +81,19 @@ function initLogo(){
 	_logo_geometry=new THREE.PlaneGeometry(LogoConst.LogoSize,LogoConst.LogoSize);
 	_special_geometry=new THREE.PlaneGeometry(LogoConst.SpecialSize,LogoConst.SpecialSize);
 
+	for(var i=1;i<=3;++i){
+		_fill_texture[i]=new THREE.TextureLoader().load('image/fill/fill-'+'0'+String(i)+'.png');
+	}
 
 	_leg_texture=new THREE.TextureLoader().load('image/leg-01.png',function(texture){		
 		_gold_texture=new THREE.TextureLoader().load('image/golden.png',function(texture){
 			_special_texture=new THREE.TextureLoader().load('image/special-project.png',function(texture){
-				_logo_texture=new THREE.TextureLoader().load('image/index_logo.png',function(texture){
-					_fill_texture=new THREE.TextureLoader().load('image/leg-fill-01.png',function(texture){
-						initLogoLeg();			
-					});	
-				});		
+						initLogoLeg();							
 			});
 		});		
 	});
+
+	
 
 	_logo_add_loop=0;
 }		
